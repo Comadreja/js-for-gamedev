@@ -57,11 +57,11 @@ This lesson assumes you will be using a single Node console session, unless othe
 
 You can keep the same session logged on for most of the examples, but in the case that you find anything unexpected, you should try restarting the console before doing anything else. In order to restart the console, you have to **exit and enter again**.
 
-It would be best for you to keep this text opened up in a window (or printed out,) and the Node console on another.
+It would be best for you to keep this text opened up in a window (or printed out), and the Node console on another.
 
 ## Primitive types
 
-**Primitive types** are how we call types that come built into the language and allow for the creation of newer, more complex types. The primitive types in JavaScript are: **boolean**, **number**, **string**, **object**, and **function**.
+**"Primitive type"** is the name give a type that comes built into the language, and which allows for the creation of newer, more complex types. The primitive types in JavaScript are: **boolean**, **number**, **string**, **object**, and **function**.
 
 ```js
 // You can find more possible values for each of the types in the comments.
@@ -82,7 +82,7 @@ typeof {};
 typeof function () { return 42; };
 ```
 
-In JavaScript, it is possible to declare a variable without assigning a value to it. In this case, the variable's type would be **undefined**.
+In JavaScript, it is possible to declare a variable without assigning a value to it. In this case, the variable's type would be `'undefined'`.
 
 ```js
 var x;
@@ -343,13 +343,13 @@ var enemy = {
 };
 ```
 
-The foremost limitation to JavaScript is that **access to object properties cannot be restricted** (i.e., there are no private properties.) Because of this, there is nothing to prevent us from directly modifying the position.
+The foremost limitation to JavaScript is that **access to object properties cannot be restricted** (i.e., there are no private properties). Because of this, there is nothing to prevent us from directly modifying the position.
 
 ```js
 enemy.position.x = 100; // perfectly valid.
 ```
 
-At most, we could warn the user against code that handles certain properties. A widespread practice in JavaScript is to add an underscore `_` to attributes we want to consider to be **private:**
+At most, we could warn the user against code that handles certain properties. A widespread practice in JavaScript is to add an underscore `_` to attributes we want to consider to be **private**:
 
 ```js
 var enemy = {
@@ -360,7 +360,7 @@ var enemy = {
 };
 ```
 
-However, we stress that this is only a convention and underscore-marked attributes can be regardless accessed:
+However, we stress that this is only a convention, and underscore-marked attributes can be regardless accessed:
 
 ```js
 enemy._position.x = 100; // also perfectly valid.
@@ -560,7 +560,7 @@ true.toString();
 
 As we said before, JavaScript does not allow for the modeling of new types, which necessitates a "workaround". This is one of its key differences with other object-oriented languages.
 
-What we do is to sidestep the notion of _type_ altogether, in order to directly broach the **_constructor_** concept.
+What we do is to sidestep the notion of _type_ altogether, so as to directly introduce the concept of **_constructor_**.
 
 ![Object constructors](images/space-invaders-constructor-example-EN.png)
 
@@ -676,7 +676,7 @@ JavaScript has a signature feature, unique to the language: the **prototype chai
 
 You can experiment with it in [Object Playground]( http://www.objectplayground.com/), an excellent tool that will help you visualize it.
 
-The idea is not too complicated: the prototype chain is a **property search list.** Every item in the chain is the **prototype** of the prior item.
+The idea is not too complicated: the prototype chain is a **property search list**. Every item in the chain is the **prototype** of the prior item.
 
 When you access a property of an object, this property is looked up in the object and if it is not found, it is looked up in the object's prototype, and so on until either the property or the chain's end are reached.
 
@@ -797,7 +797,7 @@ If we do this for all constructors, we shall soon come across a pattern:
 
 Only steps 2 and 4 involve differences between this constructor and any others, the rest is exactly the same. So much so that JavaScript takes note of it, and comes with built-in mechanisms to automatize steps 1, 3 and 5.
 
-First of all, JavaScript allows for _any function_ to be used as a constructor. Because of this, everytime we type a function, JavaScript creates a **property of the function called "prototype",** which is an object with a single property, `constructor`, that points to the function.
+First of all, JavaScript allows for _any function_ to be used as a constructor. Because of this, everytime we type a function, JavaScript creates a **property of the function called "prototype"**, which is an object with a single property, `constructor`, that points to the function.
 
 ```js
 function anyFunction() {}
