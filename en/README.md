@@ -4,7 +4,7 @@ This is an introductory guide to **JavaScript**, and it is oriented to the devel
 
 It is based upon materials we have developed in cooperation with the Universidad Complutense de Madrid for the _Video game development with interpreted languages_ course. You can access the original course materials through [this GitHub repository](https://github.com/clnznr/pvli2017).
 
-The source code to this guide is also [published on GitHub](https://github.com/mozdevs/js-for-gamedev/). If you find any errors or want to suggest any changes, please let us know by [submitting a ticket][abriendo un ticket](https://github.com/mozdevs/js-for-gamedev/issues).
+The source code to this guide is also [published on GitHub](https://github.com/mozdevs/js-for-gamedev/). If you find any errors or want to suggest any changes, please let us know by [submitting a ticket](https://github.com/mozdevs/js-for-gamedev/issues).
 
 ## Videogames on the Web
 
