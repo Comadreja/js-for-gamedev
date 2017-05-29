@@ -1,56 +1,31 @@
-# JavaScript para el desarrollo de videojuegos
+# JavaScript for video game development
 
-Esta es una guía de introducción a **JavaScript**, y está orientada al
-desarrollo de **videojuegos HTML5**.
+This is an introductory guide to **JavaScript**, and it is oriented to the development of **HTML5 video games**.
 
-Esta basada en unos materiales que desarrollamos en una colaboración con la
-Universidad Complutense de Madrid para la asignatura de _Programación de
-videojuegos con lenguajes interpretados_. Puedes acceder a los materiales
-originales de la asignatura a través de
-[este repositorio en Github](https://github.com/clnznr/pvli2017).
+It is based upon materials we have developed in cooperation with the Universidad Complutense de Madrid for the _Video game development with interpreted languages_ course. You can access the original course materials through [this GitHub repository](https://github.com/clnznr/pvli2017).
 
-El código fuente de esta guía también está
-[publicado en Github](https://github.com/mozdevs/js-for-gamedev/). Si encuentras
-una errata o quieres sugerir algún cambio, por favor háznoslo saber
-[abriendo un ticket](https://github.com/mozdevs/js-for-gamedev/issues).
+The source code to this guide is also [published on GitHub](https://github.com/mozdevs/js-for-gamedev/). If you find any errors or want to suggest any changes, please let us know by [submitting a ticket][abriendo un ticket](https://github.com/mozdevs/js-for-gamedev/issues).
 
-## Videojuegos en la Web
+## Videogames on the Web
 
-La llegada de **HTML5** y sus tecnologías asociadas expandió enormemente las
-capacidades de la Web como **plataforma de videojuegos**. Hasta entonces, la
-mayoría de juegos web requerían un plugin externo –como Flash o Unity Player–,
-pero hoy ya no es necesario y los juegos HTML5 se ejecutan en el navegador de
-forma transparente.
+The arrival of **HTML5** and its associated technologies has massively expanded the Web's capabilities as a **video gaming platform**. Until then, most web-based video games required an external plugin –such as Flash or Unity Player–, but nowadays it is no longer necessary and HTML5 video games are seamlessly run in the browser.
 
-La Web nos ofrece **API** de gráficos 2D y 3D (esta última, basada en el estándar
-OpenGL ES), de reproducción y sintetización de audio, de acceso a múltiples
-métodos de entrada (_gamepads_, eventos de _touch_, giroscopios…), etc. En
-definitiva, todo lo que necesitamos para desarrollar videojuegos.
+The Web offers **APIs** for 2D & 3D graphics (the latter based on the OpenGL ES standard), audio playback and synthesis, multiple input methods (_gamepads_, _touch_ events, gyroscopes…), etc. To sum it up, everything we need in order to develop video games.
 
-Existen multitud de **motores y herramientas** para crear videojuegos HTML5.
-Algunos de los motores más populares, como Unity, Unreal o Game Maker, ya
-incluyen un exportador HTML5. También existen motores o frameworks específicos
-para la web, en los que podemos desarrollar con JavaScript, como Phaser o
-PlayCanvas.
+There is a plethora of available **engines and tools** for the creation of HTML5 video games. Some of the most popular engines, such as Unity, Unreal or Game Maker, already include HTML5 exporters. There also are Web-specific engines and frameworks on which we can develop in JavaScript, such as Phaser or PlayCanvas.
 
-El objetivo de esta guía es proporcionar una base de conocimientos JavaScript
-para que puedas desarrollar videojuegos web utilizando librerías o motores web
-existentes.
+This guide's objective is to provide a JavaScript knowledge base so that you can develop web video games by using existing libraries or Web engines.
 
-## ¿A quién está dirigida esta guía?
+## Whom is this guided meant for?
 
-- A cualquiera con interés en el desarrollo de videojuegos y que ya tenga unos
-**conocimientos mínimos de programación** (cualquier lenguaje sirve, como Lua,
-C o Python): variables, bucles, funciones, condiciones, etc.
+- For anyone with an interest in video game development and some **minimal programming knowledge** (any language will do, such as Lua, C or Python): variables, loops, functions, conditionals, etc.
 
-- A programadores de videojuegos que quieran desarrollar videojuegos web con
-JavaScript.
+- For video game programmers who want to develop web video games with JavaScript.
 
-- A desarrolladores web que quieran aprender los fundamentos de la programación
-orientada a objetos con JavaScript.
+- For web developers who want to learn the fundamentals of object-oriented programming with JavaScript.
 
 ---
 
-**Importante**:
+**Important notice**:
 
-Se recomienda leer todos los artículos de una unidad, así como hacer los ejercicios guiados _antes_ de realizar la práctica propuesta.
+It is strongly recommended to read all of the articles in a given unit, as well as doing the guided exercises, _before_ undertaking the proposed practice.
