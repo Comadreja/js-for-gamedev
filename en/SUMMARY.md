@@ -18,4 +18,4 @@
     - [Canvas](03-javascript-en-el-navegador/0302-canvas/index.md)
     - [Guided exercises](03-javascript-en-el-navegador/03-ejercicios/index.md)
     - [Practice](03-javascript-en-el-navegador/03-practica/index.md)
-        - [Guided](03-javascript-en-el-navegador/03-practica/guia.md)
+        - [Guide](03-javascript-en-el-navegador/03-practica/guia.md)
