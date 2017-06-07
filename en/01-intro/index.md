@@ -1,99 +1,56 @@
-# El entorno de trabajo
+# The work environment
 
-## La línea de comandos
+## The command line
 
-La línea de comandos es una aplicación para comunicarse con el sistema operativo
-a través de comandos escritos. Gran parte de las herramientas empleadas en el
-desarrollo web son aplicaciones de consola, es decir, aplicaciones cuya interfaz
-está pensada para usarse a través de una línea de comandos.
+The command line is an application for communicating with the operating system through written commands. A major part of web development tools are console applications, that is, applications whose interface is conceived to be used through a command line.
 
-En general, no necesitas instalar líneas de comandos de otros desarrolladores
-porque los sistemas operativos incluyen las suyas. Consulta una de estas guías
-acerca de cómo lanzar estas aplicaciones de acuerdo a tu sistema operativo:
+Generally speaking, you do not need to install command lines from any other developers because operating systems feature their own. Check one of these guides on how to launch these applications depending on your operating system:
 
-- En caso de trabajar sobre [Windows](http://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/).
+- In case you are working on  [Windows](http://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/).
 
-- En caso de trabajar sobre [Mac OS](http://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line).
+- In case you are working on [Mac OS](http://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line).
 
-- En caso de trabajar sobre [Linux](http://askubuntu.com/questions/183775/how-do-i-open-a-terminal).
+- In case you are working on [Linux](http://askubuntu.com/questions/183775/how-do-i-open-a-terminal).
 
-Conviene familiarizarse con los comandos que ofrecen los distintos sistemas
-operativos. Linux y Mac OS ofrecen un conjunto de utilidades muy similar basado
-en el estándar [POSIX](https://en.wikipedia.org/wiki/POSIX). Sin embargo,
-el conjunto de comandos de Windows es radicalmente distinto.
+It would be advisable to become familiar with the commands available to the different operating systems. Linux and Mac OS offer very similar utility sets based on the [POSIX](https://en.wikipedia.org/wiki/POSIX) standard. However, the Windows command set is radically different.
 
-De acuerdo a tu sistema operativo, utiliza una de las siguientes guías para
-aprender los comandos más normales en cada entorno:
+In accordance to your operating system, use one of the following guides to learn the most typical commands in each environment:
 
-- Si tu sistema operativo es Windows, utiliza la guía de http://dosprompt.info/
+- If your operating system is Windows, use the http://dosprompt.info/ guide.
 
-- Si es Mac OS o Linux, utiliza la guía de [_The Linux Information
-Project_](http://www.linfo.org/command_line_lesson_1.html)
+- If your operating system is Mac OS or Linux, use the guide from [_The Linux Information
+Project_](http://www.linfo.org/command_line_lesson_1.html).
 
-También puedes hacer que Windows ofrezca las mismas utilidades que Linux o Mac
-OS instalando [Cygwin](https://www.cygwin.com/).
+You can also make it so that Windows offers the same utilities as Linux or Mac OS by installing [Cygwin](https://www.cygwin.com/).
 
 ## Node
 
-JavaScript es el lenguaje de programación de la Web y se ejecuta,
-principalmente, dentro de una máquina virtual integrada en un navegador.
-No obstante, este no es el único entorno en el que podemos utilizar JavaScript.
+JavaScript is the Web's programming language and it is run, mainly, within a browser-integrated virtual machine. Nevertheless, this is not the only environment we can use JavaScript in.
 
-Node es un intérprete JavaScript basado en V8, la máquina virtual del navegador
-Chrome, de Google. Node es ampliamente utilizado en el desarrollo de
-aplicaciones en el lado del servidor y será en Node que aprenderemos JavaScript
-para enfatizar su independencia del navegador.
+Node is a JavaScript interpreter based upon V8, the virtual machine in Google's browser, Chrome. Node is widely utilized in the development of server-side applications and it is in Node that we will learn JavaScript, in order to emphasize its independence from the browser.
 
-Para realizar los ejercicios y prácticas propuestos en esta guía, recomendamos
-[instalar cualquier versión de Node 6](https://nodejs.org/en/).
+In order to carry out the exercises and practices proposed in this guide, we recommend [the installation of any version of Node 6](https://nodejs.org/en/).
 
-## El editor de texto
+## The text editor
 
-Conviene tener en cuenta que para comenzar a programar en JavaScript sólo
-necesitas un editor de texto plano. Sin embargo, es recomendable elegir un
-editor con algunas características avanzadas que nos permita ser más
-productivos.
+It is convenient to keep in mind that, in order to begin programing in JavaScript, all you need is a plain text editor. However, it is recommendable to choose an editor with some advanced capabilities that allow us to be more productive.
 
-**Nota**: es importante no confundir un editor de texto plano (como Notepad),
-con un procesador de texto (como Microsoft Word).
+**Notice**: it is important not to mistake a plain text editor (such as Notepad), for a word processor (such as Microsoft Word).
 
-El editor [Atom](https://atom.io/) es muy popular entre desarrolladores web. Es
-una buena opción por ser gratuito, de código abierto y extensible (y, además,
-ha sido programado con JavaScript).
+The editor [Atom](https://atom.io/) is very popular among web developers. It is a good option due to being free, open-source and extensible (in addition, it has been programmed in JavaScript).
 
-Si optas por Atom, te recomendamos que instales el siguiente _add-on_:
-[`linter-jshint`](https://github.com/AtomLinter/linter-jshint). Es un _linter_,
-un software que analizará tu código JavaScript. No sólo te corregirá el estilo
-(por ejemplo, que las líneas no superen cierto número de caracteres), sino que
-te avisará de posibles malas prácticas que podrían causar _bugs_ (como,
-por ejemplo, usar una variable sin haberla declarado antes).
+If you choose Atom, we recommend you install the following _add-on_: [`linter-jshint`](https://github.com/AtomLinter/linter-jshint). It is a _linter_, a piece of software that will analyze your JavaScript code. Not only will it check your style (for instance, preventing lines from exceeding a certain amount of characters), but it will also warn you of certain poor practices that could cause _bugs_ (for instance, using a variable without having declared it beforehand).
 
+### Console editors
 
-### Editores de consola
+It is convenient to know at least one console editor, since you will not always be working with desktop environments. There are several good ones, among them [Vim](http://www.vim.org/).
 
-Es conveniente conocer al menos un editor de consola, puesto que no siempre
-trabajarás con entornos de escritorio. Hay varios muy buenos, entre ellos
-[Vim](http://www.vim.org/).
+In any case, if you have never worked with a console editor before, _we strongly recommend you use Atom_ or any other editor with a visual interface. It is the quickest way to get started, since the learning curve for Vim is very steep.
 
-De todas formas, si nunca has trabajado con un editor de consola, _recomendamos
-encarecidamente que uses Atom_ o cualquier otro editor con una interfaz visual.
-Es la forma más rápida de comenzar, puesto que la curva de aprendizaje de Vim
-es muy pronunciada.
+If, despite our warnings, you choose to use Vim, do not forget to play [Vim Adventures](http://vim-adventures.com/) and complete the tutorial from http://www.openvim.com, both of which will help you become familiar with the editor. Vim is also highly configurable and there are several guides on how to enhance the programming experience.
 
-Si, pese a nuestras advertencias, optas por utilizar Vim, no olvides jugar a
-[Vim Adventures](http://vim-adventures.com/) y completar el tutorial de
-http://www.openvim.com, que te ayudarán a familiarizarte con el editor.
-Vim es también altamente configurable y existen varias guías sobre cómo mejorar
-la experiencia de programación.
+## The browser
 
-## El navegador
+**Any modern browser** will do and, in fact, we recommend you install several so that you can verify that your game is compatible across browsers.
 
-**Cualquier navegador moderno** sirve y, de hecho, recomendamos que instales
-varios para que puedas comprobar que el juego sea compatible entre navegadores.
-
-Debes aprender cómo activar las **herramientas de desarrollador** en tu
-navegador, ya que te permitirán depurar tu juego, analizar su rendimiento, etc.
-En esta guía mostraremos
-[Firefox Developer Edition](https://www.mozilla.org/firefox/developer/), que
-es una versión de Firefox especial para desarrolladores web e incluye
-herramientas y opciones no disponibles en la versión normal de Firefox.
+You must learn how to enable the **developer tools** in your browser, since those will help you debug your game, analyze its performance, etc. In this guide we shall feature [Firefox Developer Edition](https://www.mozilla.org/firefox/developer/), which is a special version of Firefox for web developers, featuring tools and options unavailable in the normal version of Firefox.
