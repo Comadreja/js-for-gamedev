@@ -1,92 +1,71 @@
-# Programación orientada a objetos
+# Object-oriented programming
 
 > OOP to me means only messaging, local retention and protection and
 > hiding of state-process, and extreme late-binding of all things.
 
-[Alan Kay sobre la programación orientada a objetos](http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en)
+[Alan Kay on object-oriented programming](http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en)
 
-## Modelado de problemas
+## Problem modeling
 
-Programar es expresar un problema en un lenguaje de programación dado. Modelar
-representa un paso intermedio en el que se capturan y organizan los aspectos
-importantes de un problema.
+Programming is expressing a problem in a given programming language. Modeling represents a halfway step of the process, where the important aspects of a problem are captured and organized.
 
-El modelado de un problema es independiente del lenguaje de programación que se
-elija, pero el lenguaje seleccionado condiciona la facilidad con la que puedes
-codificar el modelo.
+The modeling of a problem is independent from the chosen programming language, but this choice conditions the ease you can codify the model with.
 
-Muchas actividades creativas incluyen modelos intermedios entre la realidad y
-su expresión en el medio final. Por ejemplo, los _storyboards_ se utilizan para
-planificar las secuencias de acción: capturan los momentos clave de la
-secuencia.
+Many creative activities employ intermediate models between reality and its final expression on the medium. For instance, _storyboards_ are used in planning action sequences: they capture the key moments in the sequence.
 
-![Una página del story board de la serie de animación de Batman](images/batman-storyboard.jpg)
+![A page of the Batman animated series' storyboard](images/batman-storyboard.jpg)
 
-Este mapa muestra el paso de "Ella-Laraña", usado para mantener la coherencia
-del escenario descrito.
+This map, which depicts Shelob's Lair from The Lord of the Rings, was employed to maintain coherence in the described scenario.
 
-![Notas de Tolkien para la elaboración del Señor de los Anillos](images/lotr-notes.jpg)
+![JRR Tolkien's groundwork notes for The Lord of the Rings](images/lotr-notes.jpg)
 
-Este es un diseño de un mapa del videojuego _Mario_. Las herramientas digitales han
-permitido la automatización de modelos en software.
+This is a design for a map from the video game _Mario_. Digital tools have enabled the automation of models into software.
 
-![Mapa del video juego Mario en papel cuadriculado](images/mario-level-design.png)
+![Map from the video game Mario on graph paper](images/mario-level-design.png)
 
-Y aquí el diagrama de flujo de cómo se llaman las distintas funciones de un script
-de Unity.
+And here's the flowchart of how the different functions of a Unity script are called.
 
-![Diagrama de flujo del ciclo de vida de un script en Unity](images/monobehaviour-flowchart.png)
+![Flowchart for a Unity script's life cycle](images/monobehaviour-flowchart.png)
 
-La programación orientada a objetos es una técnica de **modelado de problemas**
-que pone especial énfasis en dos conceptos: **objetos** y **paso de mensajes**.
+Object-oriented programming is a **problem modeling** technique that confers special emphasis to two concepts: **objects** and **message passing**.
 
-## Objetos
+## Objects
 
-Los objetos son **representaciones de los aspectos de un problema** que
-desempeñan un rol específico, exponen un conjunto de funcionalidad
-concreta –la [API](https://en.wikipedia.org/wiki/Application_programming_interface#Libraries_and_frameworks)–,
-y además, ocultan cómo realizan esa funcionalidad.
+Objects are **depictions of a problem's aspects** that carry out a specific role, exhibit a set of concrete functionality –the [API](https://en.wikipedia.org/wiki/Application_programming_interface#Libraries_and_frameworks)–, and also conceal the way they carry out that functionality.
 
-## Paso de mensajes
+## Message passing
 
-Los mensajes son **peticiones de acción** de un objeto a otro. Estas peticiones
-parten de un objeto remitente hacia un objeto destinatario y codifican
-qué **funcionalidad de la API** se precisa.
+Messages are **action requests** from one object to another. These requests issue from a sender object to an addressee object, and they codify which **API functionality** is required.
 
-## Modelado orientado a objetos
+## Object-oriented modeling
 
-La definición de objetos y las interacciones entre los mismos modelan el
-problema. A lo largo de esta sección modelaremos informalmente el videojuego
-[_Space Invaders_](https://en.wikipedia.org/wiki/Space_Invaders).
+Object definitions and the interactions between objects model the problem. Throughout this section we shall informally model the video game [_Space Invaders_](https://en.wikipedia.org/wiki/Space_Invaders).
 
-![Captura de pantalla del video juego space invaders donde se aprecian naves enemigas, la nave amiga, marcadores de vidas y puntuación, proyectiles amigos y enemigos y las defensas de la nave.](images/space-invaders.jpg)
+![Screenshot from the video game Space Invaders, where we can observe enemy ships, the allied ship, remaining ship & score counters, friendly & enemy bullets, and the ship's defenses.](images/space-invaders.jpg)
 
-### Identificando objetos
+### Identifying objects
 
-Una técnica para identificar objetos consiste en **poner nombres**.
+A technique for object identification is to **give names**.
 
-![Captura de Space Invaders donde se distinguen muchos objetos: 50 enemigos, 9 defensas, 12 disparos, 2 marcadores, 1 nave protagonista...](images/space-invaders-objects.png)
+![Screenshot from Space Invaders where many objects can be made out: 50 enemies, 9 defenses, 12 bullets, 2 counters, 1 hero ship...](images/space-invaders-objects.png)
 
-Estos son algunos objetos a los que podrías poner un nombre: nave amiga, enemigo 1,
-enemigo 2, enemigo 3, disparo amigo, disparo enemigo 1, disparo enemigo 2,
-defensa 1, defensa 2, marcador de vidas, marcador de puntuación.
+These are some objects you could give a name: allied ship, enemy 1, enemy 2, enemy 3, friendly bullet, enemy bullet 1, enemy bullet 2, defense 1, defense 2, remaining ship counter, score counter.
 
-### Tipos de objetos e instancias
+### Types of objects and instances
 
-Queda claro de un vistazo que muchos objetos concretos pertenecen a familias
-o **tipos** de objetos. Conviene recordar que también se los llama **clases**.
+It is clear at a glance that many concrete objects belong into families or **types** of objects. It is convenient to remember that these are also called **classes**.
 
-Los tipos **especifican propiedades y comportamientos comunes** a todos ellos
-aunque individualmente sean distintos.
+Types **specify properties and common behaviors** to all of the belonging objects, though they may be different individually.
 
-![Captura de Space Invaders donde se distinguen los distintos tipos de objetos: marcadores, defensas, enemigos, protagonista y disparos](images/space-invaders-types.png)
+![Space Invaders screenshot where we can tell different object types: counters, defenses, enemies, player & bullets](images/space-invaders-types.png)
 
-Algunos **tipos** que podrías identificar son marcadores, escudos, nave amiga,
-enemigos y disparos.
+Some **types** you could identify are counters, shields, friandly ship, enemies, and bullets.
 
-Los **valores** de un tipo son cada uno de los objetos individuales. El enemigo
-especial, así como cada uno de los otros enemigos será un valor distinto del
-**tipo enemigo**.
+A type's **values** are each of the individual objects. The special enemy, as well as each of the other enemies, will be a distinct value of the **enemy type**.
+
+
+
+
 
 Cuando utilices la terminología de clases, los valores se convertirán en
 **instancias de la clase**.
@@ -215,3 +194,4 @@ al constructor de naves. Luego tomará esa nave, la modificará para que sea un
 enemigo y devolverá un enemigo.
 
 ![Cuando se pide al constructor de enemigos un enemigo, este pide al constructor de naves una nave, la personaliza para que sea un enemigo y devuelve el enemigo.](./images/space-invaders-hierarchy-constructor.png)
+
