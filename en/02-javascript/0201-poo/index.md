@@ -63,39 +63,40 @@ Some **types** you could identify are counters, shields, friandly ship, enemies,
 
 A type's **values** are each of the individual objects. The special enemy, as well as each of the other enemies, will be a distinct value of the **enemy type**.
 
+When you use the class terminology, values will become **class instances**.
+
+In object models, it is more convenient to work with object types.
+
+![Object diagram with the five identified classes: marker, defense, enemy, hero & bullet.](images/space-invaders-object-diagram.png)
+
+### Methods & interfaces
+
+In order to try to determine the API for the types of objects you can use the game's interactions as a guide.
 
 
-
-
-Cuando utilices la terminología de clases, los valores se convertirán en
-**instancias de la clase**.
-
-En los modelos de objetos es más conveniente trabajar con tipos de objetos.
-
-![Diagrama de objetos con los cinco clases identificadas: marcador, defensa, enemigo, protagonista y disparo.](images/space-invaders-object-diagram.png)
-
-### Interfaces y métodos
 
 Para tratar de determinar la API de los tipos de objetos puedes guíarte por
 las interacciones propias del juego.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/D1jZaIPeD5w?rel=0" frameborder="0" allowfullscreen></iframe>
 
-Un ejemplo:
+For example:
 
-> Los enemigos se mueven todos juntos hacia un lado, avanzan una línea y se
-> mueven hacia el otro lado mientras disparan aleatoriamente.
+> The enemies all move together towards one side of the screen; they advance
+> one row and then they move towards the other side all the while they fire
+> at random.
 
-La técnica consiste en **buscar verbos** esta vez: _moverse_, _avanzar_ y
-_disparar_, por ejemplo.
+This time the technique is to **look for verbs**: _move_, _advance_, and _fire_, for instance.
 
-Para poder implementar el comportamiento de los enemigos, estos tienen que
-poder moverse hacia los lados, avanzar y disparar. Así, tendrán que permitir
-que les envíen mensajes pidiendo alguna de estas operaciones.
+In order to implement enemy behavior, enemies have to be able to move to the sides, advance and fire. Therefore, they will need to allow to be sent messages requesting any of these operations.
 
-A las acciones que puede realizar un objeto se las denomina **métodos**.
+The actions an object can carry out are called **methods**.
 
-![API del enemigo mostrando cuatro métodos: moverse a la izquierda, moverse a la derecha, avanzar y disparar.](images/space-invaders-enemy-api.png)
+![Enemy API showing four methods: move left, move right, advance and fire.](images/space-invaders-enemy-api.png)
+
+
+
+
 
 ### Estado y atributos
 
@@ -194,4 +195,3 @@ al constructor de naves. Luego tomará esa nave, la modificará para que sea un
 enemigo y devolverá un enemigo.
 
 ![Cuando se pide al constructor de enemigos un enemigo, este pide al constructor de naves una nave, la personaliza para que sea un enemigo y devuelve el enemigo.](./images/space-invaders-hierarchy-constructor.png)
-
