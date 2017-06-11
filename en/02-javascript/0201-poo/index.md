@@ -94,104 +94,70 @@ The actions an object can carry out are called **methods**.
 
 ![Enemy API showing four methods: move left, move right, advance and fire.](images/space-invaders-enemy-api.png)
 
+### State & attributes
 
+Objects can not only carry out actions, but they also capture **characteristics** of the entities they represent.
 
+Every enemy, for instance, has a distinct graphic, a different score, an on-screen position, and also keeps track of which direction it was moving in.
 
+The **state** is not usually exposed outright in the API. Think of the enemies' case: even if these do have a position, it is preferable to have specific methods with which to modify the position (such as "move left" and "move right") instead of just giving free access to the position.
 
-### Estado y atributos
+An object's characteristics are called **attributes**.
 
-Los objetos no sólo pueden realizar acciones, sino que además capturan
-**características** de las entidades a las que representan.
+![Enemy state showing: graphic, current direction, position & score.](images/space-invaders-enemy-state.png)
 
-Cada enemigo, por ejemplo, tiene un gráfico distinto, una puntuación
-diferente, una posición en pantalla y además recordará en qué dirección
-se estaba moviendo.
+The modeling process is iterative: in defining some actions, we introduce new names such as _position_ or _direction_, which in turn become new types of objects.
 
-El **estado** no se suele exponer de forma directa en la API. Piensa en el
-caso de los enemigos: incluso si estos tienen una posición, es preferible
-tener métodos específicos con los que manipular la posición (como
-"mover a la izquierda" o "mover a la derecha") en lugar de dar libre acceso
-a la posición.
+### Constructors and object creation
 
-A las características de un objeto se las denomina **atributos**.
+Let's consider now the shooting interaction:
 
-![Estado del enemigo mostrando: gráfico, dirección actual, posición y puntuación.](images/space-invaders-enemy-state.png)
+> When the player presses the fire button, a bullet appears in front of the
+> friendly ship and advances until reaching the top of the screen or
+> colliding with an enemy.
 
-El proceso de modelado es iterativo: al definir algunas acciones, se introducen
-nuevos nombres como _posición_ o _dirección_, que se convertirán a su vez en
-nuevos tipos de objetos.
+The bullet wasn not there before, and it will have to be created in the moment of firing.
 
-### Constructores y creación de objetos
+As another example, the level's arrangement before the game starts:
 
-Pensemos ahora en la interacción del disparo:
+> 55 enemies show on screen; 5 rows of 11 each in the following pattern: 1
+> row of type 1 enemies, 2 rows of type 2 enemies, 1 of type 3s, and 1 of
+> type 4s.
 
-> Cuando el jugador pulsa el botón de disparo, aparece un proyectil delante de
-> la nave amiga que avanza hasta alcanzar la parte superior de la pantalla o
-> colisionar con un enemigo.
+It is clear we do not want to write each and every one of the 55 enemies; and since they all belong to the type enemy, it is also obvious they will all be very similar.
 
-El proyectil no estaba ahí antes y tendrá que ser creado en el momento del
-disparo.
+What we need is an **automatic object generation** mechanism. Every language offers its own way of creating objects.
 
-Otro ejemplo, la preparación del nivel antes de jugar:
+A useful mechanism is to rely on a new object, the **constructor**, whose task is to generate objects of a certain type. There is, therefore, **one constructor for every type**.
 
-> Aparecen 55 enemigos en pantalla, 5 filas de 11 enemigos con la siguiente
-> configuración: una fila de enemigos de la especie 1, dos filas de la especie
-> 2, una de la especie 3 y una de la especie 4.
+![Enemy state displaying: graphic, current direction, position and score.](images/space-invaders-constructors.png)
 
-Está claro que no queremos escribir los 55 enemigos individualmente. Además,
-dado que todos pertenecen al tipo enemigo, también es evidente que serán todos
-muy parecidos.
+Constructors have a very simple API: _new object_. This method creates a new object of a given type.
 
-Lo que se necesita es un mecanismo de **generación automática de objetos**. Cada
-lenguaje ofrece formas distintas de crear objetos.
+![A factory for a type with a single method: new object.](images/space-invaders-constructor-detail.png)
 
-Un mecanismo útil es el de contar con un nuevo objeto el **constructor**, cuya
-tarea es la de generar objetos de un tipo dado. Habrá pues **un constructor
-por tipo**.
+Constructors usually allow the customization of parts of the object they create, so that they can be told something along the lines of _"create a bullet with this position, this graphic and this direction of movement"_.
 
-![Estado del enemigo mostrando: gráfico, dirección actual, posición y puntuación.](images/space-invaders-constructors.png)
+![A factory for a type with a single method: new object.](images/space-invaders-constructor-detail.png)
 
-Los constructores tienen una API muy sencilla: _nuevo objeto_. Este método crea
-un nuevo objeto de un tipo dado.
+### Relations between types
 
-![Una factoría para un tipo cualquiera con un sólo método: nuevo objeto.](images/space-invaders-constructor-detail.png)
+During modeling, relations arise in a natural way. Enemies _have_ a position. The friendly ship _creates_ bullets.
 
-Los constructores suelen permitir personalizar partes del objeto que están
-creando de forma que se le pueda decir algo como _"crea un disparo con esta
-posición, este gráfico y esta dirección de avance"_.
+As is often the case with people, you will tend to **set hierarchies** between objects by creating more general types. For instance, instead of thinking of enemies and player separately, it is possible to think of _ships_.
 
-![Una factoría para un tipo cualquiera con un sólo método: nuevo objeto.](images/space-invaders-constructor-example.png)
+The **`ship` type** compounds the methods and attributes common to the player ship and the enemies.
 
-### Relaciones entre tipos
+![Hierarchy between enemies, player ship and the ship super-type.](images/space-invaders-hierarchy.png)
 
-Durante el modelado surgen relaciones de forma natural. Los enemigos _tienen_
-una posición. La nave amiga _crea_ disparos.
+This hierarchy establishes **inheritance relations**, also called _"it's a(n)"_ since the player ship is a `ship`, and the enemy is a `ship` as well.
 
-Como es natural entre las personas, tenderás a **establecer jerarquías** entre
-objetos creando tipos más generalistas. Por ejemplo: en vez de pensar en
-enemigos y protagonista por separado, es posible pensar en _naves_.
+We say the `enemy` type **extends** the `ship` type by adding `advance` to the API, as well as the score and last movement direction to the state.
 
-El **tipo `nave`** reune los métodos y atributos comunes de la nave protagonista
-y enemigos.
+The friendly ship adds no new methods but **redefines or overwrites** the `shoot` method so that it fires upwards.
 
-![La jerarquía entre los enemigos, la nave protagonista y el super-tipo nave.](images/space-invaders-hierarchy.png)
+Since there are new types, you will need new constructors. Old constructors can **delegate** parts of the object creation to the new ones.
 
-Esta jerarquía establece **relaciones de herencia** tambén llamadas relaciones
-_"es un(a)"_ dado que el protagonista es una `nave` y el enemigo es una
-`nave` también.
+This way, when we request an enemy, the enemy constructor will request a ship from the ship constructor. It will then take that ship, modify it so that it becomes an enemy, and return it as an enemy.
 
-Se dice que el tipo `enemigo` **extiende** al tipo `nave` añadiendo `avanzar` a la
-API, así como la puntuación y la última dirección de desplazamiento al estado.
-
-La nave amiga no añade ningún método nuevo pero **redefine o sobreescribe** el
-método `disparar` para que dispare hacia arriba.
-
-Como hay nuevos tipos, necesitarás nuevos constructores. Los viejos
-constructores pueden **delegar** parte de la creación del objeto (las partes
-comunes) a los nuevos.
-
-De esta forma, al pedir un enemigo, el constructor de enemigos pedirá una nave
-al constructor de naves. Luego tomará esa nave, la modificará para que sea un
-enemigo y devolverá un enemigo.
-
-![Cuando se pide al constructor de enemigos un enemigo, este pide al constructor de naves una nave, la personaliza para que sea un enemigo y devuelve el enemigo.](./images/space-invaders-hierarchy-constructor.png)
+![When an enemy is requested from the enemy constructor, this one asks requests a ship from the ship constructor, customizes it into an enemy, and returns the requested enemy.](./images/space-invaders-hierarchy-constructor.png)
