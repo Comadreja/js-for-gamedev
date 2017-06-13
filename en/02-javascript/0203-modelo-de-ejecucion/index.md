@@ -422,141 +422,111 @@ require('./b');
 text;
 ```
 
+## Events and asynchronous programming
 
-
-
-
-## Programación asíncrona y eventos
-
-Prueba el siguiente ejemplo (copia, pega y espera 5 segundos):
+Try the following example (copy, paste and wait for 5 seconds):
 
 ```js
-var fiveSeconds = 5 * 1000; // en milisegundos.
+var fiveSeconds = 5 * 1000; // in milliseconds.
 
-// Esto ocurre ahora.
+// This happens now.
 console.log('T: ', new Date());
 
 setTimeout(function () {
-    // Esto ocurre pasados 5 segundos.
+    // This happens after 5 seconds.
     console.log('T + 5 segundos: ', new Date());
 }, fiveSeconds);
 
-// Esto ocurre inmediatamente después
+// This happens immediately thereafter
 console.log('T + delta: ', new Date());
 ```
 
-Como puedes comprobar, el mensaje se completa pasados 5 segundos porque lo que
-hace [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout)
-es llamar a la función tan pronto como pasen el número de milisegundos
-indicados.
+As you can realize, the message is completed after 5 seconds because what [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout) does is call the function as soon as the stated amount of milliseconds has elapsed.
 
-Decimos que una función es un **_callback_** si se llama en algún momento
-futuro –es decir, **asíncronamente**– para informar de algún resultado.
+We say a function is a **_callback_** if it is called at some point in the future –that is to say, **asynchronously**– in order to report on some result.
 
-En el ejemplo de `setTimeout`, el resultado es que ha pasado la cantidad de
-tiempo especificada.
+In the `setTimeout` example, the result is that the specified amount of time has passed.
 
-### Eventos
+### Events
 
-En esta sección veremos el **módulo `readline`**, que es específico de Node.
+In this section we will look at the **`readline` module**, which is specific to Node.
 
-La programación asíncrona en JavaScript y otros lenguajes se usa para **modelar
-eventos**, principalmente esperas por entrada y salida. En otras palabras:
-hitos que ocurren pero que no sabemos _cuándo_ ocurren.
+Asynchronous programming is used in JavaScript and other languages to **model events**, mainly input/output waits. In other words: milestones that happen without us knowing when.
 
-La entrada y salida –a partir de ahora IO (del inglés _input / output_)– no
-sólo supone lectura de ficheros o peticiones a la red, también incluye esperar
-una acción del usuario.
+Input/output –from now on, I/O– does not just consist of reading from files or network requests, but also waiting for an action on the user's part.
 
-Como ejemplo, vamos a implementar una consola de diálogo por líneas. Usaremos el
-módulo [`readline`](https://nodejs.org/api/readline.html), que es parte de la
-librería estándar que viene con Node:
+As an example, we shall implement a line-by-line dialog console. We will use the [`readline`](https://nodejs.org/api/readline.html) module, which is a part of the standard library that comes built in with node:
 
 ```js
-// En conversational.js
+// In conversational.js
 "use strict";
 
 var readline = require('readline');
 
 var cmd = readline.createInterface({
-    input: process.stdin,  // así referenciamos la consola como entrada.
-    output: process.stdout, // y así, como salida.
-    prompt: '(╯°□°）╯ ' // lo que aparece para esperar la entrada del usuario.
+    input: process.stdin,  // this way, we reference the console as input.
+    output: process.stdout, // and this way, as output.
+    prompt: '(╯°□°）╯ ' // what shows up in order to wait for user input.
 });
 ```
 
-Lanza ese programa con Node y verás que no hace nada, **pero tampoco termina**.
-Esto es típico de los programas asíncronos: el programa queda esperando a que
-pase algo. Pulsa `ctrl+c` para terminar el programa.
+Launch that program with Node and you will see it does nothing, **yet neither does it end**. This is typical of asynchronous programs: the program remains in wait for something to happen. Press `ctrl+c` to terminate the program.
 
-Ahora prueba:
+Now try this:
 
 ```js
-// Añade al final de conversational.js
-console.log('Escribe algo y pulsa enter');
-cmd.prompt(); // pide que el usuario escriba algo.
+// Add at the end of conversational.js
+console.log('Write something and press enter');
+cmd.prompt(); // asks the user to write something.
 
 cmd.on('line', function (input) {
-    console.log('Has dicho "' + input  + '"');
-    cmd.prompt(); // pide que el usuario escriba algo.
+    console.log('You have said "' + input  + '"');
+    cmd.prompt(); // asks the user to write something.
 });
 ```
 
-Lo que has conseguido es **escuchar el evento `line`** que se produce
-[cada vez que en la entrada se recibe un caracter de cambio de línea](https://nodejs.org/api/readline.html#readline_event_line).
+What you have achieved is to **listen for the `line` event** that happens [every time a new line character is input](https://nodejs.org/api/readline.html#readline_event_line).
 
-Hablando de eventos, la función que se ejecuta asíncronamente recibe el nombre de
-**_listener_**, pero tampoco es raro que se la llame _callback_.
+Speaking of events, the function that is asynchronously executed is called **listener**, but it is not uncommon for it to be called _callback_.
 
-Se habla de "**registrar un _listener_** para un evento", "subscribirse a un
-evento" o "escuchar un evento" a utilizar el mecanismo que permite asociar la
-ejecución de una función con dicho evento.
+Expressions like "**registering a _listener_** for an event", "subscribing to an event" or "listening for an event" mean utilizing the mechanism that allows the association of a function's execution to said event.
 
-Con todo, aún no se puede salir del programa anterior. Necesitamos algunos
-cambios más:
+All of this said, we cannot exit the prior program yet. We need to make some further changes:
 
 ```js
-// Añade a conversational.js
+// Add to conversational.js
 cmd.on('line', function (input) {
-    if (input === 'salir') {
+    if (input === 'exit') {
         cmd.close();
     }
 });
 
 cmd.on('close', function () {
-    console.log('¡Nos vemos!');
-    process.exit(0); // sale de node.
+    console.log('See you!');
+    process.exit(0); // exits node.
 });
 ```
 
-Hemos añadido un segundo _listener_ al evento `line` y **ambos se ejecutarán**.
-El primero gestiona el funcionamiento por defecto (que es repetir lo que el
-usuario ha introducido) y el segundo trata específicamente el comando `salir`.
+We have added a second _listener_ to the `line` event and **both will be run**. The first manages the default behavior (which is to repeat what the user has typed in), and the second deals specifically with the `exit` command.
 
-Si la línea es exactamente `salir`, cerraremos la interfaz de línea de
-comandos. Esto produce un evento `close` y, cuando lo recibamos, utilizaremos el
-_listener_ de ese evento para terminar el programa.
+If the line is exactly `exit`, we will close the command line interface. This causes a `close` event and, when we receive it, we will use that event's _listener_ in order to terminate the program.
 
-El método `on` es un segundo nombre para [`addListener`](https://nodejs.org/api/events.html#events_emitter_addlistener_eventname_listener).
+The `on` method is a second name for [`addListener`](https://nodejs.org/api/events.html#events_emitter_addlistener_eventname_listener).
 
-Igual que podemos añadir un _listener_, también podemos eliminarlo con
-[`removeListener`](https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener),
-y quitarlos todos con
-[`removeAllListeners`](https://nodejs.org/api/events.html#events_emitter_removealllisteners_eventname).
+Same way we can add a _listner_, we can also remove it with [`removeListener`](https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener),
+or remove all of them with [`removeAllListeners`](https://nodejs.org/api/events.html#events_emitter_removealllisteners_eventname).
 
-Podemos escuchar un evento **sólo una vez** con
-[`once`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener).
+We can listen for an event **just once** with [`once`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener).
 
-### Emisores de eventos
+### Event broadcasters
 
-Ahora veremos la clase `EventEmitter`, que también es específica de Node.
+Now we will cover the `EventEmitter` class, which is also specific to Node.
 
-Los eventos no son un mecanismo estándar de JavaScript. Son una forma
-conveniente de modelar determinados tipos de problema, pero un objeto JavaScript,
-por sí solo, **no tiene API para emitir eventos**.
+Events are not a standard mechanism to JavaScript. They are a convenient way of modeling certain types of problems; but a JavaScript object, on its own, **has no event broadcasting API**.
 
-En Node contamos con diversas alternativas con el fin de que los objetos emitan
-eventos:
+In Node, we can rely on several alternatives in order to have objects broadcast events:
+
+
 
 - Implementar nuestra propia API de eventos.
 
