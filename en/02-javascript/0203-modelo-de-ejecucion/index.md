@@ -518,29 +518,23 @@ or remove all of them with [`removeAllListeners`](https://nodejs.org/api/events.
 
 We can listen for an event **just once** with [`once`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener).
 
-### Event broadcasters
+### Event dispatchers
 
 Now we will cover the `EventEmitter` class, which is also specific to Node.
 
-Events are not a standard mechanism to JavaScript. They are a convenient way of modeling certain types of problems; but a JavaScript object, on its own, **has no event broadcasting API**.
+Events are not a standard mechanism to JavaScript. They are a convenient way of modeling certain types of problems; but a JavaScript object, on its own, **has no event dispatching API**.
 
-In Node, we can rely on several alternatives in order to have objects broadcast events:
+In Node, we can rely on several alternatives in order to have objects dispatch events:
 
+- Implementing our own event API.
 
+- Having our objects **use** an instance of `EventEmitter`.
 
-- Implementar nuestra propia API de eventos.
+- Having our objects **be instances** of `EventEmitter`.
 
-- Hacer que nuestros objetos **usen** una instancia de `EventEmitter`.
+The first option would imply the creation of our own `on` method, as well as the mechanisms for event dispatching. The second and third both use the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class, which already implements this API.
 
-- Hacer que nuestros objetos **sean instancias** de `EventEmitter`.
-
-La primera supondría crear nuestro propio método `on` y los mecanismos para
-emitir eventos. La segunda y la tercera usan la clase
-[`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter),
-que ya implementa esta API.
-
-Este es un ejemplo de la opción 3 –el cual aprovechamos para repasar la
-herencia:
+This is an example of option 3, which we will take as an opportunity to review the notion of inheritance:
 
 ```js
 var events = require('events');
@@ -555,37 +549,28 @@ Ship.prototype = Object.create(EventEmitter.prototype);
 Ship.prototype.constructor = Nave;
 
 var ship = new Ship();
-ship.on; // ¡existe!
+ship.on; // it exists!
 ```
 
-Ahora que la nave puede emitir eventos, vamos a hacer que dispare y que emita un
-evento.
+Now that the ship can dispatch events, we shall make it dispatch an event by shooting.
 
 ```js
 Ship.prototype.shoot = function () {
-    console.log('PICHIUM!');
-    this.emit('shoot', this._ammunition); // parte de la API de EventEmitter.
+    console.log('VOIP!');
+    this.emit('shoot', this._ammunition); // part of the EventEmitter API.
 };
 
 ship.on('shoot', function (ammunition) {
-    console.log('CENTRO DE MANDO. La nave ha disparado:', ammunition);
+    console.log('THIS IS COMMAND. The ship has fired:', ammunition);
 });
 
 ship.shoot();
 ```
 
-**Emitir un evento** consiste en llamar al método
-[`emit`](https://nodejs.org/api/events.html#events_emitter_emit_eventname_arg1_arg2),
-que hará que se ejecuten los _listeners_ que escuchan tal evento.
+**Dispatching an event** consists of calling the [`emit`](https://nodejs.org/api/events.html#events_emitter_emit_eventname_arg1_arg2) method, which will trigger the execution of the _listeners_ that listen for this event.
 
-Los eventos son increiblemente útiles para modelar interfaces de usuario de
-forma genérica.
+Events are incredibly useful in order to generically model user interfaces.
 
-Para ello, los modelos deben **publicar** qué les ocurre: cómo cambian, qué
-hacen… Todo **a base de eventos**. Las interfaces de usuario se
-**suscribirán** a estos eventos y proporcionarán la información visual adecuada.
+To this end, models must **publish** what is happening to them: how they change, what they do… all of it **through events**. User interfaces will **subscribe** to these events and will provide the necessary visual information.
 
-Este modelo permite además que varias interfaces de usuario funcionen al mismo
-tiempo, todas escuchando los mismos eventos. Sin embargo, también permite
-dividir la interfaz en otras más especializadas, cada una escuchando un
-determinado conjunto de eventos.
+This model also allows for several user interfaces to work simultaneously, all of them listening for the same events. However, it also allows us to divide an interface into other, more specialized ones, all of them listening for a given set of events.
