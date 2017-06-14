@@ -1,35 +1,28 @@
-# Ejercicios guiados
+# Guided exercises
 
-Prueba estos ejemplos y trata de responder a las preguntas. Si te atascas con
-lo que hace una función, busca en Internet la función acompañada de "mdn".
+Test these examples and try to answer the questions. If you get stuck on what a function does, search the Internet for the function followed by "mdn".
 
-**1. Valores booleanos en JavaScript.**
+**1. Booleans in JavaScript.**
 
-En JavaScript cualquier valor puede considerarse verdadero o falso según el
-contexto. Por ejemplo, el `0` es considerado `false` y cualquier número distinto
-de `0` es `true`:
+In JavaScript, any value can be considered true or false depending on context. For instance, `0` is considered `false`, and any number different than `0` is `true`:
 
 ```js
-var v = 0; // después de esta prueba, cambia el valor de v por otro número.
-!!v; // la doble negación al comienzo lo convierte en booleano.
+var v = 0; // after this test, change the value of v for another number.
+!!v; // a double negation at the beginning turns it into a boolean.
 ```
 
-Descubre qué valores son ciertos y cuales falsos para todos los tipos: números,
-cadenas, objetos, funciones y undefined.
+Find out which values are true and which are false for all types: numbers, strings, objects, functions, and undefined.
 
-**2. Expresiones booleanas en JavaScript.**
+**2. Boolean expressions in JavaScript.**
 
-En JavaScript, las expresiones booleanas son _vagas_, esto significa que en
-cuanto el intérprete de JavaScript sabe lo que va a valer la expresión,
-dejamos de evaluar. Por ejemplo, ¿qué crees que le pasará a la siguiente
-expressión?
+In JavaScript, boolean expressions are _vague_; this means as soon as the JavaScript interpreter knows what the expression is going to be equal to, we stop evaluating. For instance, what do you think will happen to the following expression?
 
 ```js
 var hero = { name: 'Link', weapon: null };
 console.log('Hero weapon power is:', hero.weapon.power);
 ```
 
-Pero, ¿y ahora?
+But, now what?
 
 ```js
 var hero = { name: 'Link', weapon: null };
@@ -40,19 +33,13 @@ if (hero.weapon && hero.weapon.power) {
 }
 ```
 
-En caso de expresiones `&&` (_and_ o _y_), la evaluación termina tan pronto como
-encontramos un término falso.
+In the case of `&&` (_and_) expressions, evaluation ends as soon as we find a false term.
 
-En caso de expresiones `||` (_or_ u _o_), la evaluación termina tan pronto como
-encontramos un término verdadero.
+In the case of `||` (_or_) expressions, evaluation ends as soon as we find a true term.
 
-**3. El resultado de las expresiones booleanas.**
+**3. The result of a boolean expression.**
 
-Contra el sentido común, el resultado de una expresión booleana no es un
-booleano sino el último término evaluado. Recuerda que la evaluación es _vaga_
-y JavaScript deja de evaluar tan pronto como puede determinar el resultado de la
-expresión. Con esto en cuenta, trata de predecir el resultado de las siguientes
-expresiones:
+Counter to common sense, the result of a boolean expression is not a boolean, but the last evaluated term. Remember, evaluation is _vague_ and JavaScript stops evaluating as soon as it can determine the expression's result. With this in mind, try to predict the result of the following expressions:
 
 ```js
 var v;
@@ -64,11 +51,9 @@ null || v || noop || true;
 null || v || void "Eggs!" || 0;
 ```
 
-**4. Parámetros por defecto.**
+**4. Default parameters.**
 
-Puedes ver una aplicación real de lo anterior en esta función para rellenar
-números. En JavaScript no hay parámetros por defecto, pero los parámetros
-omitidos tienen el valor especial `undefined` que es falso.
+You can see a real application of the above in this number-filling function. There are no default parameters in JavaScript, but skipped parameters have the special value `undefined`, which is false.
 
 ```js
 function pad(target, targetLength, fill) {
@@ -81,16 +66,15 @@ function pad(target, targetLength, fill) {
   return result;
 }
 
-// intenta predecir el resultado de las siguientes llamadas
+// try to predict the result of the following calls
 pad(3);
 pad(2, 5);
 pad(2, 5, '*');
 ```
 
-**5. Buenas prácticas en el diseño de APIs.**
+**5. Good practices in API design.**
 
-Se ha dicho muchas veces que el estado no se debería exponer pero siempre
-se acaba enseñando este tipo de modelado para los puntos:
+It is often said that the state should not be made explicit, but this modeling for points always ends up as an example:
 
 ```js
 var p = { x: 5, y: 5 };
@@ -104,7 +88,7 @@ function scale(point, factor) {
 scale(p, 10);
 ```
 
-La implementación correcta sería:
+The correct implementation would be:
 
 ```js
 var p = {
@@ -133,12 +117,11 @@ function scale(point, factor) {
 scale(p, 10);
 ```
 
-Pero reconócelo, escribir tanto es un rollo soberano.
+Got to admit it though, writing so much is a royal pain.
 
-**6. Propiedades computadas al rescate.**
+**7. Computed properties to the rescue.**
 
-JavaScript permite definir un tipo especial de propiedades llamadas normalmente
-_propiedades computadas_ de esta guisa:
+JavaScript allows the definition of a special type of properties, usually called _computed properties_, in this fashion:
 
 ```js
 var p = {
@@ -167,9 +150,7 @@ function scale(point, factor) {
 scale(p, 10);
 ```
 
-Escribirlo sigue siendo un muermo (menos mal que has estudiado como hacer
-factorías de objetos) pero utilizarlo es mucho más claro. Así, si ahora decides
-que sería mejor exponer el nombre de los ejes en mayúscula, puedes hacer:
+Writing that is still a chore (good thing you have studied how to create object factories!), but using it is much clearer. This way, should you decide now that it would be better to show the names of the axes in caps, you can do this:
 
 ```js
 var p = {
@@ -198,12 +179,9 @@ function scale(point, factor) {
 scale(p, 10);
 ```
 
-¿Se te ocurre la manera de hacer que una propiedad pueda ser de sólo lectura? Es
-decir, que su valor no pueda cambiarse (asumiendo que el usuario no accederá a
-las propiedades que comiencen por '_').
+Can you think of the way to make a property read-only? That is to say, for its value to be unchangeable (assuming the user will not access any properties beginning by `_`)?
 
-Si quisieras añadir una propiedad a un objeto ya existente tendrías que utilizar
-[Object.defineProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty):
+If you wanted to add a property to an already existing object, you would have to use [Object.defineProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty):
 
 ```js
 var point = {};
@@ -225,14 +203,14 @@ Object.defineProperty(point, 'y', {
     this._y = v;
   }
 });
-point; // no se observan propiedades...
-point.x; // ...pero aquí están.
+point; // no properties are appreciable...
+point.x; // ...but here they are.
 point.y;
 ```
 
-¿Te atreves a decir por qué cuando inspeccionamos el objeto no aparecen sus
-propiedades? ¿Cómo podrías arreglarlo? ¿Cómo harías para que sólo se vieran
-las propiedades que son parte de la API?
+Would you dare say why, when we inspect the object, its properties are not displayed? How would you fix it? What would you do so that only the properties which are a part of the API can be seen?
+
+
 
 No te lances a usar `Object.defineProperty()` si no tienes **muy claro** qué
 significan los términos **configurable**, **enumerable** y **writable**.
