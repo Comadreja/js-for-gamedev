@@ -210,21 +210,11 @@ point.y;
 
 Would you dare say why, when we inspect the object, its properties are not displayed? How would you fix it? What would you do so that only the properties which are a part of the API can be seen?
 
+Do not go and use `Object.defineProperty()` unless you have a **very clear notion** of what the terms **configurable**, **enumerable** and **writable** mean.
 
+**7. Using functions as if they were methods.**
 
-No te lances a usar `Object.defineProperty()` si no tienes **muy claro** qué
-significan los términos **configurable**, **enumerable** y **writable**.
-
-**7. Usando funciones como si fueran métodos.**
-
-Hemos visto que cualquier función puede usarse como un método si se referencia
-como una propiedad de un objeto y entonces se llama. Pero lo cierto es que
-también puedes hacer que una función cualquiera, sin estar referenciada desde
-una propiedad, pueda ser usada como el método de un objeto si indicamos
-explícitamente cual es el objeto destinatario. Esto puede hacerse con
-[`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
-y con
-[`.call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
+We have seen how any function can be used as a method if it is referenced as an object's property and then called. But the fact of the matter is you can also make any function, regardless of whether it is referenced from a property, be used as an object's method if you explicitly point out the target object. This can be done with [`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) and [`.call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
 
 ```js
 var ship = { name: 'Death Star' };
@@ -233,18 +223,16 @@ function fire(shot) {
   console.log(this.name + ' is firing: ' + shot.toUpperCase() + '!!!');
 }
 
-ship.fire; // ¿qué crees que será esto?
-fire.apply(ship, ['pichium']);
-fire.call(ship, 'pañum');
+ship.fire; // what do you think this is?
+fire.apply(ship, ['voip']);
+fire.call(ship, 'pew');
 ```
 
-¿Cuál es la diferencia entre `.apply()` y `.call()`?
+What is the difference between `.apply()` and `.call()`?
 
-**8. Propiedades dinámicas.**
+**8. Dynamic properties.**
 
-La notación corchete para acceder a las propiedades de un objeto es
-especialmente útil para acceder a propiedades de manera genérica. Por ejemplo,
-imagina el siguiente código:
+The bracketed notation for accessing an object's properties is especially useful for accessing properties in a generic way. For instance, picture the following code:
 
 ```js
 var hero = {
@@ -271,7 +259,7 @@ function attack(character, target) {
 }
 
 function applyEffect(effect, target) {
-  // Obtiene los nombres de las propiedades del objeto. Búscalo en la MDN.
+  // Obtains names of object properties. Look it up in the MDN.
   var propertyNames = Object.keys(effect);
   for (var i = 0; i < propertyNames.length; i++) {
     var name = propertyNames[i];
@@ -286,16 +274,11 @@ attack(enemy, hero);
 attack(hero, enemy);
 ```
 
-¿Podrías modificar el efecto del arma del héroe para incapacitar al enemigo pero
-no matarlo ni dañarlo? Intenta hacerlo sin reescribir el ejemplo entero, es
-decir, continuando desde el término del ejemplo.
+Could you modify the hero's weapon effect so that it can incapacitate the enemy, but not kill him or damage him? Try to do it without rewriting the whole example, i.e., picking up from where the example ends.
 
-**9. Objetos como algo más que objetos.**
+**9. Objects as something more than objects.**
 
-Los objetos de JavaScript no solo sirven para modelar los objetos de la
-programación orientada a objetos sino que permiten realizar clasificaciones por
-nombre. Un histograma, es decir un conteo de un conjunto con repeticiones, es
-un ejemplo clásico de la utilidad de un objeto JavaScript:
+JavaScript objects do not only serve the purpose of modeling object-oriented programming objects, but also allow classifications by name. A histogram, i.e. a count of a set with repetitions, is a classic example of the usefulness of a JavaScript object:
 
 ```js
 function wordHistogram(text) {
@@ -312,13 +295,13 @@ function wordHistogram(text) {
 }
 ```
 
-Prueba a usar la función por ti mismo.
+Try to use the function by yourself.
 
-Lo que JavaScript llama objetos se conoce en otros lenguajes de programación
-como mapas o diccionarios y a los nombres de las propiedades se los llama
-_claves_.
+What JavaScript calls objects is known in other programming languages as maps or dictionaries, and property names are also known as _keys_.
 
-¿Puedes pensar en al menos una aplicacion más?
+Can you think of at least one more application?
+
+
 
 **10. Funciones como parámetros.**
 
