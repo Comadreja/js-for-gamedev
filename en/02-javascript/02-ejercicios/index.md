@@ -259,7 +259,7 @@ function attack(character, target) {
 }
 
 function applyEffect(effect, target) {
-  // Obtains names of object properties. Look it up in the MDN.
+  // Obtains names of object properties. Look it up on the MDN.
   var propertyNames = Object.keys(effect);
   for (var i = 0; i < propertyNames.length; i++) {
     var name = propertyNames[i];
@@ -301,15 +301,9 @@ What JavaScript calls objects is known in other programming languages as maps or
 
 Can you think of at least one more application?
 
+**10. Functions as parameters.**
 
-
-**10. Funciones como parámetros.**
-
-Las listas de JavaScript tiene algunos métodos que aceptan funciones como
-parámetros, por ejemplo
-[`.forEach()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/forEach).
-De hecho es común encontrar `.forEach()` cuando se tiene la certeza de que se
-van a recorrer **todos** los elementos de una lista.
+JavaScript lists have some methods which accept functions as parameters, for instance [`.forEach()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/forEach). In fact, `.forEach()` is commonly found when we have the certainty that we are going to go over **all** of the elements in a list.
 
 ```js
 function wordHistogram(text) {
@@ -324,23 +318,19 @@ function wordHistogram(text) {
   return histogram;
 }
 
-var poem = 'Todo pasa y todo queda, ' +
-           'pero lo nuestro es pasar, ' +
-           'pasar haciendo caminos, ' +
-           'caminos sobre la mar';
+var poem = 'All passes and all remains, ' +
+           'but \'tis our lot to pass, ' +
+           'pass by making pathways, ' +
+           'pathways o\'er the sea';
 
 wordHistogram(poem);
 ```
 
-El resultado no es correcto porque al separar las palabras por los espacios
-estás dejando caracteres que no forman palabras como parte de ellas. Puedes
-arreglarlo si en vez de partir el texto por los espacios usas una
-[expresión regular](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
-para partir el texto por los límites de las palabras:
+The result is not correct, since by separating words by their spaces you are leaving out characters that are not part of the words themselves. You can fix this if, rather than splitting the text by the spaces, you use a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) in order to split the text by the words' ends:
 
 ```js
 function wordHistogram(text) {
-  var wordList = text.split(/\b/); // Eso entre / / es una expresión regular.
+  var wordList = text.split(/\b/); // The thing between / / is a regular expression.
   var histogram = {};
   wordList.forEach(function (word) {
     if (!histogram.hasOwnProperty(word)) {
@@ -351,24 +341,22 @@ function wordHistogram(text) {
   return histogram;
 }
 
-var poem = 'Todo pasa y todo queda, ' +
-           'pero lo nuestro es pasar, ' +
-           'pasar haciendo caminos, ' +
-           'caminos sobre la mar';
+var poem = 'All passes and all remains, ' +
+           'but \'tis our lot to pass, ' +
+           'pass by making pathways, ' +
+           'pathways o\'er the sea';
 
 wordHistogram(poem);
 ```
 
-Pero ahora tendrás cosas que no son palabras (como espacios y comas). Puedes
-filtrar una lista con
-[`.filter()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/filter):
+But now you will have things that are not words, such as spaces and commas. You can filter a list by using [`.filter()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/filter):
 
 ```js
 function isEven(n) { return n % 2 === 0; }
 [1, 2, 3, 4, 5, 6].filter(isEven);
 ```
 
-Y así quitar lo que no sean palabras:
+And thus remove whatever is not a word:
 
 ```js
 function isWord(candidate) {
@@ -389,19 +377,15 @@ function wordHistogram(text) {
   return histogram;
 }
 
-var poem = 'Todo pasa y todo queda, ' +
-           'pero lo nuestro es pasar, ' +
-           'pasar haciendo caminos, ' +
-           'caminos sobre la mar';
+var poem = 'All passes and all remains, ' +
+           'but \'tis our lot to pass, ' +
+           'pass by making pathways, ' +
+           'pathways o\'er the sea';
 
 wordHistogram(poem);
 ```
 
-También deberías normalizar las palabras (pasarlas a minúsculas por ejemplo)
-para no encontrarnos con entradas distintas en el histograma para la misma
-palabra. Para transformar una lista en otra lista con el mismo número de
-elementos usamos
-[`.map()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/map).
+You should also normalize the words (making them all-lowercase, for instance) so as to avoid finding different histogram entries for the same word. In order to transform a list into another list with the same amount of items, we use [`.map()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/map).
 
 ```js
 function isWord(candidate) {
@@ -427,18 +411,15 @@ function wordHistogram(text) {
   return histogram;
 }
 
-var poem = 'Todo pasa y todo queda, ' +
-           'pero lo nuestro es pasar, ' +
-           'pasar haciendo caminos, ' +
-           'caminos sobre la mar';
+var poem = 'All passes and all remains, ' +
+           'but \'tis our lot to pass, ' +
+           'pass by making pathways, ' +
+           'pathways o\'er the sea';
 
 wordHistogram(poem);
 ```
 
-Una última función te permite transformar una lista en un sólo valor. Esto es
-precisamente el histograma, una clasificación de todos los valores de la lista.
-Esta transformación se consigue mediante
-[`.reduce()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/reduce):
+One last function allows us to transform a list into a single value. This is precisely the histogram, a classification of all of the values in the list. This transformation is achieved by using [`.reduce()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/reduce):
 
 ```js
 function isWord(candidate) {
@@ -465,15 +446,15 @@ function wordHistogram(text) {
              .reduce(buildHistogram, emptyHistogram);
 }
 
-var poem = 'Todo pasa y todo queda, ' +
-           'pero lo nuestro es pasar, ' +
-           'pasar haciendo caminos, ' +
-           'caminos sobre la mar';
+var poem = 'All passes and all remains, ' +
+           'but \'tis our lot to pass, ' +
+           'pass by making pathways, ' +
+           'pathways o\'er the sea';
 
 wordHistogram(poem);
 ```
 
-**11. Número variables de parámetros**
+**11. Variable amounts of parameters**
 
 Fíjate en esto:
 
@@ -485,13 +466,12 @@ Math.max(1, 2);
 Math.max(1, 2, 3);
 ```
 
-Como puedes ver, la función acepta un número cualquiera de variables. Podemos
-hacer lo mismo gracias a la variable implícita `arguments`.
+As you can see, the function accepts any amount of variables. We can do the same thanks to the implicit variable, `arguments`.
 
 ```
 function f() {
-  console.log('Número de argumentos pasados:', arguments.length);
-  console.log('Argumentos:', arguments);
+  console.log('Amount of arguments passed:', arguments.length);
+  console.log('Arguments:', arguments);
 }
 f();
 f(1);
@@ -499,13 +479,11 @@ f('a', {});
 f(function () {}, [], undefined);
 ```
 
-Busca la información sobre `arguments` en la
-[MDN](http://lmgtfy.com/?q=mdn+arguments). ¡Te hará falta!
+Look up the info on `arguments` on the [MDN](http://lmgtfy.com/?q=mdn+arguments). You will need it!
 
-**12. Decoradores**
+**12. Decorators**
 
-Aparte de devolverse como parámetros, las funciones pueden ser devueltas desde
-otras functiones. Considera el siguiente ejemplo:
+Aside from being returned as parameters, functions can be returned from other functions. Consider the following example:
 
 ```js
 function newLog(label) {
@@ -515,11 +493,9 @@ function newLog(label) {
 }
 ```
 
-Esta función crea funciones que llamarán a `console.log()` pero con una
-etiqueta delante. Podríamos crear métodos `log` por clase, cada uno con
-un prefijo y así distinguir unos logs de otros.
+This function creates other functions that will call `console.log()`, but with a tag preceding it. We could create `log` methods on a class-by-class basis, each with a prefix, and this way be able to tell logs apart.
 
-Sin embargo, advierte el siguiente comportamiento:
+However, do notice the following behavior:
 
 ```js
 var log1 = newLog('Default');
@@ -531,15 +507,14 @@ log2(p);
 log1('Greetings', 'humans!');
 ```
 
-¿Cual es el problema? ¿Por qué no funciona el último ejemplo?
+What is the problem? Why is the last example not working?
 
-Para hacer que funcione, tendrías que llamar a `console.log()` con un número
-de parámetros que no sabemos a priori. Puedes usar `arguments`, no obstante:
+To make it work, you would need to call `console.log()` with a number of parameters we do not know beforehand. You can use `arguments`, however:
 
 ```js
 function newLog(label) {
   return function() {
-    // ¿Por qué tenemos que hacer esto?
+    // Why do we have to do this?
     var args = Array.prototype.slice.call(arguments);
     args.splice(0, 0, label + ':');
     console.log.apply(console, args);
@@ -555,11 +530,11 @@ log2(p);
 log1('Greetings', 'humans!');
 ```
 
-¿Podrías decir qué hace cada línea en la función `newLog`?
+Can you tell what each line in the `newLog` function does?
 
-**13. Asincronía y closures**
+**13. Asynchrony and closures**
 
-Carga el siguiente código:
+Load up the following code:
 
 ```js
 function scheduleTasks(count) {
@@ -571,21 +546,18 @@ function scheduleTasks(count) {
 }
 ```
 
-Y trata de predecir qué pasará al ejecutar el siguiente código:
+And try to predict what will happen when you run the following code:
 
 ```js
 scheduleTasks(5);
 ```
 
-¿Hace lo que esperabas? Si no es así, ¿por qué? ¿cómo lo arreglarías? Pista:
-necesitas la función [`.bind()`](
-https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind).
+Does it do what you expected? If not, why? How would you fix it? Here goes a clue: you need the [`.bind()`](
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind) function.
 
-**14. Eventos y métodos**
+**14. Events and methods**
 
-Habrá veces en las que tendrás que llamar a un método de un objeto cuando ocurra
-algo. Por ejemplo, supón que el método avanzar de un supuesto objeto debe
-llamarse en un intervalo de tiempo. Pongamos cada segundo:
+There will be occasions when you will need to call a method from an object when something happens. For instance, suppose that the 'advance' method of a given object has to be called within an interval. Let us say, every second:
 
 ```js
 var obj = {
@@ -593,38 +565,32 @@ var obj = {
   y: 2,
   advance: function () {
     this.y += 2;
-    console.log('Ahora Y vale', this.y);
+    console.log('Now Y equals', this.y);
   }
 };
 
 var id = setInterval(obj.advance, 1 * 1000);
 ```
 
-Este ejemplo falla porque en la última línea **no estamos llamando** a la
-función sino sólo pasándola como parámetro. La función `setInterval` no
-tiene idea del destinatario del mensaje y por tando no puede llamar a la función
-como si fuera un método.
+This example fails because in the last line **we are not calling** the function, but only passing it as a parameter. The `setInterval` function has no idea of the message's addressee, and therefore cannot call the function as if it were a method.
 
-Podemos arreglarlo con `bind` pero antes para el intervalo con:
+We can fix this with `bind`, but first you need to stop the interval with:
 
 ```js
 clearInterval(id);
 ```
 
-Puedes solucionar el problema con:
+You can solve the issue with:
 
 ```js
 var id = setInterval(obj.advance.bind(obj), 1 * 1000);
 ```
 
-**15. La función bind()**
+**15. The bind() function**
 
-A estas alturas ya deberías saber cómo funciona `bind` o qué hace. Si aun no
-lo tienes claro, búscalo en la MDN.
+At this stage, you should already know how `bind` works, or what it does. If you are not too clear on that, look it up on the MDN.
 
-La tarea es la siguiente: crea una función `bind` que simule el comportamiento
-del método de las funciones `.bind()`. Como se pide una función y no un método,
-el primer parámetro será la función. Así pues, en vez de usarse así:
+Your task is the following: create a `bind` function that simulates the behaviour of `.bind()` functions' method. Since what is requested is a function and not a method, the first parameter will be the function. Therefore, instead of using it this way:
 
 ```js
 function die(sides) {
@@ -637,7 +603,7 @@ var d20 = die.bind(obj, 20);
 d20();
 ```
 
-La usarás de esta otra forma:
+You will be using it this other way:
 
 ```js
 function die(sides) {
@@ -646,6 +612,6 @@ function die(sides) {
   return result;
 }
 var obj = { history: [] };
-var d20 = bind(die, obj, 20); // fíjate en que ahora die es el primer parámetro
+var d20 = bind(die, obj, 20); // notice that now die is the first parameter
 d20();
 ```
