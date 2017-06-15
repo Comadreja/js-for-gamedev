@@ -19,7 +19,7 @@ function introduction() {
 }
 
 function greetings(list) {
-    // And this is a different variable, also called text.
+    // And this is a DIFFERENT variable, also called text.
     var text = 'Greetings humans!';
     console.log(text);
 }
@@ -44,7 +44,7 @@ getEven([1, 2, 3, 4, 5, 6]);
 
 Since the scope is that of the function itself, the same name in a nested function can refer to two things:
 
-1) **If it is used with `var`**, we are referring to **another different variable**:
+1) **If it is used with `var`**, we are introducing **another different variable**:
 
 ```js
 function introduction() {
@@ -64,7 +64,7 @@ function introduction() {
 introduction();
 ```
 
-In the above case, we say that the variable `text` from the nested function `greetings` _conceals_ the variable `text` from the function `introduction`.
+In the above case, we say that the variable `text` from the nested function `greetings` _hides_ the variable `text` from the function `introduction`.
 
 Remember that, in order to introduce a new variable, we have to declare it with `var` before using it (or at the same time we are assigning it).
 
@@ -212,7 +212,7 @@ d20();
 
 In JavaScript, functions **retain the access to variables from higher scopes**. A function referring to any variable from a higher scope is called a **_closure_**.
 
-**This does not affect the value of `this`**, which will continue to be the message's addressee.
+**This does not affect the value of `this`**, which will continue to be the message's target.
 
 ### Methods, _closures_ and `this`
 
@@ -241,7 +241,7 @@ var d10 = diceUtils.newDie(10);
 d10(); // error!
 ```
 
-This is so because **`this` is always the message's addressee** and `d10` is being called as if it were a function rather than a method.
+This is so because **`this` is always the message's target** and `d10` is being called as if it were a function rather than a method.
 
 Remember that we can make any function take a fixed value as `this` with `.apply()`; so this does work, although it is not very convenient:
 
@@ -260,11 +260,11 @@ var diceUtils = {
     history: [], // keeps the dice record.
 
     newDie: function (sides) {
-        var self = this; // self is now the addressee of newDie.
+        var self = this; // self is now the target of newDie.
 
         return function die() {
             var result = Math.floor(Math.random() * sides) + 1;
-            // by using self, we refer to newDie's addressee.
+            // by using self, we refer to newDie's target.
             self.history.push([new Date(), sides, result]);
             return result;
         }
@@ -292,7 +292,7 @@ var diceUtils = {
     history: [], // keeps the dice record.
 
     newDie: function (sides) {
-        return die.bind(this); // a new function that will call die with its addressee set on the first parameter.
+        return die.bind(this); // a new function that will call die with its target set on the first parameter.
 
         function die() {
             var result = Math.floor(Math.random() * sides) + 1;
@@ -303,7 +303,7 @@ var diceUtils = {
 }
 ```
 
-Both forms are widely used, but the first is often seen written this way:
+Both forms are widely used, but the second is often seen written this way:
 
 ```js
 var diceUtils = {
@@ -373,7 +373,7 @@ var howard = {
             console.log('Horrifying, but I\'ll manage. That was close.');
         } else {
             console.log(
-                '¡Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn!');
+                'Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn!');
         }
     }
 };
@@ -434,7 +434,7 @@ console.log('T: ', new Date());
 
 setTimeout(function () {
     // This happens after 5 seconds.
-    console.log('T + 5 segundos: ', new Date());
+    console.log('T + 5 seconds: ', new Date());
 }, fiveSeconds);
 
 // This happens immediately thereafter
@@ -511,20 +511,20 @@ We have added a second _listener_ to the `line` event and **both will be run**. 
 
 If the line is exactly `exit`, we will close the command line interface. This causes a `close` event and, when we receive it, we will use that event's _listener_ in order to terminate the program.
 
-The `on` method is a second name for [`addListener`](https://nodejs.org/api/events.html#events_emitter_addlistener_eventname_listener).
+The `on` method is an alias for [`addListener`](https://nodejs.org/api/events.html#events_emitter_addlistener_eventname_listener).
 
 Same way we can add a _listner_, we can also remove it with [`removeListener`](https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener),
 or remove all of them with [`removeAllListeners`](https://nodejs.org/api/events.html#events_emitter_removealllisteners_eventname).
 
 We can listen for an event **just once** with [`once`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener).
 
-### Event dispatchers
+### Event broadcasters
 
 Now we will cover the `EventEmitter` class, which is also specific to Node.
 
-Events are not a standard mechanism to JavaScript. They are a convenient way of modeling certain types of problems; but a JavaScript object, on its own, **has no event dispatching API**.
+Events are not a standard mechanism to JavaScript. They are a convenient way of modeling certain types of problems; but a JavaScript object, on its own, **has no event broadcasting API**.
 
-In Node, we can rely on several alternatives in order to have objects dispatch events:
+In Node, we can rely on several alternatives in order to have objects broadcast events:
 
 - Implementing our own event API.
 
@@ -532,7 +532,7 @@ In Node, we can rely on several alternatives in order to have objects dispatch e
 
 - Having our objects **be instances** of `EventEmitter`.
 
-The first option would imply the creation of our own `on` method, as well as the mechanisms for event dispatching. The second and third both use the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class, which already implements this API.
+The first option would imply the creation of our own `on` method, as well as the mechanisms for event broadcasting. The second and third both use the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class, which already implements this API.
 
 This is an example of option 3, which we will take as an opportunity to review the notion of inheritance:
 
@@ -546,13 +546,13 @@ function Ship() {
 }
 
 Ship.prototype = Object.create(EventEmitter.prototype);
-Ship.prototype.constructor = Nave;
+Ship.prototype.constructor = Ship;
 
 var ship = new Ship();
 ship.on; // it exists!
 ```
 
-Now that the ship can dispatch events, we shall make it dispatch an event by shooting.
+Now that the ship can broadcast events, we shall make it broadcast an event by shooting.
 
 ```js
 Ship.prototype.shoot = function () {
@@ -567,7 +567,7 @@ ship.on('shoot', function (ammunition) {
 ship.shoot();
 ```
 
-**Dispatching an event** consists of calling the [`emit`](https://nodejs.org/api/events.html#events_emitter_emit_eventname_arg1_arg2) method, which will trigger the execution of the _listeners_ that listen for this event.
+**Broadcasting an event** consists of calling the [`emit`](https://nodejs.org/api/events.html#events_emitter_emit_eventname_arg1_arg2) method, which will trigger the execution of the _listeners_ that listen for this event.
 
 Events are incredibly useful in order to generically model user interfaces.
 
