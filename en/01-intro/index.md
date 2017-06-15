@@ -1,10 +1,10 @@
-# The work environment
+# The working environment
 
 ## The command line
 
 The command line is an application for communicating with the operating system through written commands. A major part of web development tools are console applications, that is, applications whose interface is conceived to be used through a command line.
 
-Generally speaking, you do not need to install command lines from any other developers because operating systems feature their own. Check one of these guides on how to launch these applications depending on your operating system:
+Generally speaking, you need not install command lines from 3rd-party developers because operating systems feature their own. Check one of these guides on how to launch these applications depending on your operating system:
 
 - In case you are working on  [Windows](http://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/).
 
