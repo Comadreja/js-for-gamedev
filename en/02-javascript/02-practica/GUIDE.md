@@ -1,42 +1,34 @@
-# Batalla RPG - Guía de la práctica
+# RPG Battle - Practice guide
 
-La guía de la práctica te sugiere un orden para completar con éxito la
-implementación de la funcionalidad de la práctica. Prepárate, eso sí, para
-**leer mucho JavaScript** y ten a mano Google, la MDN y StackOverflow.
+The practice guide suggests you an order you can follow so as to successfully accomplish the implementation of the practice's functionality. You should brace yourself, however, for some **heavy JavaScript reading**; also be sure to keep Google, the MDN and StackOverflow handy.
 
-## 1. El modelo de datos
+## 1. The data model
 
-En el juego existen muchos tipos de entidades, algunos relacionados y otros no.
+There are many types of entities in the game, some related to each other and some unrelated.
 
-La especificación de tales entidades puede encontrarse en `spec/entities.js` y
-la implementación en `src/entities.js`, `src/Character.js` y `src/items.js`.
+The specification for such entities can be found in `spec/entities.js`, and the implementation in `src/entities.js`, `src/Character.js` and `src/items.js`.
 
-### Efectos
+### Effects
 
-Quizá el tipo más sencillo sea el tipo `Effect` en `src/items.js` y especificado
-en `spec/entities.js`. Comienza por aquí.
+Perhaps the easiest type is `Effect` in `src/items.js`, which is specified in `spec/entities.js`. Begin from there.
 
-### Personajes
+### Characters
 
-Continúa activando los tests relacionados con el tipo `Character` y desactiva
-los demás.
+Keep enabling the tests related to the type `Character`, and disable the rest.
 
-A continuación abre `src/Character.js` e implementa las partes que faltan.
+Next, open up `src/Character.js` and implement the remaining parts.
 
-### Elementos
+### Items
 
-Continúa con el módulo `src/items.js` activando paulatinamente las _suites_ para
-los tipos `Item`, `Weapon` y `Scroll` que encontrarás en `spec/entities.js`.
+Go on with the `src/items.js` module, incrementally enabling the suites for the `Item`, `Weapon` and `Scroll` types you will find in `spec/entities.js`.
 
-### Entidades por defecto
+### Default entities
 
-Tienes que crear algunos personajes, armas y pergaminos por defecto para que
-otras prácticas puedan usarlos. La _suite_ _built-in entities_ en
-`spec/entities.js` incluye todas las expectativas de estas entidades.
+You need to create some default characters, weapons and scrolls so that other practices will be able to use them. The _built-in entities_ suite in `spec/entities.js` includes all of the expectations for these entities.
 
-Ve al archivo `src/entities.js` y completa las que falten. Fíjate que las
-propiedades son _getters_ para que cada acceso a las propiedades te devuelvan
-un nuevo personaje.
+Go to the `src/entities.js` file and complete the remaining ones. Notice that the properties are _getters_, so that every time you access the properties they will return a new character.
+
+
 
 ## 2. La lista de turnos
 
