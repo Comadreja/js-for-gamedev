@@ -31,7 +31,7 @@ Object-oriented programming is a **problem modeling** technique that confers spe
 
 ## Objects
 
-Objects are **depictions of a problem's aspects** that carry out a specific role, exhibit a set of concrete functionality –the [API](https://en.wikipedia.org/wiki/Application_programming_interface#Libraries_and_frameworks)–, and also conceal the way they carry out that functionality.
+Objects are **depictions of a problem's aspects** that carry out a specific role, exhibit a set of concrete functionality –the [API](https://en.wikipedia.org/wiki/Application_programming_interface#Libraries_and_frameworks)–, and also hide the way they carry out that functionality.
 
 ## Message passing
 
@@ -59,7 +59,7 @@ Types **specify properties and common behaviors** to all of the belonging object
 
 ![Space Invaders screenshot where we can tell different object types: counters, defenses, enemies, player & bullets](images/space-invaders-types.png)
 
-Some **types** you could identify are counters, shields, friandly ship, enemies, and bullets.
+Some **types** you could identify are counters, shields, friendly ship, enemies, and bullets.
 
 A type's **values** are each of the individual objects. The special enemy, as well as each of the other enemies, will be a distinct value of the **enemy type**.
 
@@ -72,11 +72,6 @@ In object models, it is more convenient to work with object types.
 ### Methods & interfaces
 
 In order to try to determine the API for the types of objects you can use the game's interactions as a guide.
-
-
-
-Para tratar de determinar la API de los tipos de objetos puedes guíarte por
-las interacciones propias del juego.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/D1jZaIPeD5w?rel=0" frameborder="0" allowfullscreen></iframe>
 
@@ -144,7 +139,7 @@ Constructors usually allow the customization of parts of the object they create,
 
 During modeling, relations arise in a natural way. Enemies _have_ a position. The friendly ship _creates_ bullets.
 
-As is often the case with people, you will tend to **set hierarchies** between objects by creating more general types. For instance, instead of thinking of enemies and player separately, it is possible to think of _ships_.
+As is often our habit, you will tend to **set hierarchies** between objects by creating more general types. For instance, instead of thinking of enemies and player separately, it is possible to think of _ships_.
 
 The **`ship` type** compounds the methods and attributes common to the player ship and the enemies.
 
@@ -154,7 +149,7 @@ This hierarchy establishes **inheritance relations**, also called _"it's a(n)"_ 
 
 We say the `enemy` type **extends** the `ship` type by adding `advance` to the API, as well as the score and last movement direction to the state.
 
-The friendly ship adds no new methods but **redefines or overwrites** the `shoot` method so that it fires upwards.
+The friendly ship adds no new methods but **redefines or overrides** the `shoot` method so that it fires upwards.
 
 Since there are new types, you will need new constructors. Old constructors can **delegate** parts of the object creation to the new ones.
 
