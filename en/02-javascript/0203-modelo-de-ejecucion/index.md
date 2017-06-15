@@ -518,13 +518,13 @@ or remove all of them with [`removeAllListeners`](https://nodejs.org/api/events.
 
 We can listen for an event **just once** with [`once`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener).
 
-### Event broadcasters
+### Event emitters
 
 Now we will cover the `EventEmitter` class, which is also specific to Node.
 
-Events are not a standard mechanism to JavaScript. They are a convenient way of modeling certain types of problems; but a JavaScript object, on its own, **has no event broadcasting API**.
+Events are not a standard mechanism to JavaScript. They are a convenient way of modeling certain types of problems; but a JavaScript object, on its own, **has no event-emitting API**.
 
-In Node, we can rely on several alternatives in order to have objects broadcast events:
+In Node, we can rely on several alternatives in order to have objects emit events:
 
 - Implementing our own event API.
 
@@ -532,7 +532,7 @@ In Node, we can rely on several alternatives in order to have objects broadcast 
 
 - Having our objects **be instances** of `EventEmitter`.
 
-The first option would imply the creation of our own `on` method, as well as the mechanisms for event broadcasting. The second and third both use the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class, which already implements this API.
+The first option would imply the creation of our own `on` method, as well as the mechanisms for event emission. The second and third both use the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class, which already implements this API.
 
 This is an example of option 3, which we will take as an opportunity to review the notion of inheritance:
 
@@ -552,7 +552,7 @@ var ship = new Ship();
 ship.on; // it exists!
 ```
 
-Now that the ship can broadcast events, we shall make it broadcast an event by shooting.
+Now that the ship can emit events, we shall make it emit an event by shooting.
 
 ```js
 Ship.prototype.shoot = function () {
@@ -567,7 +567,7 @@ ship.on('shoot', function (ammunition) {
 ship.shoot();
 ```
 
-**Broadcasting an event** consists of calling the [`emit`](https://nodejs.org/api/events.html#events_emitter_emit_eventname_arg1_arg2) method, which will trigger the execution of the _listeners_ that listen for this event.
+**Emitting an event** consists of calling the [`emit`](https://nodejs.org/api/events.html#events_emitter_emit_eventname_arg1_arg2) method, which will trigger the execution of the _listeners_ that listen for this event.
 
 Events are incredibly useful in order to generically model user interfaces.
 
