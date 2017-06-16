@@ -28,100 +28,60 @@ You need to create some default characters, weapons and scrolls so that other pr
 
 Go to the `src/entities.js` file and complete the remaining ones. Notice that the properties are _getters_, so that every time you access the properties they will return a new character.
 
+## 2. The turn list
 
+This one is easy. The specification can be found in `spec/TurnList.js` and the implementation in `src/TurnList.js`. You only need fill the gaps. It is pure algorithmics. You may have to look at how the `Array.sort()` function works if you do not want to implement your own sorting function.
 
-## 2. La lista de turnos
+## 3. The character's view
 
-Esta es fácil. La especificación se encuentra en `spec/TurnList.js` y la
-implementación en `src/TurnList.js`. Tan sólo rellena los huecos. Es pura
-algoritmia. Quizá tengas que mirarte cómo funciona la función `Array.sort()`
-para no implementarte tu propia función de ordenamiento.
+The character's view is a read-only display of the character's stats. Its specification is contained in `spec/CharactersView.js` and its implementation in `src/CharactersView.js`. You can pick up from there.
 
-## 3. La vista del personaje
+## 4. The options set
 
-La vista del personaje es una representación de sólo lectura de las estadísticas
-del mismo. Su especificación está en `spec/CharactersView.js` y su
-implementación en `src/CharactersView.js`. Puedes continuar por ahí.
+The options set represents the options that can be chosen at any given time. The specification is contained in `spec/Options.js`, and the near-complete implementation in `src/Options.js`. Notice how the `Options` type extends `EventEmitter`. Your task will be to implement the `.select()` method so that when it is called, an event according to the specification will be emitted.
 
-## 4. El grupo de opciones
+## 5. The options stack
 
-El grupo de opciones representa las opciones que se pueden elegir en un momento
-dado. La especificación está en `spec/Options.js` y la implementación,
-casi completa, en `src/Options.js`. Fíjate cómo el tipo `Options`
-extiende `EventEmitter`. Tu misión será implementar el método `.select()` para
-que al llamarlo se emita un evento acorde con la especificación.
+An RPG is normally made up of several stacked menus. For instance, the action menu gives way to the spell menu, which in turn gives way to the target menu. We can switch to the prior menu at any point. The options stack in `src/OptionsStack.js`, specified in `spec/OptionsStack.js`, reflects this behavior.
 
-## 5. La pila de opciones
+The API is the same as for the options set, but the methods are to be redirected to the last stacked menu only. Notice how new menus are stacked and unstacked.
 
-Un RPG se compone normalmente de varios menús apilados. Por ejemplo, el menú
-de acciones da paso al menú de hechizos que da paso al menú de objetivos. En
-cualquier momento podemos regresar al menú anterior. La pila de opciones en
-`src/OptionsStack.js` y especificada en `spec/OptionsStack.js` refleja este
-comportamiento.
+## 6. Utilities
 
-La API es la misma que el grupo de opciones pero los métodos realmente sólo
-se deben redirigir al último menú apilado. Fíjate en cómo se apilan y desapilan
-menús nuevos.
+Easy! Nothing to do here, just keep in mind you have the `src/utils.js` module, where you can place more utilities if you find yourself repeating the same code in many places. I suggest you write some kind of test. You can look to the ones that are already in `spec/utils.js` for inspiration.
 
-## 6. Utilidades
+## 7. The battle
 
-Tranqui. No tienes que hacer nada aquí, tan sólo ten en cuenta que tienes el
-módulo `src/utils.js` donde puedes colocar más utilidades si encuentras que
-andas repitiendo el mismo código en muchas partes. Te aconsejo que escribas
-algún test. Puedes inspirarte en los que ya hay en `spec/utils.js`.
+You got to the real meat of the practice. Until now, it was all a matter of preparing the different types the `Battle` type relies on. Now you will have to implement the state machine that controls battle actions: defending, attacking, and spellcasting.
 
-## 7. La batalla
+Do notice that the fighters and their weapons and spells **are not the ones that are included by default in `src/entities.js`**, but those that are found in `spec/samplelib.js`.
 
-Has llegado al plato fuerte de la práctica. Hasta aquí era todo preparar los
-tipos en los que se apoya el tipo `Battle`. Ahora tendrás que implementar
-la máquina de estados que controla las acciones de batalla: defender, atacar
-y lanzar un hechizo.
+The battle specification is contained in `spec/Battle.js`, and its implementation in `src/Battle.js`. In order to successfully approach this implementation, it is necessary for all of the tests up to now to pass.
 
-Fíjate que los combatientes, sus armas y los hechizos **no son los que vienen
-por defecto en `src/entities.js`** sino los que se encuentran en
-`spec/samplelib.js`.
+There are no recommendations as to which tests should be enabled first in this part of the practice. You will have to experiment.
 
-La especificación de la batalla está en `spec/Battle.js` y la implementación en
-`src/Battle.js`. Para abordar esta implementación con éxito es necesario que
-todos los tests hasta ahora pasen.
-
-En esta parte de la práctica no hay recomendaciones sobre qué tests activar
-primero. Tendrás que experimentar.
-
-Repasa bien el código, muchos de los ejercicios consisten en dar las
-implementaciones de **funciones auxiliares**. Es el caso de:
+Review your code well, many of the exercises consist of giving implementations to **auxiliary functions**. This is the case for:
   + `assignParty`
   + `useUniqueNames`
   + `isAlive`
   + `getCommonParty`
 
-Fíjate entonces en la función `_showAction` que hará que las acciones de
-batalla estén disponibles en el atributo `options`.
+Notice then the `_showAction` function, which will make battle actions available in the `options` attribute.
 
-Ahora concéntrate en las acciones. La implementación de `_defend` está casi
-hecha. Sólo tendrás que completar las funciones `_improveDefense` y
-`_restoreDefense` para el cálculo de la defensa mejorada.
+Now concentrate on actions. The implementation for `_defend` is almost finished. You only need to complete the functions `_improveDefense` and `_restoreDefense` for the calculation of improved defense.
 
-La acción _defend_ rellena la estructura `this._action` con el nombre de la
-acción, los identificadores del personaje activo y del objetivo, el efecto
-y la nueva defensa. Todos menos la defensa son necesarios para poder llamar
-a la función `_executeAction` que ejecutará la acción e informará del
-resultado.
+The _defend_ action fills the structure `this._action` with the action's name, identifiers for the active character and the target, its effect, and the new defense value. All save for defense are necessary in order to be able to call the function `_executeAction`, which will execute the action and report the result.
 
-Durante el proceso de implementación de las acciones, tendrás que implementar
-también `_showTargets` y `_showScrolls` de manera similar, de acuerdo a la
-especificación y al [enunciado](index.md).
+During the process of implementing actions, you will also need to implement `_showTargets` and `_showScrolls` in a similar way, according to the specification and to the [header](index.md).
 
-## 8. Calidad del código
-Cuando termines y todos tus tests estén en verde habrás terminado la práctica.
+## 8. Code quality
 
-Rotula la rama con un _tag_ o cambia de rama antes de mejorar la calidad del
-código.
+When you are done and all of your tests check out green, you will have finished the practice.
 
-Lee ahora los errores de estilo que el comando de tests pueda proporcionar y
-pasa los tests cada vez que realices una modificación para asegurarte que no
-has roto nada.
+Mark the branch with a _tag_ or switch branches before proceeding to improve the code's quality.
 
-## Fin
+Now read any style errors the test command can provide, and run the tests every time you make any alterations in order to make sure you have not broken anything.
 
-¡Enhorabuena! Has completado la práctica.
+## End
+
+Congratulations! You have finished the practice.
