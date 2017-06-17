@@ -1,27 +1,24 @@
-# Batalla RPG
+# RPG Battle
 
-Los objetivos principales de esta práctica son **acostumbrarte a leer código
-JavaScript** y que **practiques la implementación de modelos y algoritmos**.
+Your main objectives in this practice are **to become accustomed to read JavaScript code** and **to practice implementing models and algorithms**.
 
-El objetivo secundario es que practiques la metodología **_TDD_**, del inglés
-_Test Driven Development_ o desarrollo dirigido por tests.
+Your secondary objective will be to practice the **_TDD_** (short for _Test-Driven Development_) methodology.
 
-## Instalación y tests
+## Install and tests
 
-**Descarga el <a href="start-here.zip" target="_blank">esqueleto inicial del proyecto</a>** y descomprímelo. En una consola, ve a la raíz del directorio del proyecto (donde se encuentra el archivo `package.json`) y ejecuta:
+**Download the <a href="start-here.zip" target="_blank">base project framework</a>** and decompress it. On a console, go to the root directory of the project (where the `package.json` file is located) and run:
 
 ```js
 npm install
 ```
 
-Ahora puedes pasar los tests con:
+Now you can run tests with:
 
 ```js
 npm test
 ```
 
-La práctica no estará finalizada hasta que no pases los tests con 0 errores y
-0 especificaciones pendientes:
+The practice will not be finished until you pass the tests with 0 errors and 0 unfulfilled specifications:
 
 ```
 $ npm test
@@ -39,25 +36,18 @@ $ npm test
 Finished in 0.4 seconds
 ```
 
-## Calidad del código
+## Code quality
 
-Este proyecto exige que tu código cumpla con ciertos estándares de calidad.
-El conjunto de restricciones responde a la [especificación recomendada por
-ESLint](http://eslint.org/docs/rules/) con dos alteraciones:
-- Se debe usar el estilo _camelCase_ para identificadores.
-- Se deben usar comillas simples para las cadenas.
-- Se deben poner espacios entre operandos y operadores.
-- No se permiten líneas de más de 100 caracteres.
-- No se permiten funciones de más de 40 _statements_
+This project demands for your code to meet certain quality standards. The set of restrictions follows the [ESLint-recommended specification](http://eslint.org/docs/rules/) with two alterations:
+- The _camelCase_ style must be used for identifiers.
+- Single quotation marks must be used for strings.
+- Operands and operators must be separated by spaces.
+- Lines wider than 100 characters are not allowed.
+- Functions with more than 40 statements are not allowed.
 
-En definitiva esas reglas están ahí para que los programas sean fáciles de leer.
-La mejor recomendación que puedes seguir es hacer lo que veas que ya está hecho.
-Cuando contribuyas a código ajeno, mira y copia.
+Ultimately, those guidelines are in place in order to make programs easier to read. The best advice you can follow is to do things the way you have seen them done. Whenever you are contributing to someone else's code, look and copy.
 
-Las dos últimas reglas están pensadas para que no hagas funciones muy largas,
-tanto en horizontal como en vertical. Ten en cuenta que lo que hemos limitado
-es el número de _statements_, no de líneas así que el siguiente ejemplo son
-realmente 4 _statements_:
+The last two rules have been thought out to prevent you from making excessively long functions, whether horizontally or vertically. Keep in mind we have limited the number of statements, not lines, so the following example is only made up of 4 statements:
 
 ```js
 function f() {
@@ -71,16 +61,16 @@ function f() {
 }
 ```
 
-Al encargado de comprobar el estilo del código se lo llama _linter_ y éste
-se pasa automáticamente junto con los tests. Un error se muestra así:
+The one in charge of checking the code's style is called _linter_ and is run automatically along with the tests. An error displays like this:
 
 ```js
 /Users/salva/workspace/pvli2017-rpg-battle/src/TurnList.js
   15:8  error  Identifier 'snake_case' is not in camel case  camelcase
 ```
 
-Ahí se indica dónde está el error mediante la ruta del fichero, la línea y la
-columna en formato `fila:columna`.
+That is where the error is indicated by file path, row, and column in the `row:column` format.
+
+
 
 ## Metodología y guía de la práctica
 
