@@ -1,23 +1,17 @@
-# TDD: Desarrollo dirigido por tests
+# TDD: Test-driven development
 
-Practicando TDD, iremos escribiendo código de forma que los tests pasen. Los
-tests vienen dados pero están desactivados. La [guía de la práctica](
-./GUIDE.md) recomienda en qué orden activar los tests para completar la práctica
-poco a poco.
+By practicing TDD, we will get to write code so that it passes tests. These tests are already there, but disabled. The [practice guide](./GUIDE.md) recommends an optimal order we can enable the tests in, so as to gradually fulfill the practice.
 
-### Tests y suites
+### Tests and suites
 
-En esta práctica usamos [**Jasmine**](http://jasmine.github.io) como framework
-para tests. En Jasmine escribimos suites y tests. Las suites se pueden anidar
-y pueden llevar código de inicialización. En general, la API de Jasmine es muy
-clara y no necesita mayor explicación. De todas formas, aquí tienes un ejemplo:
+Throughout this practice, we shall use [**Jasmine**](http://jasmine.github.io) as a test framework. We write suites and tests in Jasmine. Suites can be nested and they can also include initialization code. The Jasmine API is generally crystal clear, and does not need much more in the way of explanation. In any case, here goes an example:
 
 ```js
-describe('Las suites en Jasmine', function () {
+describe('Suites in Jasmine', function () {
 
-  describe('pueden anidarse', function () {
+  describe('can be nested', function () {
 
-    it('y encierran tests con expectativas', function () {
+    it('and enclose tests with expectations', function () {
       expect(2 + 2).toBe(4);
     });
 
@@ -26,9 +20,7 @@ describe('Las suites en Jasmine', function () {
 });
 ```
 
-Se llama test a un fragmento de código que pone a prueba una funcionalidad
-específica. El test puede pasar o fallar. En caso de fallo, la consola mostrará
-por qué ha fallado en la forma de una traza:
+We call 'test' a code fragment that checks for a specific functionality. The test can pass or fail. In case of failure, the console will show the reason it did so by means of a trace:
 
 ```js
 15.2) Expected 'b' to be 'c'.
@@ -45,83 +37,69 @@ por qué ha fallado en la forma de una traza:
         at QueueRunner.execute (/Users/salva/workspace/pvli2017-rpg-battle/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1923:10)
 ```
 
-La traza contiene el fallo y dónde se ha producido en el conjunto de llamadas
-desde la más reciente hasta la más vieja. A veces los fallos son producto de
-implementaciones que no cumplen las expectativas, otras veces serán fallos en
-tiempo de ejecución y otras serán fallos de sintaxis.
+The trace contains both the failure and where it happened in the set of calls, from the most recent to the earliest. Sometimes failures are a consequence of implementations that do not fulfill expectations, some other times they will be runtime errors, and on yet other occasions they will be the product of syntax errors.
 
-Acostúmbrate a fallar y a encontrar en la traza el punto exacto del código que
-está bajo tu control para solucionarlo. Para ello busca las carpetas `spec` y
-`src` entre la traza. El primer número tras la ruta es la línea del fallo.
+Get used to failing and to finding in the trace the exact point in the code that is up for you to solve. In order to do this, look for the `spec` and `src` folders in the trace. The first number after the path is the line that contains the failure.
 
-### Activando y desactivando tests
+### Enabling and disabling tests
 
-Los tests y las suites pueden desactivarse añadiendo el prefijo `x`. Por
-ejemplo:
+Tests and suites can be disabled by adding the prefix, `x`. For instance:
 
 ```js
-describe('Las suites en Jasmine', function () {
+describe('Suites in Jasmine', function () {
 
-  describe('pueden anidarse', function () {
+  describe('can be nested', function () {
 
-    it('y encierran tests con expectativas', function () {
+    it('and enclose tests with expectations', function () {
       expect(2 + 2).toBe(4);
     });
 
-    xit('este test está desactivado', function () {
+    xit('this test is disabled', function () {
 
     });
 
   });
 
-  xdescribe('la suite y todos sus tests están desactivados.', function () {
+  xdescribe('the suite and all of its tests are disabled.', function () {
 
   });
 
 });
 ```
 
-Los tests desactivados no comprueban las expectativas pero Jasmine te
-informa de que están desactivados.
+Disabled tests will not check for expectations, but Jasmine will report that they are disabled.
 
-### El ciclo de desarrollo
+### The development cycle
 
-Cuando estés desarrollando, es conveniente que pases los test a menudo por dos
-motivos:
+Whenever you are developing, it is best for you to run the tests often for two reasons:
 
-- Comprobar que avanzas.
-- Comprobar que no has roto nada.
+- To check whether you are advancing.
+- To check whether you have not broken anything.
 
-Para ello puedes ejecutar el comando:
+To do this, you can run the command:
 
 ```
 $ npm run-script watch
 ```
 
-Esta tarea monitoriza los cambios en los archivos de las carpetas `spec` y
-`src` y cuando detecte un cambio, lanzara todos los tests.
+This task monitors changes in the files within the `spec` and `src` folders, and will launch all of the tests when it detects a change.
 
-A veces, el error es tan estrepitoso que rompe la monitorización. En tal caso
-tendrás que reintroducir el comando manualmente.
+Sometimes, an error is catastrophic enough that it will break the monitoring. Should that happen, you will have to manually reenter the command.
 
-Cada vez que realices una modificación y los tests pasen, haz un commit nuevo.
+Make a new commit every time you make a modification and it passes the tests.
 
-### Depurando tests asíncronos
+### Debugging asynchronous tests
 
-Algunos tests son asíncronos y pueden producir _timeouts_. En general un
-_timeout_ no es un resultado positivo. El problema de los _timeouts_ es que
-pueden ralentizar toda la suite así que la recomendación en estos casos es
-afrontarlos uno a uno, desactivando el resto y activándolos poco a poco.
+Some tests are asynchronous and can cause _timeouts_. Generally speaking, a _timeout_ is not a desirable outcome. The problem with _timeouts_ is that they can slow the whole suite down, so the recommended course of action in these cases is to tackle them one by one, by disabling the rest and enabling them gradually.
 
-Reconocerás un test asíncrono porque lleva un parámetro `done` como en el
-ejemplo:
+You will recognize asynchronous tests because they have a `done` parameter, as in the example:
 
 ```js
 var EventEmitter = require('events').EventEmitter;
 
 describe('EventEmitter', function () {
 
-  it('emite eventos arbitrarios', function (done) {
+  it('emits arbitrary events', function (done) {
     var ee = new EventEmitter();
     ee.on('turn', function(turn) {
       expect(turn.number).toBe(1);
@@ -133,19 +111,14 @@ describe('EventEmitter', function () {
 });
 ```
 
-## Estrategia general para la depuración
+## General debugging strategy
 
-Es muy recomendable que mantengas una rama estable donde todos los tests pasen
-y los que no estén desactivados. Cuando te embarques en la tarea de hacer que
-un test pase, crea una rama para esa tarea y cuando termines mézclala con la
-rama estable.
+It is very recommendable for you to keep a stable branch where all tests pass, and those which do not are disabled. Whenever you embark on the task of making a test pass, create a branch for that task, and merge it with the stable branch when it is done.
 
-Cuando encuentres un error, intenta seguir los siguientes pasos:
-  1. Desactiva los tests asíncronos que estén tardando demasiado. **Necesitas un
-  ciclo de desarrollo rápido.**
-  2. **¡¡Lee el error!!**.
-  3. Busca en la traza el lugar donde se original el error:
-    1. Si es un fallo en una expectativa, localiza el punto de entrada en
-    tu código.
-    2. Deja trazas con `console.log()` inspeccionando el estado de tus objetos.
-  4. Salva y relanza los tests a menudo.
+Whenever you find an error, try to follow these steps:
+  1. Disable the asynchronous tests that are taking too long. **You need a fast development cycle.**
+  2. **Read the error!!**.
+  3. Search the trace for the place where the error is originated:
+    1. If it is a failed expectation, locate the entry point in your code.
+    2. Keep traces with `console.log()` inspecting your objects' state.
+  4. Save and reload the tests often.
