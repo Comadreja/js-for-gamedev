@@ -1,27 +1,24 @@
-# Batalla RPG
+# RPG Battle
 
-Los objetivos principales de esta práctica son **acostumbrarte a leer código
-JavaScript** y que **practiques la implementación de modelos y algoritmos**.
+Your main objectives for this practice will be **to get accustomed to reading JavaScript code** and **to practice the implementation of models and algorithms**.
 
-El objetivo secundario es que practiques la metodología **_TDD_**, del inglés
-_Test Driven Development_ o desarrollo dirigido por tests.
+Your secondary objective will be to practice the **_TDD_** (test-driven development) methodology.
 
-## Instalación y tests
+## Install and tests
 
-**Descarga el <a href="start-here.zip" target="_blank">esqueleto inicial del proyecto</a>** y descomprímelo. En una consola, ve a la raíz del directorio del proyecto (donde se encuentra el archivo `package.json`) y ejecuta:
+**Download the <a href="start-here.zip" target="_blank">project's starter framework</a>** and decompress it. On a console, go to the project's root directory (where the `package.json` file is located) and launch:
 
 ```js
 npm install
 ```
 
-Ahora puedes pasar los tests con:
+Now you can run tests with this:
 
 ```js
 npm test
 ```
 
-La práctica no estará finalizada hasta que no pases los tests con 0 errores y
-0 especificaciones pendientes:
+The practice will not be done until you pass the tests with 0 errors and 0 pending specifications:
 
 ```
 $ npm test
@@ -39,25 +36,18 @@ $ npm test
 Finished in 0.4 seconds
 ```
 
-## Calidad del código
+## Code quality
 
-Este proyecto exige que tu código cumpla con ciertos estándares de calidad.
-El conjunto de restricciones responde a la [especificación recomendada por
-ESLint](http://eslint.org/docs/rules/) con dos alteraciones:
-- Se debe usar el estilo _camelCase_ para identificadores.
-- Se deben usar comillas simples para las cadenas.
-- Se deben poner espacios entre operandos y operadores.
-- No se permiten líneas de más de 100 caracteres.
-- No se permiten funciones de más de 40 _statements_
+This project will demand for your code to meet certain quality standards. The set of restrictions follow the [ESLint-recommended specification](http://eslint.org/docs/rules/), with two alterations:
+- The _camelCase_ style must be used for identifiers.
+- Single quotes must be used for strings.
+- Operands and operators must be separated by spaces.
+- Lines longer than 100 characters are not allowed.
+- Functions with more than 40 statements are not allowed.
 
-En definitiva esas reglas están ahí para que los programas sean fáciles de leer.
-La mejor recomendación que puedes seguir es hacer lo que veas que ya está hecho.
-Cuando contribuyas a código ajeno, mira y copia.
+Ultimately, those rules are there to make programs easier to read. The best recommendation you can follow is to do things the way you have seen them done; when you contribute to someone else's code, watch and copy.
 
-Las dos últimas reglas están pensadas para que no hagas funciones muy largas,
-tanto en horizontal como en vertical. Ten en cuenta que lo que hemos limitado
-es el número de _statements_, no de líneas así que el siguiente ejemplo son
-realmente 4 _statements_:
+The last two rules are conceived to prevent you from writing excessively long functions, whether horizontally or vertically. Keep in mind we have limited the number of statements, not lines, so the following example really only has 4 statements:
 
 ```js
 function f() {
@@ -71,58 +61,38 @@ function f() {
 }
 ```
 
-Al encargado de comprobar el estilo del código se lo llama _linter_ y éste
-se pasa automáticamente junto con los tests. Un error se muestra así:
+The program in charge of checking the code's style is called _linter_ and is run automatically alongside the tests. An error displays like this:
 
 ```js
 /Users/salva/workspace/pvli2017-rpg-battle/src/TurnList.js
   15:8  error  Identifier 'snake_case' is not in camel case  camelcase
 ```
 
-Ahí se indica dónde está el error mediante la ruta del fichero, la línea y la
-columna en formato `fila:columna`.
+That is where the error is indicated; by file path, line, and column (in the `line:column` format).
 
-## Metodología y guía de la práctica
+## Practice methodology and guide
 
-Antes de comenzar lee el documento [TDD.md](./TDD.md) y la guía de la práctica
-[GUIDE.md](./GUIDE.md). El primero presenta la metodología que seguirás para
-desarrollar la práctica y el segundo te muestra un orden de activación de tests
-sensato de cara a completar la práctica con éxito.
+Before you start, read the document [TDD.md](./TDD.md) and the practice guide [GUIDE.md](./GUIDE.md). The former introduces the methodology you will follow in order to develop the practice; the latter shows you a sensible test-enabling order so that you can complete the practice successfully.
 
-## Descripción de la batalla
+## Battle description
 
-El objetivo de la práctica es crear una **biblioteca que modele el
-funcionamiento de una batalla RPG**.
+The practice's objective is to create **a library that models the functioning of an RPG battle**.
 
-Los combatientes en la batalla son personajes en distintos bandos que lucharán
-entre sí. Cuando sólo queden miembros de un bando este será declarado como
-vencedor.
+The fighters in the battle are characters on opposing sides that will fight each other. When the only characters standing belong to the same side, this side will be declared the victor.
 
-Al comienzo de la batalla, los personajes son ordenados por su iniciativa, de
-mayor a menor y los turnos se suceden en este orden hasta que sólo quedan
-personajes de un bando. Si un personaje ha muerto, es decir, sus puntos de vida
-son 0, su turno se salta.
+At the start of the battle, the characters will be sorted by initiative from highest to lowest, and their turns will follow in succession in that order until only one side's characters are standing. If a character is dead, that is to say, her hit points are 0, her turn is skipped.
 
-Cuando le llega el turno a un personaje este puede elegir entre realizar tres
-acciones: defender, atacar o lanzar un hechizo.
+When a character's turn comes, she can choose between three actions: defending, attacking, or casting a spell.
 
-Si defiende, su defensa aumentará en un 10%. La defensa es importante porque
-afecta en el modo en que un personaje bloquea el efecto de las armas y los
-hechizos.
+If she defends, her defense will be raised by 10%. Defense is important because it affects the way a character blocks weapon or spell effects.
 
-Si ataca, lo hará sobre un personaje objetivo que realizará una tirada de
-defensa. Si el objetivo supera esta tirada no recibirá ningún efecto pero si la
-falla, recibirá todo el daño del arma.
+If she attacks, she will do so against a target character, who will receive a defense die roll. If the target succeeds in this roll, she will not receive any effect; however, should she fail, she will receive the full damage for the attacking weapon.
 
-Si finalmente decide utilizar un hechizo, habrá de seleccionar el hechizo y
-luego un objetivo. Los hechizos se encuentran en un grimorio común a todo el
-bando y consumen puntos de maná. Si el personaje no tiene suficientes puntos
-de maná para seleccionar un hechizo, no puede utilizarlo.
+Finally, if she chooses to cast a spell, she will have to select the spell and then a target. Spells are located in a grimoire that is common to the character's side, and they consume mana points. If the character has insufficient mana for a spell, she cannot use it.
 
-## Los bandos
+## The sides of the battle
 
-Los bandos tienen un identificador, miembros y hechizos. Al conjunto de hechizos
-lo llamamos el grimorio del bando. Por ejemplo, la estructura:
+Sides have an identifier, members, and spells. The set of spells available to a side is called its grimoire. For instance, the structure:
 
 ```js
 var setup = {
@@ -137,122 +107,88 @@ var setup = {
 };
 ```
 
-Contiene dos bandos con identificadores `heroes` y `monsters`. El bando
-`heroes` tiene dos miembros. `heroTank` y `heroWizard`, mientras que el bando
-`monsters` sólo uno, `fastEnemy`. Los dos bandos tienen grimorios con los
-hechizos `fire` y `health`.
+Contains two sides with the identifiers `heroes` and `monsters`. The `heroes` side has only two members, `heroTank` and `heroWizard`; the `monsters` side has only one, `fastEnemy`. Both sides have grimoires with the spells `fire` and `health`.
 
-## Los personajes
+## The characters
 
-Los personajes tienen un **nombre**, un **bando opcional** y una serie de
-características que determinan su valor en la batalla. Estas características
-son iniciativa, defensa, puntos de vida y de maná, y máximos de vida y de maná.
+Characters have a **name**, an **optional side** and a series of characteristics that determine their battle power. These characteristics are initiative, defense, hit points, mana points, and maximum hit points and mana points.
 
-La **iniciativa** determina el orden en el que los personajes aparecerán en la
-lista de turnos. Cuanto más alto, antes aparecen en esta lista.
+**Initiative** determines the order in which characters are placed in the turn list. The higher it is, the sooner they appear in the list.
 
-La **defensa** establece la probabilidad (de 0 a 100) de que un
-[efecto](#efectos) actúe sobre el personaje.
+**Defense** determines the probablity (from 0 to 100) that an [effect](#effects) will affect the character.
 
-Los **puntos de maná** sirven para pagar los costes mágicos de los hechizos y
-los **puntos de vida** indican cuánto daño es capaz de resistir el personaje
-antes de morir (puntos de vida a 0). Ambas características están ligadas a
-unos valores máximos **puntos de maná máximos** y **puntos de vida máximos**
-respectivamente que no pueden sobrepasar.
+**Mana points** pay the magic cost for spells, and **hit points** mark how much damage the character can take before dying (0 hit points) Both characteristics are respectively linked to **maximum mana points** and **maximum hit points**, which they cannot exceed.
 
-La siguiente tabla resume las características numéricas y sus límites.
+The following table summarizes numeric characteristics and their limits.
 
-| Característica | Mínimo | Máximo | Limitado por           |
-|:---------------|-------:|-------:|:----------------------:|
-| Iniciativa     |      0 |      - |                      - |
-| Defensa        |      0 |    100 |                      - |
-| Puntos de vida |      0 |      - | Puntos de vida máximos |
-| Puntos de maná |      0 |      - | Puntos de maná máximos |
+| Characteristic | Minimum | Maximum | Limited by           |
+|:---------------|--------:|--------:|:--------------------:|
+| Initiative     |       0 |       - |                    - |
+| Defense        |       0 |     100 |                    - |
+| Hit points     |       0 |       - | Maximum hit points   |
+| Mana points    |       0 |       - | Maximum mana points  |
 
-## Las acciones
+## The actions
 
-Si durante su turno, un personaje elije **defender**, entrará en estado de
-defensa mejorada aumentando un 10% su defensa (redondeando arriba). El personaje
-puede defender tantas veces como quiera, aumentando su defensa en cada turno que
-defienda pero tan pronto otro personaje lo ataque, perderá su mejora.
+If a character chooses to **defend** during her turn, she will enter an improved defense status where her defense is raised by 10% (rounded up). A character can defend as many times as she may want to, raising her defense during every turn she defends, but she will lose her improvement as soon as another character attacks her.
 
-Si elige **atacar**, habrá de elegir un personaje objetivo de entre todos los
-personajes vivos que queden en la batalla. El personaje causará el efecto de
-su arma al objetivo siguiendo las
-[reglas de aplicación de efectos](#reglas-de-efecto).
+If she chooses to **attack**, she will have to choose a target character from among all of the remaining living characters in the battle. The character will inflict her weapon effect on the target, according to the [effect application rules](#effect-rules).
 
-Por último, un personaje puede **lanzar un hechizo**, en tal caso se debe
-elegir un hechizo que se pueda pagar del grimorio del bando y un objetivo.
-De nuevo se utilizarán las [reglas de aplicación de efectos](#reglas-de-efecto)
-con el efecto del hechizo.
+Lastly, a character may **cast a spell**, in which case she must choose a spell she can afford on her side's grimoire, as well as a target. Again, the spell effect follows the [effect application rules](#effect-rules).
 
-## Efectos
+## Effects
 
-Armas y hechizos contienen efectos. Un arma contendrá un efecto que **siempre
-reducirá los puntos de vida**, los hechizos pueden tener efectos variados.
-Exceptuando el nombre y el bando, **todas las características son susceptibles
-de verse alteradas por efectos**.
+Both weapons and spells contain effects. A weapon contains an effect that **always reduces hit points**, while spells may have various effects. Save for the character's name and side, **all characteristics are liable to alteration due to effects**.
 
-### Reglas de efecto
+### Effect rules
 
-Las reglas de efecto esperan un efecto cualquiera, un objetivo y un indicador
-de alianza que indica si el efecto lo aplica un aliado del objetivo o no.
+Effect rules expect any effect, a target, and an allegiance marker that designates whether the effect is applied by an ally of the target or not.
 
-El procedimiento es el siguiente:
+The procedure is as follows:
 
-  1. Si el indicador de alianza indica que son aliados, continúa con el paso 2.
-  Si no:
-   1. Genera un número al azar del 1 al 100.
-   2. Si el resultado se encuentra por debajo o es igual a la defensa del
-    objetivo, suspende estos pasos. Si no, continúa con el paso 2.
-  2. Por cada característica afectada por el efecto
-   1. Suma el valor del efecto al valor de la característica del objetivo.
-   2. Corrige el valor para que se encuentre entre 0 y el máximo para esa
-   característica, si tiene.
+  1. If the allegiance marker indicates that they are allies, go to step 2.
+  Else:
+   1. Generate a random number from 1 to 100.
+   2. If the result is lower than or equal to the target's defense, skip these steps. Else, go to step 2.
+  2. For each characteristic affected by the effect:
+   1. Add the effect value to the value of the target's characteristic.
+   2. Correct the value so that it lies between 0 and the maximum allowed for that characteristic, if there is one.
 
-## Armas y hechizos
+## Weapons and spells
 
-Armas y hechizos son elementos con efectos. La diferencia sustancial entre ellos
-es que los hechizos tienen un coste en puntos de maná para el lanzador del
-hechizo. Este coste se aplica tenga o no tenga éxito la defensa del objetivo.
+Weapons and spells are items with effects. The substantial difference between them is that spells have a mana point cost for the caster. This cost applies, no matter whether the target defends successfully or not.
 
-El efecto de los hechizos puede ser variado así como el de las armas pero en el
-caso de las armas el efecto debe reducir los puntos de vida de alguna forma.
+Spell effects can be varied, just like those of weapons, but weapon effects need to reduce hit points in some way.
 
-## La API de batalla
+## The battle API
 
-La batalla tendrá los siguientes métodos:
-  + `setup` para establecer la configuración inicial como la que hemos
-  mostrados antes.
-  + `start` para comenzar la batalla.
-  + `stop` para detener la batalla.
+The battle has the following methods:
+  + `setup` establishes the startup configuration, as previously shown.
+  + `start` commences the battle.
+  + `stop` stops the battle.
 
-Además la batalla expone los siguientes atributos:
-  + `characters` para inspeccionar el estado de los personajes.
-  + `scrolls` para inspeccionar el estado de los hechizos.
-  + `options` para controlar la batalla.
+In addition, the battle exposes the following attributes:
+  + `characters` to inspect the characters' status.
+  + `scrolls` to inspect the spells' status.
+  + `options` to control the battle.
 
-La batalla emitirá los siguientes eventos:
-  + `start` junto con los identificadores de los combatientes por bando, al
-  comienzo de la batalla.
-  + `turn` junto con la información del turno, cada vez que le toque a un
-  personaje.
-  + `info` con el resultado de una acción.
-  + `end` cuando sólo quede un bando.
+The battle will emit the following events:
+  + `start` alongside the fighters' identifiers by sides, at the beginning of the battle.
+  + `turn` alongisde turn info, every time a character gets one.
+  + `info` with the result of an action.
+  + `end` when there is only one side standing.
 
-En cualquier caso, el objeto de contexto será la `Batalla`.
+In any case, the context object is the `Battle`.
 
-## La interfaz de control
+## The control interface
 
-Controlar el curso de la batalla consiste en decidir qué ocurre a cada turno.
-Para ello tendrás que suscribirte al evento `turn` y elegir entre las
-alternativas que se nos ofrecen en `options`:
+Controlling the course of the battle consists of choosing what will happen on each turn. To do this, you will have to subscribe to the `turn` event, and choose from among the alternatives offered in `options`:
 
 ```js
 var battle = new Battle(setup);
 battle.on('turn', function (turn) {
 
-  // Los héroes dañan al primer enemigo disponible.
+  // The heroes damage the first available enemy.
   if (turn.party === 'heroes') {
     this.options.select('attack');
     var candidates = this.options.list();
@@ -260,7 +196,7 @@ battle.on('turn', function (turn) {
     this.options.select(monsters[0]);
   }
 
-  // Los monstruos sólo defienden.
+  // The monsters only defend.
   if (turn.party === 'monsters') {
     this.options.select('defend');
   }
@@ -272,36 +208,26 @@ battle.on('turn', function (turn) {
 battle.start();
 ```
 
-### Las opciones
+### The options
 
-A cada turno, inicialmente las opciones serán: `defend`, `attack` y `cast`.
+On each turn, the initial options will be: `defend`, `attack`, and `cast`.
 
-Al elegir `defend` se aplican las reglas para la acción defender y pasamos
-al siguiente turno.
+On choosing `defend`, the rules for the action "defend" are applied and we move on to the next turn.
 
-Si se elige `attack`, las siguientes opciones han de mostrar los identificadores
-de los personajes para seleccionar un objetivo. Cuando se elige el objetivo, se
-ejecuta la acción atacar y se pasa al siguiente turno.
+If `attack` is chosen, the following options have to show the character identifiers so that a target can be selected. When the target is selected, the action "attack" is executed and we move on to the next turn.
 
-Si elige `cast`, la siguientes opciones serán los hechizos disponibles (que
-pueden ser ninguno) y luego la lista de objetivos. De nuevo al elegir el
-objetivo, se efectúa la acción de lanzar hechizo y se pasa al siguiente turno.
+If `cast` is chosen, the options following it will be to show the available spells (which may be none), and then the target list. Again, on selecting a target, the "cast spell" action is executed and we move on to the next turn.
 
-### Reglas de formación de identificadores
+### Identifier forming rules
 
-Los identificadores de los personajes no son los nombres puesto que estos
-podrían repetirse. Si un bando tuviera dos personajes murciélago con el nombre
-`Bat`, sus identificadores sería `Bat` y `Bat 2`. Las reglas de formación de los
-identificadores son:
+Character identifiers cannot be their names, since these could be repeated. If a side in a battle had two bat characters with the name `Bat`, their identifiers would be `Bat` and `Bat 2`. The identifier forming rules are:
 
-  1. Recorre todos los bandos. Por cada bando:
-    1. Recorre todos los miembros. Por cada miembros:
-      1. Recupera el nombre del personaje y comprueba si está en el histograma
-      de nombres.
-      2. Si no está, añádelo con valor cero.
-      3. Recupera el valor para nombre en el histograma de nombres.
-      4. Si es 0, el identificador es el nombre.
-      5. Si es mayor que 0, el identificador es el nombre seguido de un espacio
-      y el valor del histograma más uno.
-      6. Incrementa el valor del histograma en 1.
-      7. Asigna al personaje ese identificador.
+  1. Scan through all of the sides. For each side:
+    1. Scan through all of the members. For each member:
+      1. Retrieve the character's name and check whether it is in the name histogram.
+      2. If it is not, add it with the value 0.
+      3. Retrieve the value for the name from the name histogram.
+      4. If it is 0, the identifier is the name.
+      5. If it is greater than 0, the identifier is the name followed by a space and its value in the histogram plus 1.
+      6. Increase the histogram value by 1.
+      7. Assign that identifier to the character.
