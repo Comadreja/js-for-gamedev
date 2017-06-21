@@ -11,7 +11,7 @@ var cmd = readline.createInterface({
 });
 
 var parties;
-var partyNames = { heroes: 'héroes', monsters: 'monstruos' };
+var partyNames = { heroes: 'heroes', monsters: 'monsters' };
 var action;
 var battle;
 var battleLine;
@@ -24,12 +24,12 @@ function setupBattle() {
 
   battle.on('start', function (charactersByParties) {
     parties = charactersByParties;
-    console.log('¡La batalla comienza!');
+    console.log('Let the battle begin!');
   });
 
   battle.on('end', function (result) {
-    console.log('¡Fin de la batalla!');
-    console.log('Bando ganador: ' + result.winner);
+    console.log('The battle is over!');
+    console.log('Winning party: ' + result.winner);
     process.exit(0);
   });
 
@@ -47,21 +47,21 @@ function setupBattle() {
       if (!result.success) {
         console.log(
           result.activeCharacterId,
-          'trató de golpear a', result.targetId,
-          'y falló.'
+          'tried to hit', result.targetId,
+          'and failed.'
         );
       } else {
         console.log(
           result.activeCharacterId,
-          'golpea a', result.targetId,
-          'y le produce', result.effect
+          'hits', result.targetId,
+          'and inflicts', result.effect
         );
       }
       break;
     case 'defend':
       console.log(
         result.targetId,
-        'defendió. Su defensa es ahora',
+        'defended. Now his defense is',
         result.newDefense
       );
       break;
@@ -69,14 +69,14 @@ function setupBattle() {
       if (!result.success) {
         console.log(
           result.activeCharacterId,
-          'trató de lanzar un hechizo a', result.targetId,
-          'y falló.'
+          'tried to cast a spell on', result.targetId,
+          'and failed.'
         );
       } else {
         console.log(
           result.activeCharacterId,
-          'lanza', result.scrollName, 'a', result.targetId,
-          'con efecto', result.effect
+          'casts', result.scrollName, 'on', result.targetId,
+          'causing the effect', result.effect
         );
       }
       break;
@@ -89,13 +89,13 @@ function setupBattle() {
 
 function showActions() {
   var actions = {
-    attack: 'Atacar',
-    defend: 'Defender',
-    cast: 'Lanzar hechizo'
+    attack: 'Attack',
+    defend: 'Defend',
+    cast: 'Cast'
   };
   var items = battle.options.list();
 
-  console.log('Elige qué hacer:');
+  console.log('Choose what to do:');
   items.forEach(function (item, index) {
     console.log('[' + (index + 1) + ']', actions[item]);
   });
@@ -116,7 +116,7 @@ function showActions() {
           showScrolls();
         }
       } else {
-        console.log('Opción incorrecta');
+        console.log('Incorrect option');
         setTimeout(function () {
           readline.moveCursor(process.stdin, 0, -2);
           readline.clearScreenDown(process.stdin);
@@ -129,11 +129,11 @@ function showActions() {
 
 function showTargets() {
   var items = battle.options.list();
-  console.log('Elige un objetivo:');
+  console.log('Choose a target:');
   items.forEach(function (item, index) {
     console.log('[' + (index + 1) + ']', item);
   });
-  console.log('\n[0] Cancelar');
+  console.log('\n[0] Cancel');
   waitForAction();
 
   function waitForAction() {
@@ -156,7 +156,7 @@ function showTargets() {
           battle.options.select(items[selection - 1]);
         }
       } else {
-        console.log('Opción incorrecta');
+        console.log('Incorrect option');
         setTimeout(function () {
           readline.moveCursor(process.stdin, 0, -2);
           readline.clearScreenDown(process.stdin);
@@ -169,7 +169,7 @@ function showTargets() {
 
 function showScrolls() {
   var items = battle.options.list();
-  console.log('Elige un hechizo:');
+  console.log('Choose a spell:');
   items.forEach(function (item, index) {
     console.log(
       '[' + (index + 1) + ']', item,
@@ -211,7 +211,7 @@ function showScrolls() {
 function showTurnLine(activeCharacterId) {
   var nameRegExp = new RegExp(activeCharacterId);
   Object.keys(parties).forEach(function (partyId) {
-    console.log('Bando de los', partyNames[partyId] + ':');
+    console.log('Party of the', partyNames[partyId] + ':');
     var characters = parties[partyId];
     characters.forEach(function (charId) {
       var character = battle.characters.get(charId);
