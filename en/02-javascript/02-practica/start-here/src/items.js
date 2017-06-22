@@ -7,11 +7,10 @@ function Item(name, effect) {
 
 function Weapon(name, damage, extraEffect) {
   extraEffect = extraEffect || new Effect({});
-  // Haz que Weapon sea subtipo de Item haciendo que llame al constructor de
-  // de Item.
+  // Make Weapon be a subtype of Item by making it call the Item constructor.
 }
-// Termina de implementar la herencia haciendo que la propiedad prototype de
-// Item sea el prototipo de Weapon.prototype y recuerda ajustar el constructor.
+// Finish implementing inheritance by making Item's prototype property be the prototype
+// to Weapon.prototype and remember to adjust the constructor.
 
 function Scroll(name, cost, effect) {
   Item.call(this, name, effect);
@@ -21,13 +20,11 @@ Scroll.prototype = Object.create(Item.prototype);
 Scroll.prototype.constructor = Scroll;
 
 Scroll.prototype.canBeUsed = function (mp) {
-  // El pergamino puede usarse si los puntos de maná son superiores o iguales
-  // al coste del hechizo.
+  // The scroll can be used if mana points are equal to or higher than the spell cost.
 };
 
 function Effect(variations) {
-  // Copia las propiedades que se encuentran en variations como propiedades de
-  // este objeto.
+  // Copy the properties that are found in variations as properties of this object.
 }
 
 module.exports = {
