@@ -12,14 +12,14 @@ TurnList.prototype.reset = function (charactersById) {
 };
 
 TurnList.prototype.next = function () {
-  // Haz que calcule el siguiente turno y devuelva el resultado
-  // según la especificación. Recuerda que debe saltar los personajes
-  // muertos.
+  // Make it calculate the next turn and return the result
+  // according to the specification. Do not forget it has to skip
+  // dead characters.
 };
 
 TurnList.prototype._sortByInitiative = function () {
-  // Utiliza la función Array.sort(). ¡No te implementes tu propia
-  // función de ordenación!
+  // Use the Array.sort() function. Do not implement your own
+  // sorting function!
 };
 
 module.exports = TurnList;
