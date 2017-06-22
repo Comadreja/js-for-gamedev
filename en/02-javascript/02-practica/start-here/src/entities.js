@@ -19,7 +19,7 @@ var lib = module.exports = {
     get wand() {
       return new items.Weapon('wand', 5);
     },
-    // Implementa los colmillos y el pseudópodo
+    // Implement the fangs and the pseudopod
   },
 
   characters: {
@@ -34,7 +34,7 @@ var lib = module.exports = {
       });
     },
 
-    // Implementa el mago
+    // Implement the mage
 
     get monsterSkeleton() {
       return new Character('skeleton', {
@@ -46,7 +46,7 @@ var lib = module.exports = {
       });
     },
 
-    // Implementa el limo y el murciélago
+    // Implement the slime and the bat
   },
 
   scrolls: {
@@ -55,7 +55,7 @@ var lib = module.exports = {
       return new items.Scroll('health', 10, new Effect({ hp: 25 }));
     },
 
-    // Implementa la bola de fuego
+    // Implement the fireball
 
   }
 };
