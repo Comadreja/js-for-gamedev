@@ -4,8 +4,8 @@ var dice = require('./dice');
 function Character(name, features) {
   features = features || {};
   this.name = name;
-  // Extrae del parámetro features cada característica y alamacénala en
-  // una propiedad.
+  // Extract each characteristic from the features parameter, and store it
+  // to a property.
   this._mp = features.mp || 0;
   this.maxMp = features.maxMp || this._mp;
 }
@@ -13,13 +13,13 @@ function Character(name, features) {
 Character.prototype._immuneToEffect = ['name', 'weapon'];
 
 Character.prototype.isDead = function () {
-  // Rellena el cuerpo de esta función
+  // Fill in this function's body.
 };
 
 Character.prototype.applyEffect = function (effect, isAlly) {
-  // Implementa las reglas de aplicación de efecto para modificar las
-  // características del personaje. Recuerda devolver true o false según
-  // si el efecto se ha aplicado o no.
+  // Implement the effect application rules in order to modify the
+  // character's characteristics. Do not forget to return true or false
+  // depending on whether the effect has applied or not.
 };
 
 Object.defineProperty(Character.prototype, 'mp', {
@@ -32,11 +32,11 @@ Object.defineProperty(Character.prototype, 'mp', {
 });
 
 Object.defineProperty(Character.prototype, 'hp', {
-  // Puedes usar la mísma ténica que antes para mantener el valor de hp en el
-  // rango correcto.
+  // You can use the same technique as before in order to keep hp's value
+  // within the correct range.
 });
 
-// Puedes hacer algo similar a lo anterior para mantener la defensa entre 0 y
-// 100.
+// You can do something similar to the above in order to keep defense
+// between 0 and 100.
 
 module.exports = Character;
