@@ -81,13 +81,13 @@ Battle.prototype._extractCharactersById = function (parties) {
   return listToMap(characters, useUniqueName);
 
   function assignParty(characters, party) {
-    // Cambia la party de todos los personajes a la pasada como parámetro.
+    // Changes all characters' party to the one specified as a parameter.
   }
 
   function useUniqueName(character) {
-    // Genera nombres únicos de acuerdo a las reglas
-    // de generación de identificadores que encontrarás en
-    // la descripción de la práctica o en la especificación.
+    // Generates unique names according to the identifier
+    // forming rules you can find within
+    // the practice description or the specification.
   }
 };
 
@@ -132,12 +132,12 @@ Battle.prototype._checkEndOfBattle = function () {
   return commonParty ? { winner: commonParty } : null;
 
   function isAlive(character) {
-    // Devuelve true si el personaje está vivo.
+    // Returns true if the character is alive.
   }
 
   function getCommonParty(characters) {
-    // Devuelve la party que todos los personajes tienen en común o null en caso
-    // de que no haya común.
+    // Returns the party all characters share in common, or null
+    // in case there is no common party.
   }
 };
 
@@ -155,7 +155,7 @@ Battle.prototype._onAction = function (action) {
     action: action,
     activeCharacterId: this._turns.activeCharacterId
   };
-  // Debe llamar al método para la acción correspondiente:
+  // Must call corresponding method for the action:
   // defend -> _defend; attack -> _attack; cast -> _cast
 };
 
@@ -169,19 +169,19 @@ Battle.prototype._defend = function () {
 
 Battle.prototype._improveDefense = function (targetId) {
   var states = this._states[targetId];
-  // Implementa la mejora de la defensa del personaje.
+  // Implements the character's defense improvement.
 };
 
 Battle.prototype._restoreDefense = function (targetId) {
-  // Restaura la defensa del personaje a cómo estaba antes de mejorarla.
-  // Puedes utilizar el atributo this._states[targetId] para llevar tracking
-  // de las defensas originales.
+  // Restores the character's defense to its value prior to improvement.
+  // You can use the this._states[targetId] attribute to keep track
+  // of original defense values.
 };
 
 Battle.prototype._attack = function () {
   var self = this;
   self._showTargets(function onTarget(targetId) {
-    // Implementa lo que pasa cuando se ha seleccionado el objetivo.
+    // Implements what happens when the target is selected.
     self._executeAction();
     self._restoreDefense(targetId);
   });
@@ -190,7 +190,7 @@ Battle.prototype._attack = function () {
 Battle.prototype._cast = function () {
   var self = this;
   self._showScrolls(function onScroll(scrollId, scroll) {
-    // Implementa lo que pasa cuando se ha seleccionado el hechizo.
+    // Implements what happens when the spell is selected.
   });
 };
 
@@ -213,15 +213,15 @@ Battle.prototype._informAction = function () {
 };
 
 Battle.prototype._showTargets = function (onSelection) {
-  // Toma ejemplo de la función ._showActions() para mostrar los identificadores
-  // de los objetivos.
+  // Use the ._showActions() as an example in order to show
+  // target identifiers.
 
   this.options.current.on('chose', onSelection);
 };
 
 Battle.prototype._showScrolls = function (onSelection) {
-  // Toma ejemplo de la función anterior para mostrar los hechizos. Estudia
-  // bien qué parámetros se envían a los listener del evento chose.
+  // Use the previous function as an example to show the spells.
+  // Study well which parameters are passed to the 'chose' event's listeners.
   this.options.current.on('chose', onSelection);
 };
 
