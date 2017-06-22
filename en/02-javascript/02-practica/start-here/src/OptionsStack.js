@@ -17,11 +17,11 @@ function OptionsStack() {
 }
 
 OptionsStack.prototype.select = function (id) {
-  // Redirige el comando al último de la pila.
+  // Redirect the command to the last in the stack.
 };
 
 OptionsStack.prototype.list = function () {
-  // Redirige el comando al último de la pila.
+  // Redirect the command to the last in the stack.
 };
 
 OptionsStack.prototype.get = function (id) {
