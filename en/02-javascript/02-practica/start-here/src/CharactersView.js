@@ -44,19 +44,19 @@ CharactersView.prototype.set = function (characters) {
 
 CharactersView.prototype._getViewFor = function (character) {
   var view = {};
-  // Usa la lista de características visibles y Object.defineProperty() para
-  // devolver un objeto de JavaScript con las características visibles pero
-  // no modificables.
+  // Use the list of visible characteristics and Object.defineProperty() to
+  // return a JavaScript object with its characteristics visible but
+  // not modifiable.
   Object.defineProperty(view, 'cada feature', {
     get: function () {
-      // ¿Cómo sería este getter para reflejar la propiedad del personaje?
+      // What would this getter have to be like, for it to reflect the character's property?
     },
     set: function (value) {
-      // ¿Y este setter para ignorar cualquier acción?
+      // What about this setter, which should ignore any action?
     },
     enumerable: true
   });
-  // Acuérdate de devolver el objeto.
+  // Remember to return the object.
 };
 
 module.exports = CharactersView;
