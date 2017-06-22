@@ -18,7 +18,7 @@ Options.prototype.get = function (id) {
 };
 
 Options.prototype.select = function (id) {
-  // Haz que se emita un evento cuando seleccionamos una opción.
+  // Make it so that an event is emitted when we select an option.
 };
 
 module.exports = Options;
