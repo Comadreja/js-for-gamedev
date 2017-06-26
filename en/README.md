@@ -6,7 +6,7 @@ It is based upon materials we have developed in cooperation with the Universidad
 
 The source code to this guide is also [published on GitHub](https://github.com/mozdevs/js-for-gamedev/). If you find any errors or want to suggest any changes, please let us know by [submitting a ticket](https://github.com/mozdevs/js-for-gamedev/issues).
 
-## Videogames on the Web
+## Video games on the Web
 
 The arrival of **HTML5** and its associated technologies has massively expanded the Web's capabilities as a **video gaming platform**. Until then, most web-based video games required an external plugin –such as Flash or Unity Player–, but nowadays it is no longer necessary and HTML5 video games are seamlessly run in the browser.
 
