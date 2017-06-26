@@ -16,7 +16,7 @@ There is a plethora of available **engines and tools** for the creation of HTML5
 
 This guide's objective is to provide a JavaScript knowledge base, so that you can develop web video games by using existing libraries or Web engines.
 
-## Whom is this guided meant for?
+## For whom is this guide meant?
 
 - For anyone interested in video game development and in possession of some **minimal programming knowledge** (any language will do, such as Lua, C or Python): variables, loops, functions, conditionals, etc.
 
