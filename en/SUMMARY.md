@@ -3,7 +3,7 @@
 
 - [The work environment](01-intro/index.md)
 
-- Basic JavaScript
+- JavaScript basics
     - [Object-oriented programming](02-javascript/0201-poo/index.md)
     - [The JavaScript data model](02-javascript/0202-modelo-de-datos/index.md)
     - [The JavaScript execution model](02-javascript/0203-modelo-de-ejecucion/index.md)
