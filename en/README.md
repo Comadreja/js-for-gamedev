@@ -8,7 +8,7 @@ The source code to this guide is also [published on GitHub](https://github.com/m
 
 ## Video games on the Web
 
-The arrival of **HTML5** and its associated technologies has massively expanded the Web's capabilities as a **video gaming platform**. Until then, most web-based video games required an external plugin –such as Flash or Unity Player–, but nowadays it is no longer necessary and HTML5 video games are seamlessly run in the browser.
+The arrival of **HTML5** and its associated technologies has massively expanded the Web's capabilities as a **video gaming platform**. Until then, most web-based video games required an external plugin –such as Flash or Unity Player–, but nowadays those are no longer needed, and HTML5 video games are seamlessly run in the browser.
 
 The Web offers **APIs** for 2D & 3D graphics (the latter based on the OpenGL ES standard), audio playback and synthesis, multiple input methods (_gamepads_, _touch_ events, gyroscopes…), etc. In a nutshell, everything we need in order to develop video games.
 
