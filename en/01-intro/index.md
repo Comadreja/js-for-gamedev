@@ -1,4 +1,4 @@
-# The working environment
+# The work environment
 
 ## The command line
 
