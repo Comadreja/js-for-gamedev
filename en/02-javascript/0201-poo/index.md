@@ -7,11 +7,11 @@
 
 ## Problem modeling
 
-Programming is expressing a problem in a given programming language. Modeling represents a halfway step of the process, where the important aspects of a problem are captured and organized.
+Programming is expressing a problem in a given programming language. Modeling represents a halfway step through the process, where the important aspects of a problem are captured and organized.
 
-The modeling of a problem is independent from the chosen programming language, but this choice conditions the ease you can codify the model with.
+The modeling of a problem is independent from the chosen programming language, but this choice has an impact on how easy it will be for you to codify the model.
 
-Many creative activities employ intermediate models between reality and its final expression on the medium. For instance, _storyboards_ are used in planning action sequences: they capture the key moments in the sequence.
+Many creative activities employ intermediate models between reality and its final expression on the medium. For instance, _storyboards_ are used in the planning of action sequences; they capture the key moments in the sequence.
 
 ![A page of the Batman animated series' storyboard](images/batman-storyboard.jpg)
 
@@ -19,23 +19,23 @@ This map, which depicts Shelob's Lair from The Lord of the Rings, was employed t
 
 ![JRR Tolkien's groundwork notes for The Lord of the Rings](images/lotr-notes.jpg)
 
-This is a design for a map from the video game _Mario_. Digital tools have enabled the automation of models into software.
+This is a design for a map from the video game _Mario_. Digital tools have enabled the automation of models in software.
 
 ![Map from the video game Mario on graph paper](images/mario-level-design.png)
 
-And here's the flowchart of how the different functions of a Unity script are called.
+And here's the flowchart for how the different functions of a Unity script are called.
 
 ![Flowchart for a Unity script's life cycle](images/monobehaviour-flowchart.png)
 
-Object-oriented programming is a **problem modeling** technique that confers special emphasis to two concepts: **objects** and **message passing**.
+Object-oriented programming is a **problem modeling** technique that emphasizes two concepts: **objects** and **message passing**.
 
 ## Objects
 
-Objects are **depictions of a problem's aspects** that carry out a specific role, exhibit a set of concrete functionality –the [API](https://en.wikipedia.org/wiki/Application_programming_interface#Libraries_and_frameworks)–, and also hide the way they carry out that functionality.
+Objects are **depictions of a problem's aspects** which carry out a specific role, exhibit a set of specific functionality –the [API](https://en.wikipedia.org/wiki/Application_programming_interface#Libraries_and_frameworks)–, and also hide the way they carry out that functionality.
 
 ## Message passing
 
-Messages are **action requests** from one object to another. These requests issue from a sender object to an addressee object, and they codify which **API functionality** is required.
+Messages are **action requests** from one object to another. These requests issue from a sender object to a target object, and they codify which **API functionality** is required.
 
 ## Object-oriented modeling
 
@@ -55,7 +55,7 @@ These are some objects you could give a name: allied ship, enemy 1, enemy 2, ene
 
 It is clear at a glance that many concrete objects belong into families or **types** of objects. It is convenient to remember that these are also called **classes**.
 
-Types **specify properties and common behaviors** to all of the belonging objects, though they may be different individually.
+Types **specify properties and common behaviors** to all of their belonging objects, though these may be different from each other individually.
 
 ![Space Invaders screenshot where we can tell different object types: counters, defenses, enemies, player & bullets](images/space-invaders-types.png)
 
@@ -71,7 +71,7 @@ In object models, it is more convenient to work with object types.
 
 ### Methods & interfaces
 
-In order to try to determine the API for the types of objects you can use the game's interactions as a guide.
+In order to try to determine the API for the types of objects, you can use the game's interactions as a guide.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/D1jZaIPeD5w?rel=0" frameborder="0" allowfullscreen></iframe>
 
@@ -93,9 +93,9 @@ The actions an object can carry out are called **methods**.
 
 Objects can not only carry out actions, but they also capture **characteristics** of the entities they represent.
 
-Every enemy, for instance, has a distinct graphic, a different score, an on-screen position, and also keeps track of which direction it was moving in.
+Every enemy, for instance, has a distinct graphic, a different score value, an on-screen position, and also keeps track of which direction it was moving in.
 
-The **state** is not usually exposed outright in the API. Think of the enemies' case: even if these do have a position, it is preferable to have specific methods with which to modify the position (such as "move left" and "move right") instead of just giving free access to the position.
+The **state** is not usually exposed outright in the API. Think of the enemies' case: even if these do have a position, it is preferable to have specific methods for modifying their position (such as "move left" and "move right") instead of just giving free access to their position.
 
 An object's characteristics are called **attributes**.
 
@@ -105,13 +105,13 @@ The modeling process is iterative: in defining some actions, we introduce new na
 
 ### Constructors and object creation
 
-Let's consider now the shooting interaction:
+Let's consider the shooting interaction now:
 
 > When the player presses the fire button, a bullet appears in front of the
 > friendly ship and advances until reaching the top of the screen or
 > colliding with an enemy.
 
-The bullet wasn not there before, and it will have to be created in the moment of firing.
+The bullet was not there before, and it will have to be created in the moment of firing.
 
 As another example, the level's arrangement before the game starts:
 
@@ -119,13 +119,13 @@ As another example, the level's arrangement before the game starts:
 > row of type 1 enemies, 2 rows of type 2 enemies, 1 of type 3s, and 1 of
 > type 4s.
 
-It is clear we do not want to write each and every one of the 55 enemies; and since they all belong to the type enemy, it is also obvious they will all be very similar.
+It is clear we do not want to write each and every one of the 55 enemies; and since they all belong to the enemy type, it is also obvious they will all be very similar.
 
 What we need is an **automatic object generation** mechanism. Every language offers its own way of creating objects.
 
 A useful mechanism is to rely on a new object, the **constructor**, whose task is to generate objects of a certain type. There is, therefore, **one constructor for every type**.
 
-![Enemy state displaying: graphic, current direction, position and score.](images/space-invaders-constructors.png)
+![Enemy state displaying: graphic, current direction, position and score value.](images/space-invaders-constructors.png)
 
 Constructors have a very simple API: _new object_. This method creates a new object of a given type.
 
@@ -147,7 +147,7 @@ The **`ship` type** compounds the methods and attributes common to the player sh
 
 This hierarchy establishes **inheritance relations**, also called _"it's a(n)"_ since the player ship is a `ship`, and the enemy is a `ship` as well.
 
-We say the `enemy` type **extends** the `ship` type by adding `advance` to the API, as well as the score and last movement direction to the state.
+We say the `enemy` type **extends** the `ship` type by adding `advance` to the API, as well as the score value and last movement direction to the state.
 
 The friendly ship adds no new methods but **redefines or overrides** the `shoot` method so that it fires upwards.
 
@@ -155,4 +155,4 @@ Since there are new types, you will need new constructors. Old constructors can 
 
 This way, when we request an enemy, the enemy constructor will request a ship from the ship constructor. It will then take that ship, modify it so that it becomes an enemy, and return it as an enemy.
 
-![When an enemy is requested from the enemy constructor, this one asks requests a ship from the ship constructor, customizes it into an enemy, and returns the requested enemy.](./images/space-invaders-hierarchy-constructor.png)
+![When an enemy is requested from the enemy constructor, this one requests a ship from the ship constructor, customizes it into an enemy, and returns the requested enemy.](./images/space-invaders-hierarchy-constructor.png)
