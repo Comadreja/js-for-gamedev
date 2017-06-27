@@ -12,7 +12,7 @@ In JavaScript, scope is the **function's body**, demarcated by the pair of brace
 
 ```js
 function introduction() {
-    // This is the variable, text.
+    // This is a variable called text.
     var text = 'I\'m Ziltoid, the Omniscient.';
     greetings();
     console.log(text);
@@ -44,11 +44,11 @@ getEven([1, 2, 3, 4, 5, 6]);
 
 Since the scope is that of the function itself, the same name in a nested function can refer to two things:
 
-1) **If it is used with `var`**, we are introducing **another different variable**:
+1) **If it is used with `var`**, we are introducing **another, different variable**:
 
 ```js
 function introduction() {
-    // This is a variable, text.
+    // This is a variable called text.
     var text = 'I\'m Ziltoid, the Omniscient.';
 
     function greetings(list) {
@@ -76,7 +76,7 @@ function introduction() {
   var text = 'I\'m Ziltoid, the Omniscient.';
 
   function greetings(list) {
-    // This is THE SAME variable called text as the one outside.
+    // This is THE SAME variable called text as the one above.
     text = 'Greetings humans!';
     console.log(text);
   }
@@ -170,7 +170,7 @@ And, should we still be in doubt, we can continue to read and look into what the
     }
 ```
 
-Do notice that for this way of writing code to be clear, the names we use for auxiliar functions must be suitable, descriptive, and give us hints about the value they return.
+Do notice that for this way of writing code to be clear, the names we use for auxiliar functions must be suitable, descriptive, and hint at the value they return.
 
 ## _Closures_
 
@@ -193,7 +193,7 @@ g(); // Both functions do the same thing...
 f !== g; // ...but are NOT the same function
 ```
 
-On its own, this is not a very powerful mechanism; but knowing that a nested function can access the variables from higher scopes, we can do something like this:
+On its own, this is not a very powerful mechanism; however, now that we know nested functions can access variables from higher scopes, we can do something like this:
 
 ```js
 function newDie(sides) {
@@ -210,7 +210,7 @@ d100();
 d20();
 ```
 
-In JavaScript, functions **retain the access to variables from higher scopes**. A function referring to any variable from a higher scope is called a **_closure_**.
+In JavaScript, functions **retain access to variables from higher scopes**. A function referring to any variable from a higher scope is called a **_closure_**.
 
 **This does not affect the value of `this`**, which will continue to be the message's target.
 
@@ -220,7 +220,7 @@ Consider the following example:
 
 ```js
 var diceUtils = {
-    history: [], // keeps the roll history.
+    history: [], // keeps a history of die rolls.
 
     newDie: function (sides) {
         return function die() {
@@ -257,7 +257,7 @@ We can achieve this in two different ways. The first is a mere play on variables
 
 ```js
 var diceUtils = {
-    history: [], // keeps the dice record.
+    history: [], // keeps a history of die rolls.
 
     newDie: function (sides) {
         var self = this; // self is now the target of newDie.
@@ -283,16 +283,16 @@ d10();
 diceUtils.history;
 ```
 
-The seconf way is to use the functions' **[`bind`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind) method**.
+The second way is to use the functions' **[`bind`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind) method**.
 
 A function's `bind` method returns another function whose `this` will be the first parameter of `bind`. Thus:
 
 ```js
 var diceUtils = {
-    history: [], // keeps the dice record.
+    history: [], // keeps a history of die rolls.
 
     newDie: function (sides) {
-        return die.bind(this); // a new function that will call die with its target set on the first parameter.
+        return die.bind(this); // a new function that calls die with its target set on the first parameter.
 
         function die() {
             var result = Math.floor(Math.random() * sides) + 1;
@@ -307,7 +307,7 @@ Both forms are widely used, but the second is often seen written this way:
 
 ```js
 var diceUtils = {
-    history: [], // keeps the dice record.
+    history: [], // keeps a history of die rolls.
 
     newDie: function (sides) {
         return function die() {
@@ -327,7 +327,7 @@ One of the main disadvantages to JavaScript ([until next version](https://develo
 
 Modules are useful for isolating related functionality: types, functions, constants, configuration…
 
-Node _does have modules_ and, fortunately, there are **tools that simulate modules** like Node's on the browser.
+Node _does have modules_ and, luckily, there are **tools that simulate modules** like Node's on the browser.
 
 In Node, JavaScript files ending by `.js`are modules. Node allows us to expose or **export functionality** from a module, placing it within the object `module.exports`:
 
@@ -386,7 +386,7 @@ If we pass a name instead of a route, we will access the **default funcionality*
 
 ## Differences in scope between Node and the browser
 
-It has been said that scope in JavaScript is equivalent to the function, but we also know that we can open a console or a file and start declaring variables without any need for writing functions.
+It has been said that scope in JavaScript is equivalent to the function, but we also know that we can open a console or a file and start declaring variables without need of writing functions.
 
 This happens because we are using the **global scope**. The global scope is available both to the browser and Node.
 
@@ -441,7 +441,7 @@ setTimeout(function () {
 console.log('T + delta: ', new Date());
 ```
 
-As you can realize, the message is completed after 5 seconds because what [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout) does is call the function as soon as the stated amount of milliseconds has elapsed.
+As may have realized, the message is completed after 5 seconds because what [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout) does is to call the function as soon as the stated amount of milliseconds has elapsed.
 
 We say a function is a **_callback_** if it is called at some point in the future –that is to say, **asynchronously**– in order to report on some result.
 
@@ -485,7 +485,7 @@ cmd.on('line', function (input) {
 });
 ```
 
-What you have achieved is to **listen for the `line` event** that happens [every time a new line character is input](https://nodejs.org/api/readline.html#readline_event_line).
+What you have achieved here is to **listen for the `line` event** that happens [every time a new line character is input](https://nodejs.org/api/readline.html#readline_event_line).
 
 Speaking of events, the function that is asynchronously executed is called **listener**, but it is not uncommon for it to be called _callback_.
 
@@ -503,7 +503,7 @@ cmd.on('line', function (input) {
 
 cmd.on('close', function () {
     console.log('See you!');
-    process.exit(0); // exits node.
+    process.exit(0); // exits Node.
 });
 ```
 
@@ -513,14 +513,14 @@ If the line is exactly `exit`, we will close the command line interface. This ca
 
 The `on` method is an alias for [`addListener`](https://nodejs.org/api/events.html#events_emitter_addlistener_eventname_listener).
 
-Same way we can add a _listner_, we can also remove it with [`removeListener`](https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener),
+We can remove a _listener_ the same way we add it by using [`removeListener`](https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener),
 or remove all of them with [`removeAllListeners`](https://nodejs.org/api/events.html#events_emitter_removealllisteners_eventname).
 
 We can listen for an event **just once** with [`once`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener).
 
 ### Event emitters
 
-Now we will cover the `EventEmitter` class, which is also specific to Node.
+Now we shall cover the `EventEmitter` class, which is also specific to Node.
 
 Events are not a standard mechanism to JavaScript. They are a convenient way of modeling certain types of problems; but a JavaScript object, on its own, **has no event-emitting API**.
 
@@ -569,8 +569,8 @@ ship.shoot();
 
 **Emitting an event** consists of calling the [`emit`](https://nodejs.org/api/events.html#events_emitter_emit_eventname_arg1_arg2) method, which will trigger the execution of the _listeners_ that listen for this event.
 
-Events are incredibly useful in order to generically model user interfaces.
+Events are incredibly useful in the generic modeling of user interfaces.
 
 To this end, models must **publish** what is happening to them: how they change, what they do… all of it **through events**. User interfaces will **subscribe** to these events and will provide the necessary visual information.
 
-This model also allows for several user interfaces to work simultaneously, all of them listening for the same events. However, it also allows us to divide an interface into other, more specialized ones, all of them listening for a given set of events.
+This model also allows for several user interfaces to work simultaneously, all of them listening for the same events. However, it also allows us to divide an interface into other, more specialized ones, all of them listening for specific sets of events.
