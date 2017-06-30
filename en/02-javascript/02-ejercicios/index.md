@@ -1,6 +1,6 @@
 # Guided exercises
 
-Test these examples and try to answer the questions. If you get stuck on what a function does, search the Internet for the function followed by "mdn".
+Test these examples and try to answer the questions. If you get stuck guessing what a function does, search the Internet for the function, followed by "mdn".
 
 **1. Booleans in JavaScript.**
 
@@ -15,14 +15,14 @@ Find out which values are true and which are false for all types: numbers, strin
 
 **2. Boolean expressions in JavaScript.**
 
-In JavaScript, boolean expressions are _vague_; this means as soon as the JavaScript interpreter knows what the expression is going to be equal to, we stop evaluating. For instance, what do you think will happen to the following expression?
+In JavaScript, boolean expressions are _vague_; this means we stop evaluating as soon as the JavaScript interpreter knows what the expression is going to equal. For instance, what do you think will happen to the following expression?
 
 ```js
 var hero = { name: 'Link', weapon: null };
 console.log('Hero weapon power is:', hero.weapon.power);
 ```
 
-But, now what?
+Then again, what now?
 
 ```js
 var hero = { name: 'Link', weapon: null };
@@ -39,7 +39,7 @@ In the case of `||` (_or_) expressions, evaluation ends as soon as we find a tru
 
 **3. The result of a boolean expression.**
 
-Counter to common sense, the result of a boolean expression is not a boolean, but the last evaluated term. Remember, evaluation is _vague_ and JavaScript stops evaluating as soon as it can determine the expression's result. With this in mind, try to predict the result of the following expressions:
+Counter to common sense, the result of a boolean expression is not a boolean, but the last evaluated term. Remember, evaluation is _vague_ and JavaScript stops evaluating as soon as it can determine the expression's result. Keeping this in mind, try to predict the result of the following expressions:
 
 ```js
 var v;
@@ -72,7 +72,7 @@ pad(2, 5);
 pad(2, 5, '*');
 ```
 
-**5. Good practices in API design.**
+**5. Best practices in API design.**
 
 It is often said that the state should not be made explicit, but this modeling for points always ends up as an example:
 
@@ -117,7 +117,7 @@ function scale(point, factor) {
 scale(p, 10);
 ```
 
-Got to admit it though, writing so much is a royal pain.
+Though we have to admit, writing so much is a royal pain.
 
 **7. Computed properties to the rescue.**
 
@@ -150,7 +150,7 @@ function scale(point, factor) {
 scale(p, 10);
 ```
 
-Writing that is still a chore (good thing you have studied how to create object factories!), but using it is much clearer. This way, should you decide now that it would be better to show the names of the axes in caps, you can do this:
+Writing that is still a chore (good thing you have studied how to create object factories!), but using it is much clearer. This way, should you decide now that it would be better to show the names of the X/Y axes in caps, you can do this:
 
 ```js
 var p = {
@@ -179,7 +179,7 @@ function scale(point, factor) {
 scale(p, 10);
 ```
 
-Can you think of the way to make a property read-only? That is to say, for its value to be unchangeable (assuming the user will not access any properties beginning by `_`)?
+Can you guess the way to make a property read-only? That is to say, for its value to be unchangeable (assuming the user will not access any properties beginning by `_`)?
 
 If you wanted to add a property to an already existing object, you would have to use [Object.defineProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty):
 
@@ -208,13 +208,13 @@ point.x; // ...but here they are.
 point.y;
 ```
 
-Would you dare say why, when we inspect the object, its properties are not displayed? How would you fix it? What would you do so that only the properties which are a part of the API can be seen?
+Dare you explain why, when we inspect the object, its properties are not displayed? How would you fix it? What would you do so that only the properties which are a part of the API can be seen?
 
-Do not go and use `Object.defineProperty()` unless you have a **very clear notion** of what the terms **configurable**, **enumerable** and **writable** mean.
+Do not just go and use `Object.defineProperty()` unless you have a **very clear notion** of what the terms **configurable**, **enumerable** and **writable** mean.
 
-**7. Using functions as if they were methods.**
+**7. Using functions in lieu of methods.**
 
-We have seen how any function can be used as a method if it is referenced as an object's property and then called. But the fact of the matter is you can also make any function, regardless of whether it is referenced from a property, be used as an object's method if you explicitly point out the target object. This can be done with [`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) and [`.call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
+We have seen how any function can be used as a method if it is referenced as an object's property and then called. But the fact of the matter is, you can also make any function (regardless of whether it is referenced from a property) work as an object's method if you explicitly designate the target object. This can be done with [`.apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) and [`.call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
 
 ```js
 var ship = { name: 'Death Star' };
@@ -232,7 +232,7 @@ What is the difference between `.apply()` and `.call()`?
 
 **8. Dynamic properties.**
 
-The bracketed notation for accessing an object's properties is especially useful for accessing properties in a generic way. For instance, picture the following code:
+The bracketed notation for accessing an object's properties is especially useful for accessing properties in a generic way. For instance, picture the following piece of code:
 
 ```js
 var hero = {
@@ -278,7 +278,7 @@ Could you modify the hero's weapon effect so that it can incapacitate the enemy,
 
 **9. Objects as something more than objects.**
 
-JavaScript objects do not only serve the purpose of modeling object-oriented programming objects, but also allow classifications by name. A histogram, i.e. a count of a set with repetitions, is a classic example of the usefulness of a JavaScript object:
+JavaScript objects do not only serve the purpose of modeling object-oriented programming objects, but also allow classifications by name. A histogram, i.e. a count of a set with repetitions, is a textbook example of the versatility of JavaScript objects:
 
 ```js
 function wordHistogram(text) {
@@ -303,7 +303,7 @@ Can you think of at least one more application?
 
 **10. Functions as parameters.**
 
-JavaScript lists have some methods which accept functions as parameters, for instance [`.forEach()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/forEach). In fact, `.forEach()` is commonly found when we have the certainty that we are going to go over **all** of the elements in a list.
+JavaScript lists have some methods which accept functions as parameters, for instance [`.forEach()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/forEach). In fact, `.forEach()` is commonly found whenever there is the certainty that we are going to go over **all** of the elements in a list.
 
 ```js
 function wordHistogram(text) {
@@ -356,7 +356,7 @@ function isEven(n) { return n % 2 === 0; }
 [1, 2, 3, 4, 5, 6].filter(isEven);
 ```
 
-And thus remove whatever is not a word:
+And thus remove anything which is not a word:
 
 ```js
 function isWord(candidate) {
@@ -454,9 +454,9 @@ var poem = 'All passes and all remains, ' +
 wordHistogram(poem);
 ```
 
-**11. Variable amounts of parameters**
+**11. Variable parameter counts.**
 
-Fíjate en esto:
+Check this out:
 
 ```js
 console.log('I\'m', 'Ziltoid');
@@ -481,7 +481,7 @@ f(function () {}, [], undefined);
 
 Look up the info on `arguments` on the [MDN](http://lmgtfy.com/?q=mdn+arguments). You will need it!
 
-**12. Decorators**
+**12. Decorators.**
 
 Aside from being returned as parameters, functions can be returned from other functions. Consider the following example:
 
@@ -493,7 +493,7 @@ function newLog(label) {
 }
 ```
 
-This function creates other functions that will call `console.log()`, but with a tag preceding it. We could create `log` methods on a class-by-class basis, each with a prefix, and this way be able to tell logs apart.
+This function creates other functions that will call `console.log()`, but with a tag preceding it. We could create `log` methods on a class-by-class basis, each with a prefix, and thus be able to tell different logs from each other.
 
 However, do notice the following behavior:
 
@@ -532,7 +532,7 @@ log1('Greetings', 'humans!');
 
 Can you tell what each line in the `newLog` function does?
 
-**13. Asynchrony and closures**
+**13. Asynchrony and closures.**
 
 Load up the following code:
 
@@ -552,12 +552,12 @@ And try to predict what will happen when you run the following code:
 scheduleTasks(5);
 ```
 
-Does it do what you expected? If not, why? How would you fix it? Here goes a clue: you need the [`.bind()`](
+Did it do what you expected? If not, why? How would you fix it? Here goes a clue: you need the [`.bind()`](
 https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind) function.
 
-**14. Events and methods**
+**14. Events and methods.**
 
-There will be occasions when you will need to call a method from an object when something happens. For instance, suppose that the 'advance' method of a given object has to be called within an interval. Let us say, every second:
+There will be occasions when you will need to call a method from an object when something happens. For instance, suppose that the 'advance' method of a given object has to be called within an interval. Shall we say, every second:
 
 ```js
 var obj = {
@@ -572,7 +572,7 @@ var obj = {
 var id = setInterval(obj.advance, 1 * 1000);
 ```
 
-This example fails because in the last line **we are not calling** the function, but only passing it as a parameter. The `setInterval` function has no idea of the message's addressee, and therefore cannot call the function as if it were a method.
+This example fails because in the last line **we are not calling** the function, but only passing it as a parameter. The `setInterval` function has no idea of the message's target, and therefore cannot call the function as if it were a method.
 
 We can fix this with `bind`, but first you need to stop the interval with:
 
@@ -586,7 +586,7 @@ You can solve the issue with:
 var id = setInterval(obj.advance.bind(obj), 1 * 1000);
 ```
 
-**15. The bind() function**
+**15. The bind() function.**
 
 At this stage, you should already know how `bind` works, or what it does. If you are not too clear on that, look it up on the MDN.
 
