@@ -37,9 +37,9 @@ We call 'test' a code fragment that checks for a specific functionality. The tes
         at QueueRunner.execute (/Users/salva/workspace/pvli2017-rpg-battle/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1923:10)
 ```
 
-The trace contains both the failure and where it happened in the set of calls, from the most recent to the earliest. Sometimes failures are a consequence of implementations that do not fulfill expectations, some other times they will be runtime errors, and on yet other occasions they will be the product of syntax errors.
+The trace contains both the failure and where it happened in the set of calls, from the most recent to the earliest. Failures are sometimes a consequence of implementations not fulfilling expectations, some other times they will be due to runtime errors, and on yet other occasions they will be the product of syntax errors.
 
-Get used to failing and to finding in the trace the exact point in the code that is up for you to solve. In order to do this, look for the `spec` and `src` folders in the trace. The first number after the path is the line that contains the failure.
+Get used to failing, as well as searching the trace for the exact point in the code that is up for you to fix. In order to do this, look for the `spec` and `src` folders in the trace. The first number after the path will be the line that contains the failure.
 
 ### Enabling and disabling tests
 
@@ -74,7 +74,7 @@ Disabled tests will not check for expectations, but Jasmine will report that the
 Whenever you are developing, it is best for you to run the tests often for two reasons:
 
 - To check whether you are advancing.
-- To check whether you have not broken anything.
+- To check whether you have broken anything.
 
 To do this, you can run the command:
 
@@ -86,7 +86,7 @@ This task monitors changes in the files within the `spec` and `src` folders, and
 
 Sometimes, an error is catastrophic enough that it will break the monitoring. Should that happen, you will have to manually reenter the command.
 
-Make a new commit every time you make a modification and it passes the tests.
+Make a new commit anytime you make a modification and it passes the tests.
 
 ### Debugging asynchronous tests
 
@@ -117,7 +117,7 @@ It is very recommendable for you to keep a stable branch where all tests pass, a
 
 Whenever you find an error, try to follow these steps:
   1. Disable the asynchronous tests that are taking too long. **You need a fast development cycle.**
-  2. **Read the error!!**.
+  2. **Read the error!!**
   3. Search the trace for the place where the error is originated:
     1. If it is a failed expectation, locate the entry point in your code.
     2. Keep traces with `console.log()` inspecting your objects' state.
