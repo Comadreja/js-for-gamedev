@@ -4,7 +4,7 @@ Your main objectives for this practice will be **to get accustomed to reading Ja
 
 Your secondary objective will be to practice the **_TDD_** (test-driven development) methodology.
 
-## Install and tests
+## Installation and tests
 
 **Download the <a href="start-here.zip" target="_blank">project's starter framework</a>** and decompress it. On a console, go to the project's root directory (where the `package.json` file is located) and launch:
 
@@ -38,7 +38,7 @@ Finished in 0.4 seconds
 
 ## Code quality
 
-This project will demand for your code to meet certain quality standards. The set of restrictions follow the [ESLint-recommended specification](http://eslint.org/docs/rules/), with two alterations:
+This project will expect your code to meet certain quality standards. The set of restrictions follow the [ESLint-recommended specification](http://eslint.org/docs/rules/), with two alterations:
 - The _camelCase_ style must be used for identifiers.
 - Single quotes must be used for strings.
 - Operands and operators must be separated by spaces.
@@ -78,7 +78,7 @@ Before you start, read the document [TDD.md](./TDD.md) and the practice guide [G
 
 The practice's objective is to create **a library that models the functioning of an RPG battle**.
 
-The fighters in the battle are characters on opposing sides that will fight each other. When the only characters standing belong to the same side, this side will be declared the victor.
+The fighters in the battle are characters on opposing sides that will fight each other. When the only characters standing belong to the same side, their side will be declared the victor.
 
 At the start of the battle, the characters will be sorted by initiative from highest to lowest, and their turns will follow in succession in that order until only one side's characters are standing. If a character is dead, that is to say, her hit points are 0, her turn is skipped.
 
