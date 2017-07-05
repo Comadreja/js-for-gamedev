@@ -107,7 +107,7 @@ var setup = {
 };
 ```
 
-Contains two sides with the identifiers `heroes` and `monsters`. The `heroes` side has only two members, `heroTank` and `heroWizard`; the `monsters` side has only one, `fastEnemy`. Both sides have grimoires with the spells `fire` and `health`.
+Contains two sides with the identifiers `heroes` and `monsters`. The `heroes` side has only two members, `heroTank` and `heroWizard`; the `monsters` side has only one, `fastEnemy`. Both sides have grimoires containing the spells `fire` and `health`.
 
 ## The characters
 
@@ -115,7 +115,7 @@ Characters have a **name**, an **optional side** and a series of characteristics
 
 **Initiative** determines the order in which characters are placed in the turn list. The higher it is, the sooner they appear in the list.
 
-**Defense** determines the probablity (from 0 to 100) that an [effect](#effects) will affect the character.
+**Defense** determines the probablity (from 0 to 100) that an [effect](#effects) will apply to the character.
 
 **Mana points** pay the magic cost for spells, and **hit points** mark how much damage the character can take before dying (0 hit points) Both characteristics are respectively linked to **maximum mana points** and **maximum hit points**, which they cannot exceed.
 
