@@ -1,158 +1,157 @@
-# Navegador y DOM
+# The browser & DOM
 
-## ¿Por qué?
+## Why?
 
-Si quieres publicar juegos en la web, hay que saber cómo funciona un navegador, y cómo funciona la Web.
+If you want to publish your games on the Web, you need to know how both the browser and the Web work.
 
-Los **navegadores** son el entorno donde se van a ejecutar tus juegos, y hay consideraciones técnicas a tener en cuenta, tanto a nivel de interfaz como de seguridad. Asimismo, los navegadores incorporan **herramientas de desarrollo** que nos serán muy útiles: un depurador, un profiler, un inspector del tráfico de red, etc.
+**Browsers** are the environment where your games are going to run, and they bring a series of technical considerations to take into account, both in terms of interface and security. Additionally, browsers come with built-in **development tools** that will come in handy: a debugger, a profiler, a network traffic monitor, et cetera.
 
-También es necesario tener conocimientos sobre las tecnologías web, aun en el caso de utilizar un motor multiplatforma y exportar a HTML5:
+It is also necessary to have some knowledge of Web technologies, even if we are using a multiplatform engine and then exporting to HTML5:
 
-- El juego siempre está contenido en una página web, y quizá interese personalizar su apariencia. Para ello, hace falta usar los lenguajes HTML (para el contenido) y CSS (la apariencia).
+- The game is always contained within a Webpage, and customizing its appearance may be of interest. In order to do this, it is necessary to use the HTML and CSS languages (for content and appearance, respectively).
 
-- Es útil para añadir ciertas cosas que quizá no incorpore dicho exportador, como tal vez un botón que ponga el juego a pantalla completa o bien precargar fuentes web.
+- It is also useful in case we need to add certain elements that may not be supported by the exporter, such as a button that sets the game to run in fullscreen mode, or preloading Web fonts.
 
-- Siempre que se desarrolla un videojuego multiplataforma, es posible que aparezcan _bugs_ sólo en una de estas plataformas. Para depurar un _bug_ específico de la web, tendrás que usar las herramientas que proporcionan los navegadores, así como tener ciertos conocimientos de las API web que el juego utiliza (por ejemplo, la API de Gamepad o la de WebGL).
+- Anytime we develop a multiplatform video game, it is likely for bugs specific to one platform to appear. In order to debug Web-specific bugs, you will need to use the tools provided by the browsers, as well as some measure of knowledge of the Web API the game uses (for instance, the Gamepad or WebGL APIs).
 
-- Si utilizas un motor o framework de terceros, y necesitas arreglar un _bug_ en dicho motor o implementar una _feature_ que tu juego requiere, obviamente se ha de tener conocimientos de programación web.
+- If you are using a third-party engine or framework, and you need to fix a bug in said engine or implement a feature your game requires, you are obviously going to need Web programming knowledge.
 
+## The browsers
 
-## Los navegadores
+A **browser** is a program that allows us to accesss the Web. Keep in mind not all browsers are equal, and despite the Web being based upon **open standards**, not all browsers implement these standards the same way.
 
-Un **navegador** es un programa que permite acceder a la Web. Hay que tener en cuenta que no todos los navegadores son iguales, y pese a que la Web está basada en **estándares abiertos**, no todos los navegadores implementan estos estándares de la misma manera.
+From the developer's viewpoint, the most important components of a browser are:
 
-Desde el punto de vista del desarrollador, los componentes más relevantes de un navegador son:
+- The **rendering engine**, which is in charge of "painting" a Webpage on the screen. Firefox uses Gecko, Safari uses Webkit, Chrome and Opera both use a Webkit fork called Blink, etc.
 
-- El **motor de renderizado**, que se encarga de "pintar" una página web en la pantalla. Firefox utiliza Gecko, Safari utiliza Webkit, Chrome y Opera utilizan un _fork_ de Webkit conocido como Blink, etc.
+- The **JavaScript virtual machine**, which runs JavaScript code from the Webpage. Firefox uses SpiderMonkey, while Chrome and other browsers (as well as Node) use V8.
 
-- La **máquina virtual de JavaScript**, que se encarga de ejecutar el código JavaScript de la página web. Firefox utiliza SpiderMonkey, mientras que Chrome y otros navegadores –así como Node– utilizan V8.
+This results in **not all browsers supporting the same features**, as well as rendering engine or JavaScript virtual machine bugs which are specific to certain browsers.
 
-Esto da lugar a que **no todos los navegadores soporten las mismas características** y a que aparezcan _bugs_ del motor de render o de la máquina virtual de JavaScript que son específicos a un navegador en concreto.
+In order to know which features are implemented by each browser, we can use, among others:
 
-Para conocer qué características implementa cada navegador, podemos utilizar, entre otros:
+- [caniuse.com](http://caniuse.com), quick & intuitive
+- [MDN](http://developer.mozilla.org), has specific details on implementation and differences between browsers
 
-- [caniuse.com](http://caniuse.com), rápida e intuitiva
-- [MDN](http://developer.mozilla.org), tiene detalles concretos sobre la implementación y diferencias entre navegadores
-
-## Lenguajes en la Web
+## Languages of the Web
 
 ### HTML
 
-HTML (_HyperText Markup Language_) se utiliza para crear el **contenido** de una página web: párrafos, títulos, imágenes, vídeos, etc.
+HTML (HyperText Markup Language) is used in order to create the **content** of a Webpage: paragraphs, headers, images, videos, etc.
 
-Es un lenguaje de marcado basado en etiquetas. Por ejemplo:
+It is a tag-based markup language. For instance:
 
 ```html
-<h1>Esto es un título</h1>
+<h1>This is a header</h1>
 ```
 
 ### CSS
 
-CSS (_Cascading Style Sheets_) se utiliza para personalizar la **apariencia** de los elementos HTML: colores, fondos, bordes, su posición en la página, división en columnas, el tamaño, márgenes, etc.
+CSS (Cascading Style Sheets) is used for customizing the **appearance** of HTML elements: colors, backgrounds, borders, their position on the page, column divisions, size, margins, etc.
 
-Es un lenguaje declarativo basado en reglas. Por ejemplo:
+It is a rule-based declarative language. For instance:
 
 ```css
 h1 {
-  color: red; /* hace que los elementos h1 tengan texto rojo */
+  color: red; /* makes h1 elements display as red text */
 }
 ```
 
 ### JavaScript
 
-JavaScript es un lenguaje de programación interpretado, y con él se implementan el **comportamiento y la lógica** de una página web –si hiciera falta.
+JavaScript is an interpreted programming language, and we use it to implement the **logics and behavior** of a Webpage, should it be needed.
 
-Es un **lenguaje dinámico** orientado a prototipos, con características funcionales.
+It is a prototype-oriented, **dynamic language**, with functional features.
 
 ```javascript
 console.log("Hello, world!");
 ```
 
-## ¿Qué pasa cuando se accede a una página desde un navegador?
+## What happens when we access a page from a browser?
 
-Entender cómo funciona el tráfico de red a un nivel básico es necesario para comprender –y poder arreglar o mitigar– ciertas situaciones. Por ejemplo, por qué un juego tarda mucho en cargarse, por qué ciertos _assets_ no se cargan, cómo hacer que la página no se quede en blanco mientras el juego se carga, etc.
+Understanding how network traffic works at a basic level is necessary in order to understand –as well as being able to fix or mitigate– certain situations. For instance; why a game may be taking too long to load, why certain assets are not loaded, how to prevent the page from going blank while the game is loading, etc.
 
-Veremos un ejemplo de este flujo paso a paso.
+Now we shall take a step-by-step look at this flow.
 
-### Paso 1. Petición HTTP GET a un servidor
+### Step 1. HTTP GET server request
 
-![Paso 1](images/request_dance_step1.png)
+![Step 1](images/request_dance_step1.png)
 
-El navegador hace una **petición HTTP GET** a una URL (que sirve para identificar dónde está cierto recurso en la Web), y si el recurso existe, el servidor lo retorna.
+The browser sends an **HTTP GET request** to a URL (which identifies a resource's location on the Web) and, should a resource exist there, the server returns it.
 
-Hay que tener en cuenta que los navegadores disponen de una memoria caché, con lo que si ya tienen dicho recurso en memoria y no ha caducado, no realizan una petición al servidor y utilizan el recurso del que ya disponen.
+Keep in mind browsers feature a cache memory; therefore, if the resource is already in cache and has not yet expired, they use the cached resource instead of sending a request.
 
-### Paso 2. Descarga de archivos
+### Step 2. File download
 
-![Paso 2](images/request_dance_step2.png)
+![Step 2](images/request_dance_step2.png)
 
-Los archivos HTML pueden hacer referencia a otros recursos… que el navegador deberá pedir al servidor. Si hemos pedido un archivo HTML, se irá **descargando y renderizando** sobre la marcha.
+HTML files may reference other resources… resources the browser will have to request from the server. If we have asked for an HTML file, it will **download and render** on the fly.
 
-Cuando un archivo JS se acaba de descargar, su código se parsea y se **ejecuta**. Mientras se ejecuta, el navegador queda _bloqueado_.
+When a JS file is done downloading, its code is parsed and **run**. While it is being run, the browser is _locked up_.
 
-### Paso 3. Carga finalizada
+### Step 3. Loading finished
 
-Cuando todas las imágenes, scripts, CSS, etc. se han cargado, se dispara el **evento `load`** de `window`, que es un objeto global definido en el estándar de JavaScript que incorporan los navegadores.
+When all of the images, scripts, CSS, etc., are loaded, the **`load` event** is fired. `load` is an event of `window`, a global object defined in the JavaScript standard that comes built into browsers.
 
-Es muy común incluir el código que inicializa la ejecución del programa en el _handler_ de ese evento.
+It is very common to include the code that initializes the program execution within this event's handler.
 
 ```javascript
 window.onload = function () {
-  // Initilise the program
+  // Initialize the program
 };
 ```
 
-## Cómo incluir JavaScript en una página web
+## How to include JavaScript within a Webpage
 
-Una página web es, en esencia, un archivo HTML que puede incluir otros recursos, como las hojas de estilo CSS y también código JavaScript.
+A Webpage is, at its core, an HTML file that may include other resources, such as the CSS style sheets, or JavaScript code.
 
-### Estructura básica de un documento HTML
+### Basic structure of an HTML document
 
-Aquí un ejemplo de un documento HTML con un poco de contenido –en este caso, un título (`<h1>`) y un párrafo (`<p>`).
+Here goes an example of an HTML document with a bit of content; in this case, a header (`<h1>`) and a paragraph (`<p>`).
 
 ```html
 <!doctype html>
 <html>
-  <!-- el head es metadata -->
+  <!-- the head is metadata -->
   <head>
     <title>Cancamusa</title>
     <meta charset="utf-8">
   </head>
-  <!-- el body es contenido -->
+  <!-- the body is content -->
   <body>
     <h1>Monkey Island</h1>
-    <p>Mira detrás de ti, ¡un mono de tres cabezas!</p>
+    <p>Look behind you, a Three-Headed Monkey!</p>
   </body>
 </html>
 ```
 
-Como ves, HTML se basa en incluir unas etiquetas dentro de otras. Hay una etiqueta raíz, `<html>`, que contiene a su vez dos etiquetas, `<head>` y `<body>`. Estas dos etiquetas son _necesarias_ en toda página web.
+As you can see, HTML is based around the inclusion of tags within other tags. There is a root tag, `<html>`, which in turn contains two tags, `<head>` & `<body>`. Both of these tags are **necessary** to any Webpage.
 
-También se puede observar que en la primera línea hay una etiqueta especial:
+You may also have noticed a special tag on the first line:
 
 ```html
 <!doctype html>
 ```
 
-Con esto le indicamos al navegador que efectivamente estamos utilizando un formato HTML5 o superior –antes había otros estándares, como XHTML.
+With this, we effectively tell the browser we are using an HTML5 or higher format (there used to be other standards, such as XHTML).
 
-`<head>` contiene **metadatos** relativos a la página, como el título (aparece en las pestañas del navegador, o en los resultados de búsqueda de Google y otros), la codificación de caracteres, etc. Desde aquí también podemos incluir otros archivos, como hojas de estilos CSS.
+`<head>` includes page-related **metadata**, such as its title (which displays on browser tabs, or search results in Google and other search engines), character encoding, etc. Here we can also include other files, such as CSS style sheets.
 
-`<body>` posee el **contenido** de la página, lo que ve el usuario. En el ejemplo anterior hay un elemento de título y un párrafo.
+`<body>` holds the page **content**, what the user is seeing. The prior example shows a header element and a paragraph element.
 
-### ¿Dónde va el código JavaScript?
+### Where do we put JavaScript code?
 
-Se puede incluir archivos –y código _inline_– de JavaScript tanto en el `<head>` como en el `<body`, pero esto afecta a cómo se carga la página.
+We can include JavaScript files (as well as inline code) both within the `<head>` and the `<body>`, but this affects the way the page is loaded.
 
-Por defecto, cuando se inicia la carga de un archivo JavaScript el navegador deja de renderizar el HTML hasta que dicho archivo se descargue por completo, se _parsee_ y se ejecute.
+By default, when a JavaScript file starts loading the browser stops rendering the HTML document until the JavaScript file is completely downloaded, parsed and executed.
 
-Por tanto, si lo descargamos al principio (en el `<head>` o al principio de `<body>`) es posible que la página web aparezca en blanco o que retrasemos la carga de algunos _assets_ que quizás sean más importantes.
+Therefore, if we download it at the start (in the `<head>` or at the beginning of `<body>`), it is possible for the Webpage to display as a blank, or to delay the load of some assets that may actually be more important.
 
-Si por el contrario, incluimos el JavaScript al final de `<body>` la página web se renderizará por completo –con lo cual el usuario puede ver _algo_– pero el archivo tardará más en ejecutarse.
+Should we, to the contrary, include the JavaScript element at the end of  `<body>`, the Webpage will be rendered in full (which means the user may see _something_), but the file will take longer to execute.
 
-No hay una solución objetivamente óptima para todos los casos. Dependiendo de las características del videojuego (o de la página) interesará un punto de carga diferente.
+There is no optimal solution for all possible cases. Depending on the video game's characteristics (or the page's), different loading points will be more or less desirable.
 
-<small>Nota: esto es ha sido una explicación muy simplificada. Puedes encontrar información más completa en [este artículo de Jake Archibald](https://www.html5rocks.com/en/tutorials/speed/script-loading/).</small>
+<small>Note: this was but a very simplified explanation. You can find more complete information in [this article by Jake Archibald](https://www.html5rocks.com/en/tutorials/speed/script-loading/).</small>
 
 ### Scripts inline y externos
 
