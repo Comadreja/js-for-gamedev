@@ -85,7 +85,7 @@ Keep in mind browsers feature a cache memory; therefore, if the resource is alre
 
 ![Step 2](images/request_dance_step2.png)
 
-HTML files may reference other resources… resources the browser will have to request from the server. If we have asked for an HTML file, it will **download and render** on the fly.
+HTML files may reference other resources… resources the browser will have to request from the server. If we have requested an HTML file, it will **download and render** on the fly.
 
 When a JS file is done downloading, its code is parsed and **run**. While it is being run, the browser is _locked up_.
 
@@ -153,9 +153,9 @@ There is no optimal solution for all possible cases. Depending on the video game
 
 <small>Note: this was but a very simplified explanation. You can find more complete information in [this article by Jake Archibald](https://www.html5rocks.com/en/tutorials/speed/script-loading/).</small>
 
-### Scripts inline y externos
+### Inline & external scripts
 
-Podemos incluir código JavaScript inline en el HTML con la etiqueta `<script>`.
+We can include inline JavaScript code within the HTML document with the tag, `<script>`.
 
 ```html
 <script>
@@ -163,29 +163,29 @@ Podemos incluir código JavaScript inline en el HTML con la etiqueta `<script>`.
 </script>
 ```
 
-También podemos tener el código JavaScript en un archivo `.js` separado. Se incluyen estos archivos con la etiqueta `<script>`:
+We can also contain the JavaScript code within a separate `.js` file. These files are included with the `<script>` tag:
 
 ```html
 <script src="js/game.js"></script>
 ```
 
-## Cómo se ejecuta el código JavaScript
+## How JavaScript code is executed
 
-### Modelo asíncrono basado en eventos
+### Event-based asynchronous model
 
-En el navegador, JavaScript sigue un **modelo asíncrono** basado en eventos. Hay que tener en cuenta que, mientras el código JavaScript se está ejecutando, el navegador **bloquea _todo_** lo demás, incluida la UI (la interfaz gráfica de usuario).
+Within the browser, JavaScript follows an event-based **asynchronous model**. Keep in mind that, while the JavaScript code is being executed, the browser keeps everything else **locked up**, including the UI (user interface).
 
-El modelo asíncrono nos permite programar JavaScript de forma que los bloqueos sean imperceptibles al usuario. La idea es que el código JavaScript no se esté ejecutando siempre (y así la interfaz no estará bloqueada), sino que nos **subscribimos a ciertos eventos** y ejecutamos sólo código cuando estos eventos se producen.
+The asynchronous model allows us to program JavaScript in such a fashion that these lockups are unnoticeable to the user. The idea is not to have JavaScript code constantly running (which would lock the interface up), but rather to **subscribe to certain events** and only run code when these events are triggered.
 
-Lógicamente, tenemos la responsabilidad de que el código no tarde mucho tiempo en ejecutarse, porque entonces sí que el usuario notaría que el navegador se ha quedado bloqueado. Los navegadores, además, suelen bloquear –u ofrecer al usuario esta posibilidad– los scripts de JavaScript que no han terminado al cabo de cierta cantidad de tiempo.
+Logically, it is our responsibility for the code not to take too long to execute, as the user would then notice that the browser has frozen. In addition, browsers usually stop (or allow the users to do so) JavaScript scripts that have not finished running after a certain amount of time.
 
-Algunos ejemplos de eventos a los que podemos subscribinos son: la carga de la página, click en un botón o en un enlace, pasar el ratón por encima de un elemento, cuando se ha descargado cierto contenido, etc. También podemos lanzar nuestros propios eventos personalizados.
+Some examples of events we can subscribe to are: the page loading, clicking on a button or a link, hovering the mouse over an item, certain content finishing loading, etc. We can also fire our own customized events.
 
-### Un único hilo
+### A single thread
 
-Otro aspecto a considerar es que, _normalmente_, nuestro código JavaScript se ejecutará en **un solo hilo** (hay excepciones, como el uso de WebWorkers). Es por ello por lo que si hay dos subscripciones a un mismo evento, _no_ se ejecutarán de forma simultánea, sino una detrás de otra. Y mientras un evento se ejecuta, el resto del código _espera_.
+Another aspect that is worth considering is that, _usually_, our JavaScript code will run on **a single thread** (there are some exceptions, such as WebWorkers). This is the reason that, if there are two subscriptions to a single event, they will _not_ be executed simultaneously, but sequentially. And while an event is executing, the rest of the code _waits_.
 
-Veamos un ejemplo:
+Check out this example:
 
 ```javascript
 button.onclick = function (evt) {
@@ -195,12 +195,12 @@ button.onclick = function (evt) {
 // ...
 
 button.trigger('click');
-// el botón no se desactiva hasta que el handler de "click"
-// haya acabado de ejecutarse
+// the button does not deactivate until the "click" handler
+// has finished executing
 button.disabled = true;
 ```
 
-También puedes acceder a este [snippet de código](https://jsfiddle.net/1wqevdob/) online.
+You can also access this [code snippet](https://jsfiddle.net/1wqevdob/) online.
 
 ## El DOM
 
