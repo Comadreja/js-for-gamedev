@@ -273,7 +273,6 @@ for (var i = 0; i < buttons.length; i++) {
 
 <small>Though we can also iterate with `Array.forEach`, if we use it with `apply`…</small>
 
-
 ### Navigating the DOM tree
 
 Once we have accessed an item, we can navigate –that is to say, traverse– the DOM tree starting from there.
@@ -284,33 +283,33 @@ Once we have accessed an item, we can navigate –that is to say, traverse– th
 
 This way, we can traverse the DOM in any direction.
 
-## Propiedades interesantes de elementos del DOM
+## Interesting properties of DOM items
 
 ### `innerHTML`
 
-Es el _interior_ o contenido del elemento. Puede haber desde simplemente texto, hasta código HTML. Si usamos código HTML, estaríamos de hecho creando nuevos elementos HTML en el DOM al vuelo.
+This is the _inside_, or content, of the item. There can be anything from simple plain text to HTML code. In the case we were using HTML code, we would in fact be creating new HTML items within the DOM, on the fly.
 
 ```javascript
-button.innerHTML = 'Aceptar';
-// -> <button>Aceptar</button>
-p.innerHTML = 'Párrafo con <b>negrita</b>';
-// -> <p>Párrafo con <b>negrita</b></p>
+button.innerHTML = 'Accept';
+// -> <button>Accept</button>
+p.innerHTML = 'Paragraph with <b>bold</b>';
+// -> <p>Paragraph with <b>bold</b></p>
 ```
 
 ### `style`
 
-`style` nos permite aplicar **estilos CSS inline**. Estos estilos tienen la máxima prioridad, así que son muy útiles para ocultar/mostrar elementos, por ejemplo.
+`style` allows us to apply **inline CSS styles**. These styles get maximum priority, which makes them extremely useful when hiding/displaying items, for instance.
 
 ```javascript
 var previousDisplay = button.style.display;
-button.style="display:none"; // oculta cualquier elemento
-button.style="display:inline-block;" // muestra el botón
+button.style="display:none"; // hides any item
+button.style="display:inline-block;" // displays the button
 ```
-<small>Nota: `display:none` es universal, pero para mostrar un elemento se ha de elegir entre varios valores, los más comunes son `inline`, `inline-block` y `block`, pero hay otros.</small>
+<small>Note: `display:none` is universal, but in order to display an item we have to choose one from among several values; the most frequent of these are `inline`, `inline-block` & `block`, but there are others.</small>
 
 ### `classList`
 
-`classList` nos permite acceder a las **clases CSS** de un elemento, pudiendo añadir, quitar o alternar (_toggle_) clases. Esto es muy útil para cambiar el aspecto de la UI en función de las interacciones del usuario.
+`classList` allows us to access an item's **CSS classes**, enabling the addition, removal or switching (_toggling_) of classes. This is very useful when we want to change the way the UI looks according to the user's interactions.
 
 ```javascript
 button.classList.add('loading');
@@ -319,7 +318,7 @@ button.classList.contains('loading'); // query
 button.classList.toggle('loading'); // doesn't work on IE
 ```
 
-Ejemplo: [_snippet_ de código](https://developer.mozilla.org/en/docs/Web/API/Element/classList) online.
+Example: Online [code snippet](https://developer.mozilla.org/en/docs/Web/API/Element/classList).
 
 ## Manipular el DOM
 
