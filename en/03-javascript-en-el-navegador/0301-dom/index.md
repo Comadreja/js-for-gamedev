@@ -202,38 +202,38 @@ button.disabled = true;
 
 You can also access this [code snippet](https://jsfiddle.net/1wqevdob/) online.
 
-## El DOM
+## The DOM
 
-Los documentos HTML presentan una **estructura de árbol**. Al incluir unas etiquetas dentro de otras, tenemos una relación jerárquica, ya que algunos elementos son "padres" de otros.
+HTML documents present a **tree structure**. By including tags within other tags, we have a hierarchical relation, since some elements are "parents" to others.
 
-Por ejemplo, pongamos el siguiente fragmento de código HTML:
+For instance, let us consider the following piece of HTML code:
 
 ```html
 <article>
   <header>
-    <h1>Un título molón</h1>
+    <h1>An awesome header</h1>
   </header>
-  <p>Bla bla bla.</p>
+  <p>Blah blah, yadda-yadda.</p>
   <p>
-    Más bla, bla, bla y
-    <a href="http://wikipedia.org">aquí un enlace</a>.
+    More blah, and then
+    <a href="http://wikipedia.org">here's a link</a>.
   </p>
 </article>
 ```
 
-Su representación en forma de árbol sería la siguiente:
+Its representation as a tree would be as follows:
 
-![Sección del DOM](images/dom_section.png)
+![DOM section](images/dom_section.png)
 
-El DOM (_Object Document Model_) es una **interfaz** que implementan los navegadores para que podamos **interactuar con dicho árbol** y con los elementos HTML que lo pueblan. Podemos tanto manipular los elementos HTML (cambiando su contenido, sus propiedades o bien llamando sus métodos propios), como manipular el árbol en sí, insertando, cambiando e eliminando elementos.
+DOM, short for Document Object Model, is an **interface** browsers implement so that we can **interact with the tree above**, as well as the HTML elements that populate it. We can manipulate HTML elements (by changing their content, their properties or calling their own methods), as well as manipulate the tree itself by inserting, replacing or removing elements.
 
-## Acceder a elementos del DOM
+## Accessing DOM items
 
-Acceder a un elemento (o varios) del DOM es una de las operaciones más frecuentes que se hacen.
+Accessing one (or several) items in the DOM is one of the most frequently performed operations.
 
-### Por ID
+### By ID
 
-Sólo selecciona un elemento (los ID deben ser únicos), en base a su atributo `id` de HTML:
+It selects only one item (IDs must be unique), according to its `id` HTML attribute:
 
 ```html
 <button id="show-fullscreen">Fullscreen</button>
@@ -243,26 +243,26 @@ Sólo selecciona un elemento (los ID deben ser únicos), en base a su atributo `
 var button = document.getElementById('show-fullscreen');
 ```
 
-### Acceder a elementos por selector CSS
+### By CSS selector
 
-Esta forma usa la sintaxis de los selectores CSS para localizar uno (o varios) elementos.
+This form uses the syntax of CSS selectors in order to locate one (or several) items.
 
 ```javascript
-// selecciona el primer párrafo que encuentra
+// selects the first paragraph it finds
 var paragraph = document.querySelector('p');
-// selecciona el primer elemento con clase .warning
+// selects the first item in the .warning class
 var label = document.querySelector('.warning');
-// selecciona TODOS los párrafos
+// selects ALL paragraphs
 var allPars = document.querySelectorAll('p');
 ```
 
-<small>Puedes encontrar más información sobre selectores CSS para usar con `querySelector` en [la MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors).</small>
+<small>You can find more info on CSS selectors to use with `querySelector` in [the MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors).</small>
 
-### Iterar sobre una lista de elementos
+### Iterating on an item list
 
-Hay que tener en cuenta que `querySelectorAll` _no_ devuelve un array, sino una [`NodeList`](https://developer.mozilla.org/en/docs/Web/API/NodeList), que es un objeto diferente.
+We need to keep in mind that `querySelectorAll` does _not_ return an array, but a [`NodeList`](https://developer.mozilla.org/en/docs/Web/API/NodeList), which is a different object.
 
-No podemos utilizar métodos de `Array` sobre una `NodeList`, pero tiene la propiedad `length` y el operador `[]`, así que podemos iterar sobre ella mediante un bucle:
+We cannot use methods from `Array` on a `NodeList`; however, they do have the property `length` and the operator `[]`, so we can iterate upon it by means of a loop:
 
 ```javascript
 var buttons = document.querySelectorAll('button');
@@ -271,18 +271,18 @@ for (var i = 0; i < buttons.length; i++) {
 }
 ```
 
-<small>Aunque también podemos iterar con `Array.forEach` si lo utilizamos con `apply`…</small>
+<small>Though we can also iterate with `Array.forEach`, if we use it with `apply`…</small>
 
 
-### Navegar el árbol del DOM
+### Navigating the DOM tree
 
-Una vez que hemos accedido a un elemento, podemos navegar –recorrer- el árbol del DOM a partir de él.
+Once we have accessed an item, we can navigate –that is to say, traverse– the DOM tree starting from there.
 
-- Se accede al **padre** de un elemento con la propiedad `parentNode`.
-- Se accede a la lista de **hijos** de un elemento con `childNodes`.
-- Se accede al **hermano** anterior o siguiente con `previousSibling` y `nextSibling`.
+- An item's **parent** node is accessed through the `parentNode` property.
+- The list of **child** nodes of an item is accessed with `childNodes`.
+- An item's previous or next **sibling** nodes are accessed with `previousSibling` and `nextSibling`.
 
-Con esto podemos recorrer todo el DOM en cualquier dirección.
+This way, we can traverse the DOM in any direction.
 
 ## Propiedades interesantes de elementos del DOM
 
