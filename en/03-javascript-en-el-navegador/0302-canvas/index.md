@@ -1,16 +1,16 @@
 # Canvas
 
-Con la llegada de HTML5, se introdujeron varios elementos HTML y API's de JavaScript que hacen posible la programación de videojuegos con tecnologías y estándares web, entre ellos el elemento `<canvas>` y su API JavaScript, que nos permite pintar gráficos en pantalla, tanto 3D como 2D.
+The arrival of HTML5 brought us several HTML elements and JavaScript APIs that grant us the possibility of programming video games with Web standards and technologies; among them the `<canvas>` element and its JavaScript API, which allows us to draw graphics on the screen, both 2D and 3D.
 
-## El elemento `<canvas>`
+## The `<canvas>` element
 
-Esta etiqueta HTML crea un canvas con el ancho y el alto indicado. Sobre este canvas, podremos dibujar posteriormente usando la API de Canvas.
+This HTML tag creates a canvas of the specified width and height. On this canvas, we will be able to draw by using the Canvas API.
 
 ```html
 <canvas width="320" height="200"></canvas>
 ```
 
-Las **dimensiones** del canvas especificadas en la etiqueta HTML con `width` y `height` no tienen por qué corresponderse con las dimensiones en pantalla, sino que se corresponden a una unidad virtual. Por defecto `1` unidad equivale a `1` píxel, pero con CSS podemos realizar un escalado. Por ejemplo, el siguiente código escalaría nuestro canvas anterior a un `200%` del tamaño original.
+The **dimensions** of the canvas as specified in its HTML tag with `width` and `height` are not necessarily equivalent to on-screen size, but rather to a virtual size unit. By default, `1` of this unit equals `1` pixel; but CSS allows us to set the scale. For instance, the following code would scale our prior canvas to a `200%` of its original size.
 
 ```css
 canvas {
@@ -19,23 +19,23 @@ canvas {
 }
 ```
 
-Podemos usar esto a nuestro favor y jugar con los escalados, o adaptar nuestro juego a distintos tamaños de pantalla. Por ejemplo, en este artículo se explica cómo usar un escalado para videojuegos retro con pixel art: [_Retro, crisp pixel art in HTML5 games_](https://belenalbeza.com/retro-crisp-pixel-art-in-html-5-games/).
+We can take advantage of this and play around with the scale, or adapt our game to different screen sizes. For instance, this article explains how we can use scaling for retro video games with pixel art: [_Retro, crisp pixel art in HTML5 games_](https://belenalbeza.com/retro-crisp-pixel-art-in-html-5-games/).
 
-## La API de Canvas
+## The Canvas API
 
-La API de Canvas nos permite realizar operaciones de dibujo 2D en un elemento `<canvas>`. Con ella podemos renderizar imágenes, manipular píxeles, dibujar primitivas gráficas, curvas, etc.
+The Canvas API allows us to carry out 2D drawing operations on a `<canvas>` element. With it we can render images, manipulate pixels, draw graphical primitives, curves, etc.
 
-Dos recursos importantes son:
+Below are two important resources:
 
-- [Documentación en la MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API).
-- [_Canvas Deep Dive_](http://joshondesign.com/p/books/canvasdeepdive/toc.html): libro online conciso, pero bastante completo.
+- [Documentation on the MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API).
+- [Canvas Deep Dive](http://joshondesign.com/p/books/canvasdeepdive/toc.html): a concise yet comprehensive online book.
 
 
-### Contextos
+### Contexts
 
-Para realizar cualquier operación de pintado, necesitamos obtener un **contexto 2D** de un `<canvas>`. Para ello, utilizaremos el método `getContext` y le indicaremos que necesitamos un contexto 2D.
+In order to carry out any drawing operation, we need to obtain a **2D context** from a `<canvas>`. To this end, we shall use the `getContext` method and specify to it that we need a 2D context.
 
-Ejemplo:
+Example:
 
 ```javascript
 var ctx = document.querySelector('canvas').getContext('2d');
@@ -44,15 +44,15 @@ ctx.fillRect(10, 10, 100, 100);
 
 ![Screenshot](images/canvas_ex01.png)
 
-Ver el [_snippet_ de código](https://jsfiddle.net/nea366Lm/) online.
+See the online [code snippet](https://jsfiddle.net/nea366Lm/).
 
-### Colores, bordes, etc.
+### Colors, borders, etc.
 
-La manera de trabajar que tiene la API de Canvas es similar a la de un programa de dibujo. En el **contexto** indicamos los estilos (color de fondo, grosor de borde, etc.) que queremos que las "herramientas" (en este caso, las operaciones de dibujado) usen.
+The way the Canvas API does its work is similar to that of a drawing program. Within the **context** we set the styles (background color, border thickness, etc.) we want the "tools" (in this case, the drawing operations) to use.
 
-Hay que tener en cuenta que esto tiene "memoria", y que los estilos se conservan de una operación a la siguiente. Es decir, que si establecemos en el contexto que a partir de ahora usaremos el color rojo, _todas_ las operaciones de dibujado posteriores usarán este color, no sólo la siguiente.
+Keep in mind this system has a "memory", and styles are kept from one operation to the next. That is to say, if we specify in the context that from now on we shall use the red color, _all_ of the following drawing operations shall use this color, not only the next.
 
-Ejemplo:
+Example:
 
 ```javascript
 // red rectangles
@@ -69,14 +69,14 @@ ctx.strokeRect(50, 50, 100, 100);
 
 ![Screenshot](images/canvas_ex02.png)
 
-Ver el [_snippet_ de código](https://jsfiddle.net/x8knv6w3/2/) online.
+See the online [code snippet](https://jsfiddle.net/x8knv6w3/2/).
 
 
-### Imágenes
+### Images
 
-Podemos renderizar imágenes en el canvas, pero para ello **deberán cargarse previamente**. El método más trivial es usar una imagen cargada con `<img>`, pero podemos obtener imágenes de otras fuentes: la webcam del usuario, un `<video>`, otro elemento `<canvas>`, etc.
+We can render images on the canvas, but they need to **be loaded first**. The most trivial way of doing this is to use an image loaded with `<img>`, but we can obtain images from other sources: the user's webcam, a `<video>`, another `<canvas>` element, etc.
 
-Ejemplo:
+Example:
 
 ```html
 <img src="kitten.png" alt="A cute kitten" id="kitten">
@@ -93,23 +93,23 @@ window.onload = function () {
 }
 ```
 
-Puedes ver la imagen creada con `<img>`, y el elemento `<canvas>` a su lado con la misma imagen dibujada:
+You can see the image created with `<img>`, and the `<canvas>` element next to it, with the same image drawn:
 
 ![Screenshot](images/canvas_ex03.png)
 
-El ejemplo funciona porque el **evento `load` de `window`** se dispara cuando todas las imágenes incluidas en el documento HTML se han cargado, así que sabemos con seguridad que está ya disponible para ser pintada en el canvas.
+The example works because the **`load` event from `window`** fires when all of the images included in the HTML document have loaded, so we know for sure that it is already available to be drawn on the canvas.
 
-Ver el [_snippet_ de código](https://jsfiddle.net/j4hbb46h/1/) online.
+See the online [code snippet](https://jsfiddle.net/j4hbb46h/1/).
 
-### Cargar imágenes al vuelo
+### Loading images on the fly
 
-Tener que crear una etiqueta `<img>` en nuestro HTML por cada imagen que queramos cargar es laborioso. La mayoría de motores o librerías de videojuegos o gráficos crean objetos `Image` dinámicamente con JavaScript, que no se añaden al DOM –por lo que no son visibles.
+Having to create a `<img>` tag within our HTML for every image we want to load is bothersome. Most engines or game or graphics libraries dynamically create `Image` objects with JavaScript, which are not added to the DOM, and are therefore not visible.
 
-Los pasos a seguir para cargar una imagen de esta manera serían:
+The steps to loading an image this way would be:
 
-1. Usamos el constructor **`Image`**.
-2. Nos subscribimos al evento de **`load`** (para pintar la imagen cuando se haya cargado).
-3. Establecemos el atributo **`src`** de la imagen para iniciar la carga.
+1. We use the constructor **`Image`**.
+2. We subscribe to the **`load`** event (in order to draw the image when it has loaded).
+3. We set the **`src`** attribute of the image in order to start loading.
 
 
 ```javascript
@@ -124,83 +124,83 @@ window.onload = function () {
 
 ![Screenshot](images/canvas_ex04.png)
 
-Ver el [_snippet_ de código](https://jsfiddle.net/Lm56dcb6/) online.
+See the online [_snippet_ de código](https://jsfiddle.net/Lm56dcb6/).
 
-### Más sobre la carga de imágenes
+### Further info on image loading
 
-Los elementos `<img>` que tengan como estilo `display:none` son invisibles al usuario, pero _se siguen cargando_ igualmente. Es habitual usar esto para ocultar las imágenes que se dibujen en el canvas. Como se ha comentado anteriormente, el evento `load` de `window` se dispara cuando –entre otras cosas– todas las imágenes del DOM se han cargado, sean visibles o no. Por ello, podemos cargar imágenes usando únicamente HTML y CSS, aunque es algo laborioso.
+`<img>` elements which have the `display:none` style are invisible to the user, but they _are still loaded_ all the same. This is commonly used in order to hide the images that are drawn on the canvas. As we have mentioned previously, the `load` event of `window` fires when –among other things– all of the images in the DOM have loaded, whether they are visible or not. Due to this, we can load images using only HTML and CSS, although it is something of a chore.
 
-Para cargar imágenes desde JavaScript, creando nuevas instancias `Image`, se suelen utilizar [Promesas](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise), o bien un contador para detectar cuándo se han cargado todas.
+In order to load images from JavaScript, using new `Image` instances, we often use [Promises](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise), or a counter in order to check whether all of them are done loading.
 
-### Otras operaciones de la API de Canvas
+### Other Canvas API operations
 
-La API de Canvas es extensa y nos permite hacer muchas otras operaciones, entre ellas:
+The Canvas API is extensive and allows us to carry out many other operations, among them:
 
-- Dibujar curvas y paths complejos
-- Pintar gradientes
-- _Clipping_
-- Transformaciones
-- Manipultar píxeles
+- Drawing curves and complex paths
+- Gradient paintingPintar gradientes
+- Clipping
+- Transformations
+- Pixel manipulation
 - Etc.
 
 ## WebGL
 
-WebGL es una API que nos permite operar con **gráficos 3D** en un elemento `<canvas>`. Su filosofía es completamente diferente a la API de Canvas, y es una API bastante más compleja –pero potente.
+WebGL is an API that allows us to operate with **3D graphics** in a `<canvas>` element. Its philosophy is completely different from the Canvas API; it is a far more complex API, but also a very powerful one.
 
-WebGL es una implementación en JavaScript de **OpenGL ES 2.0**, que es un estándar de la industria para el pintado de gráficos 3D.
+WebGL is a JavaScript implementation of **OpenGL ES 2.0**, which is an industry standard for 3D graphics drawing.
 
-Para poder usarla, debemos obtener un **contexto 3D** de un elemento `<canvas>`. Para ello, debemos especificar el parámetro `webgl` –o `experimental-webgl` en algunos navegadores– en la llamada a `getContext`.
+In order to be able to use it, we need to obtain a **3D context** from a `<canvas>` element. To this end, we must specify the `webgl` parameter –or `experimental-webgl` for some browsers– in the call for `getContext`.
 
-Hay [documentación en la MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) sobre esta API.
+There is [documentation on this API available on the MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API).
 
-### Gráficos 2D en WebGL
+### 2D Graphics on WebGL
 
-En el desarrollo de videojuegos, es habitual utilizar una API de gráficos 3D también para videojuegos 2D. La razón no es otra que rendimiento: ciertas operaciones realizadas con gráficos 3D son más eficientes, como el _Z-ordering_, rotaciones, transparencias, etc.
+In video game development, it is common to use a 3D graphics API for 2D video games. The reason is none other than performance: some operations executed on 3D graphics are more efficient, such as _Z-ordering_, rotation, transparency, etc.
 
-Es posible **simular un mundo 2D** usando una API de gráficos 3D, como WebGL. El "truco" es utilizar una proyección ortográfica, que no deforme los objetos con la perspectiva. Los gráficos 2D serían entonces polígonos con una textura dentro de este espacio 2D.
+There is the possibility of **simulating a 2D world** by using a 3D graphics API, such as WebGL. The "trick" is to use an orthographic projection, which does not warp objects due to perspective. 2D graphics are then polygons with a texture within this 2D space.
 
-Muchas librerías y motores de juegos 2D en JavaScript –entre ellos Pixi y Phaser– ofrecen la posibilidad de utilizar WebGL como API de gráficos en lugar de la API de Canvas.
+Many 2D game libraries and graphics engines in JavaScript –Pixi and Phaser among them– offer the possibility of using WebGL as their graphics API instead of Canvas's API.
 
-### Recursos
+### Resources
 
-Para aprender más sobre WebGL recomendamos los siguientes recursos:
+For further learning on WebGL, we recommend the below resources:
 
-- [WebGL en la MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API): documentación, guías, tutoriales, etc.
-- _Introduction to WebGL_ [parte 1](https://dev.opera.com/articles/introduction-to-webgl-part-1/) y [parte 2](https://dev.opera.com/articles/introduction-to-webgl-part-2-porting-3d/)
-- [_WebGL fundamentals_](http://webglfundamentals.org/): tutoriales paso a paso
+- [WebGL on the MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API): documentation, guides, tutorials, etc.
+- Introduction to WebGL [part 1](https://dev.opera.com/articles/introduction-to-webgl-part-1/) and [part 2](https://dev.opera.com/articles/introduction-to-webgl-part-2-porting-3d/)
+- [WebGL fundamentals](http://webglfundamentals.org/): step-by-step tutorials
 
-## Librerías gráficas
+## Graphics libraries
 
-Hay dos librerías extremadamente populares para el manejo de gráficos con JavaScript. Son únicamente librerías de gráficos, así que no implementan otras funcionalidades necesarias para un videojuego. Sin embargo, constituyen un buen punto de partida bien para desarrollar un motor propio, bien para cuando sólo se necesite pintar gráficos en un proyecto en concreto.
+There are two extremely popular graphical operation libraries for JavaScript. They are only graphics libraries, so they do not implement any other functionalities that are necessary for a video game. However, they make for a good starting point whether we are developing our own engine, or when we only need to draw graphics for a certain project.
 
-Muchos motores las utilizan como capa gráfica, así que conviene conocerlas si se quiere modificar un motor o acceder a _features_ de estas librerías no expuestas por el motor.
+Many engines use them as their graphics layer, so it is convenient to know them if we want to modify an engine or access features of these libraries that are not exposed by the engine.
 
-### Gráficos 2D: Pixi.js
+### 2D Graphics: Pixi.js
 
 - [www.pixijs.com](http://www.pixijs.com/)
-- Funciona por defecto con WebGL, pero tiene fallback a Canvas 2D.
-- Phaser utiliza Pixi para renderizar gráficos
+- Works with WebGL by default, but it can fallback to Canvas 2D.
+- Phaser uses Pixi for graphics rendering.
 
-### Gráficos 3D: THREE.js
+### 3D Graphics: THREE.js
 
 - [www.threejs.org](https://threejs.org/)
-- Es la librería de referencia para trabajar con WebGL, y simplifica mucho el uso de esta API.
-- Facilita renderizar gráficos para ser usados con WebVR (API Web para realidad virtual)
-- Hay infinidad de tutoriales, libros, etc. disponibles.
+- The reference library for graphics work on WebGL, which greatly simplifies the use of this API.
+- Makes it easier to render graphics for their use with WebVR (Web API for virtual reality).
+- There is an endless amount of tutorials, books and other documentation available.
 
-## Animaciones
+## Animations
 
-Hasta ahora hemos visto cómo renderizar gráficos estáticos en un canvas, pero en un videojuego las imágenes están en movimiento.
+So far we have only seen how to render static graphics on a canvas, but images on a video game are moving ones.
 
-En el desarrollo de videojuegos, idealmente vamos a intentar renderizar las imágenes en el canvas **60 veces por segundo** (60 FPS o _frames per second_). Para este cometido **no nos sirven** `setTimeout` ni `setInterval`, ya que no son precisas y no tenemos garantizada su ejecución (puedes ver las razones [en la documentación](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout#Reasons_for_delays_longer_than_specified)).
+In video game development, we shall ideally aim to render images on the canvas **60 times per second** (60 FPS, or **frames per second**). To this end, neither `setTimeout` or `setInterval` are reliable, since they are not accurate and there is nothing to guarantee that they will be executed (you can see the reasons for this [in the documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout#Reasons_for_delays_longer_than_specified)).
 
-La manera adecuada para renderizar animaciones en un canvas es usando `requestAnimationFrame`.
+The proper way to render animations on a canvas is by using `requestAnimationFrame`.
 
 ### `requestAnimationFrame`
 
-Esta función acepta un _callback_ que se llamará automáticamente la siguiente vez que el navegador **_pueda_ pintar** en pantalla. En este _callback_ incluiremos tanto las operaciones de dibujo que queramos realizar, como una nueva llamada a `requestAnimationFrame`, para establecer así un **bucle** continuo.
+This function takes a callback that will be automatically called the next time the browser **can draw** on the screen. Within this callback we shall include the drawing operations we want to carry out, as well as a new call to `requestAnimationFrame`, thus establishing a continuous **loop**.
 
-Ejemplo:
+Example:
 
 ```javascript
 function render() {
@@ -214,22 +214,22 @@ function render() {
 requestAnimationFrame(render);
 ```
 
-Puedes ver una comparación del mismo código de dibujado ejecutándose con `requestAnimationFrame` y con `setInterval`. Podrás observar que la animación con `requestAnimationFrame` es más fluida, especialmente si cambias de pestaña en el navegador, lo pasas a segundo plano, etc.
+You can see a comparison of the same rendering code running with `requestAnimationFrame` and with `setInterval`. You can see how the animation with `requestAnimationFrame` is more fluid, especially if you change tabs in the browser, switch it to the background, etc.
 
-- [_Snippet_ de código](https://jsfiddle.net/oxx3h8dp/2/) con `requestAnimationFrame`
-- [_Snippet_ de código](https://jsfiddle.net/m92kpe4n/2/) con `setInterval`
+- [Code snippet](https://jsfiddle.net/oxx3h8dp/2/) using `requestAnimationFrame`.
+- [Code snippet](https://jsfiddle.net/m92kpe4n/2/) using `setInterval`.
 
-### Tiempo delta
+### Delta Time
 
-El **tiempo delta** es como se llama en desarrollo de videojuegos al tiempo que ha transcurrido entre el _frame_ actual y el anterior. Este tiempo es necesario que sea preciso ya que mucha lógica del juego depende de él: animaciones, físicas, etc.
+**Delta Time** is the name given in video game development to the time elapsed between the current frame and the next. It is necessary for this time to be accurate, as much of the game logic relies on it: animation, physics, etc.
 
-Mientras que en programación web se usa normalmente `Date` para manejar fechas, crear instancias de `Date` no sólo no es eficiente, sino que estos objetos no tienen la resolución suficiente para un videojuego, que necesita decimales de milisegundos.
+Although `Date` is usually employed in Web programming for date management, not only is it inefficient to create repeated instances of `Date`, but these objects do not have the necessary resolution for a video game, which usually demands miliseconds in the decimal range.
 
-Existe una alternativa, y es usar objetos de _timestamp_, `DOMHighResTimeStamp`, como los que devuelve el uso de la interfaz de [`Performance`](https://developer.mozilla.org/en-US/docs/Web/API/Performance). Estos _timestamps_ tienen un margen de error de únicamente 5 microsegundos. Además, para nuestra conveniencia, `requestAnimationFrame` llama a nuestro **_callback_ con un _timestamp_**.
+There is an alternative, which is to use timestamp objects, `DOMHighResTimeStamp`, such as those returned by using the [`Performance`](https://developer.mozilla.org/en-US/docs/Web/API/Performance) interface. These timestamps have a margin of error of only 5 microseconds. In addition, and much to our convenience, `requestAnimationFrame` calls our **callback with a timestamp**.
 
-En la práctica, este parámetro nos permite calcular el tiempo delta de forma precisa. El _timestamp_ que optenemos contiene el número de milisegundos transcurrido desde la primera llamada a `requestAnimationFrame`. Si vamos almacenando cuál era el valor del _timestamp_ en el _frame_ anterior, podemos calcular el tiempo delta:
+In practice, this parameter allows us to accurately calculate the delta time. The timestamp we obtain contains the amount of miliseconds elapsed since the first call to `requestAnimationFrame`. If we keep storing the value of the timestamp for the prior frame, we can calculate the delta time:
 
-Ejemplo:
+Example:
 
 ```javascript
 const SPEED = 60; // pixels per second
@@ -245,10 +245,10 @@ function render(timestamp) {
 }
 ```
 
-Puedes probar el [_snippet_ de código](https://jsfiddle.net/0e11fv91/2/) online.
+You can try this online [code snippet](https://jsfiddle.net/0e11fv91/2/).
 
-Algunas **consideraciones** a tener en cuenta sobre el tiempo delta:
+Some **considerations** on delta time to keep in mind:
 
-- _Siempre_ se ha de poner una **cota superior** al valor del tiempo delta (p.ej: 250ms) para evitar _glitches_ en la lógica del juego. Un "salto" grande en el tiempo delta puede causar fallos en las colisiones, funcionamiento anormal en el motor de físicas, etc.
+- An **upper bound** must _always_ be set on the delta time value (e.g., 250ms) in order to prevent grlitches in the game logic. A big "skip" in delta time can cause collision errors, abnormal functioning in the physics engine, etc.
 
-- A veces es recomendable saltarse el _update_ de nuestro juego un _frame_ (por ejemplo, [como hace Phaser](https://github.com/photonstorm/phaser/blob/master/src/core/Game.js#L784)).
+- Sometimes it is recommendable to skip our game's **update** by a **frame** (for instance, [as Phaser does](https://github.com/photonstorm/phaser/blob/master/src/core/Game.js#L784)).
