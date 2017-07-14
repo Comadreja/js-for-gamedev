@@ -121,13 +121,13 @@ Considerations:
 - You can concatenate strings by using the `+` operator. E.g.: `'hello, ' + 'world'`.
 - In this case, using `Image` yields no advantage over creating the object via HTML. `Image` is usually employed when we need to subscribe to an event of the image (e.g., `load`), or we need to access its properties via JavaScript.
 
-## Ejercicio 3. Estilos, formularios y atributos personalizados
+## Exercise 3. Styles, forms and custom attributes
 
-En este ejercicio vamos a mostrar una lista de personajes y utilizaremos un formulario para seleccionar a cual queremos "matar". Además, mostraremos los personajes muertos con una apariencia diferente.
+In this exercise, we shall display a list of characters and use a form to select which of them we want to "kill". Additionally, we shall display dead characters with a different appearance.
 
-### Paso 1. Setup
+### Step 1. Setup
 
-Partiremos del siguiente archivo HTML:
+We shall start from the following HTML file:
 
 ```html
 <!doctype html>
@@ -152,7 +152,7 @@ Partiremos del siguiente archivo HTML:
 </html>
 ```
 
-Crearemos además `styles.css` con lo siguiente:
+We shall also create `styles.css`, containing the following:
 
 ```css
 .dead {
@@ -160,11 +160,11 @@ Crearemos además `styles.css` con lo siguiente:
 }
 ```
 
-### Paso 2. Insertar contenido dinámicamente
+### Step 2. Inserting content dynamically
 
-Este paso lo haremos con JavaScript desde un archivo `main.js`. Lo que haremos será rellenar la lista de personajes con los datos de una _party_, así como personalizar el control de dropdown del formulario (el `<select>`) para que muestre la lista de personajes también.
+We shall perform this step with JavaScript, from a `main.js` file. What we shall do is fill in the character list with the data from a **party**, as well as customizing the form's dropdown controls (the `<select>`) so that it too can display the character list.
 
-Primero crearemos los datos de la _party_. Por ejemplo:
+We shall first create the party data. For instance:
 
 ```javascript
 var party = [
@@ -174,7 +174,7 @@ var party = [
 ];
 ```
 
-Con esto ya podemos rellenar la lista `<ul>`:
+With this we can now fill in the list, `<ul>`:
 
 ```javascript
 window.onload = function () {
@@ -187,9 +187,9 @@ window.onload = function () {
 };
 ```
 
-Para añadir "líneas" al control de dropdown, `<select>`, debemos utilizar elementos `<option>`. El texto contenido en la etiqueta será el mostrado en el menú. Sin embargo, para conocer el _valor_ seleccionado, debemos añadir un atributo `name` a `<option>`, y esa _string_ es la que nos devolverá el elemento `<select>` cuando le preguntemos qué opción tiene seleccionada.
+In order to add "lines" to the dropdown controls, that is to say the `<select>`, we must use `<option>` elements. The text contained in the tag will be the one that displays on the menu. However, in order to know the selected _value_, we need to add a `name` attribute to `<option>`, and this string is the one the `<select>` element will return when we ask it which option is the one it currently has selected.
 
-Este sería el HTML de ejemplo de un `<select>` (no lo copies, es sólo un ejemplo):
+This would be the sample HTML for a `<select>` (do not copy it, it is just an example):
 
 ```html
 <select name="size">
@@ -199,9 +199,9 @@ Este sería el HTML de ejemplo de un `<select>` (no lo copies, es sólo un ejemp
 </select>
 ```
 
-Si el usuario seleccionara la opción `Medium`, el `<select>` nos devolvería el valor `size-m` cuando le preguntemos por la opción seleccionada.
+Should the user select the option `Medium`, `<select>` would return the value `size-m` when asked about the selected option.
 
-Ahora que sabemos esto, vamos a generar un `<select>` que contenga los personajes de la _party_. Utilizaremos el nombre como texto a mostrar, y la ID como valor para esa opción.
+Now that we know this, we shall generate a `<select>` containing the characters in the party. We shall use their names as the display text, and their ID as the value for that option.
 
 ```javascript
 var select = document.querySelector('select[name=chara]');
@@ -213,34 +213,34 @@ party.forEach(function (character) {
 });
 ```
 
-Si ejecutas el código, verás lo siguiente:
+If you run the code, you shall see the following:
 
-![Ejercicio 3 - paso 2 - screenshot](images/exercise03_step02.png)
+![Exercise 3 - step 2 - screenshot](images/exercise03_step02.png)
 
-Visualmente parece que está todo correcto, pero vamos a comprobar que las `<option>` tienen efectivamente el `value` que queremos.
+Visually, everything looks alright, but we are going to make sure all of the `<option>`s effectively have the `value` we want.
 
-Para ello, haz click con el botón derecho sobre el `<select>` y selecciona la opción `Inspect Element` del menú contextual. Se abrirán las developer tools (si no estaban abiertas ya) con el Inspector como panel activo.
+To this end, right-click on the `<select>` and select the `Inspect Element` element from the context menu. The developer tools will open up (if they were not already), with the Inspector as active panel.
 
-![Ejercicio 3 - inspector screenshot](images/exercise03_inspector01.png)
+![Exercise 3 - inspector screenshot](images/exercise03_inspector01.png)
 
-Haz clic en la flecha de la izquierda para desplegar el contenido de ese nodo del DOM:
+Click the arrow on the left to unfold the content of that DOM node:
 
-![Ejercicio 3 - inspector expanded screenshot](images/exercise03_inspector02.png)
+![Exercise 3 - inspector expanded screenshot](images/exercise03_inspector02.png)
 
-Comprueba que los `value` son los correctos.
+Check whether the `value`s are the right ones.
 
 
-### Paso 3. Interceptar el formulario
+### Step 3. Intercepting the form
 
-Prueba a seleccionar un personaje y a pulsar el botón de _Kill_. Verás que la página se recarga, pero la URL es un poco diferente:
+Try selecting a character and hitting the _Kill_ button. You will see that the page reloads, but the URL is a bit different:
 
-![Ejercicio 3 - querystring](images/exercise03_querystring.png)
+![Exercise 3 - querystring](images/exercise03_querystring.png)
 
-Lo que ocurre es que se añade un símbolo de interrogación seguido de los nombres de campos de formulario que tengamos con sus valores. En este caso, vemos `chara=slime` porque nuestro `<select>` tiene el atributo `name` a `chara`, mientras que `slime` es el valor (`value`) de la opción seleccionada.
+What is happening here is that a question mark, followed by the names of the form's fields with their values, has been added. In this case we can see `chara=slime` because our `<select>` porque nuestro `<select>` has the `name` attribute set to `chara`, while `slime` is the `value` for the selected option.
 
-A esta cadena (`?chara=slime`) se la conoce como _querystring_, y sirve para pasar parámetros de request al servidor. Nosotros no estamos programando un servidor y únicamente queremos obtener el valor del formulario para realizar una acción _nosotros_ (el cliente web).
+This string (`?chara=slime`) is known as **querystring**, and its purpose is to pass request parameters to the server. We are not programming a server, and only want to obtain the form's value in order to perform an action _on our side_ (that of the Web client).
 
-Esto se soluciona interceptando el evento `submit` del formulario y cancelándolo para que el navegador no realice una nueva request al servidor, recargando la página:
+This is fixed by intercepting the `submit` event from the form and cancelling it so that the browser will not make a new request to the server, reloading the page:
 
 ```javascript
 var form = document.querySelector('form[name=killing-machine]');
@@ -250,9 +250,9 @@ form.addEventListener('submit', function (event) {
 });
 ```
 
-Comprueba que el botón ahora no recarga la página, sino que imprime un mensaje por consola.
+Notice how the button no longer reloads the page, but rather prints out a message on the console.
 
-Vamos ahora a sacar la ID del personaje consultando qué valor tiene el `<select>` seleccionado. Para ello, simplemente tenemos que acceder a su propiedad `value`. Cambia el callback de `submit` por lo siguiente:
+Now we shall retrieve the character's ID by looking up the value selected on `<select>`. To do this, all we need to do is access its `value` property. Replace the callback in `submit` with the following:
 
 ```javascript
 event.preventDefault();
@@ -260,9 +260,9 @@ var charaID = form.querySelector('[name=chara]').value;
 console.log('Killed character:', charaID);
 ```
 
-Comprueba en la consola que la ID es diferente según la opción que se seleccione.
+In the console, notice how the ID is different depending on the option that is selected.
 
-![Ejercicio 3 - valor de select](images/exercise03_selected_value.png)
+![Exercise 3 - value of select](images/exercise03_selected_value.png)
 
 
 ### Paso 4. Atributos data para mapear elementos
