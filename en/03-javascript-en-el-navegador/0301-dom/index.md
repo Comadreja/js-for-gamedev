@@ -227,13 +227,13 @@ Its representation as a tree would be as follows:
 
 DOM, short for Document Object Model, is an **interface** browsers implement so that we can **interact with the tree above**, as well as the HTML elements that populate it. We can manipulate HTML elements (by changing their content, their properties or calling their own methods), as well as manipulate the tree itself by inserting, replacing or removing elements.
 
-## Accessing DOM items
+## Accessing DOM elements
 
-Accessing one (or several) items in the DOM is one of the most frequently performed operations.
+Accessing one (or several) elements in the DOM is one of the most frequently performed operations.
 
 ### By ID
 
-It selects only one item (IDs must be unique), according to its `id` HTML attribute:
+It selects only one element (IDs must be unique), according to its `id` HTML attribute:
 
 ```html
 <button id="show-fullscreen">Fullscreen</button>
@@ -245,12 +245,12 @@ var button = document.getElementById('show-fullscreen');
 
 ### By CSS selector
 
-This form uses the syntax of CSS selectors in order to locate one (or several) items.
+This form uses the syntax of CSS selectors in order to locate one (or several) elements.
 
 ```javascript
 // selects the first paragraph it finds
 var paragraph = document.querySelector('p');
-// selects the first item in the .warning class
+// selects the first element in the .warning class
 var label = document.querySelector('.warning');
 // selects ALL paragraphs
 var allPars = document.querySelectorAll('p');
@@ -258,7 +258,7 @@ var allPars = document.querySelectorAll('p');
 
 <small>You can find more info on CSS selectors to use with `querySelector` in [the MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors).</small>
 
-### Iterating on an item list
+### Iterating on an element list
 
 We need to keep in mind that `querySelectorAll` does _not_ return an array, but a [`NodeList`](https://developer.mozilla.org/en/docs/Web/API/NodeList), which is a different object.
 
@@ -275,19 +275,19 @@ for (var i = 0; i < buttons.length; i++) {
 
 ### Navigating the DOM tree
 
-Once we have accessed an item, we can navigate –that is to say, traverse– the DOM tree starting from there.
+Once we have accessed an element, we can navigate –that is to say, traverse– the DOM tree starting from there.
 
-- An item's **parent** node is accessed through the `parentNode` property.
-- The list of **child** nodes of an item is accessed with `childNodes`.
-- An item's previous or next **sibling** nodes are accessed with `previousSibling` and `nextSibling`.
+- An element's **parent** node is accessed through the `parentNode` property.
+- The list of **child** nodes of an element is accessed with `childNodes`.
+- An element's previous or next **sibling** nodes are accessed with `previousSibling` and `nextSibling`.
 
 This way, we can traverse the DOM in any direction.
 
-## Interesting properties of DOM items
+## Interesting properties of DOM elements
 
 ### `innerHTML`
 
-This is the _inside_, or content, of the item. There can be anything from simple plain text to HTML code. In the case we were using HTML code, we would in fact be creating new HTML items within the DOM, on the fly.
+This is the _inside_, or content, of the element. There can be anything from simple plain text to HTML code. In the case we were using HTML code, we would in fact be creating new HTML elements within the DOM, on the fly.
 
 ```javascript
 button.innerHTML = 'Accept';
@@ -298,18 +298,18 @@ p.innerHTML = 'Paragraph with <b>bold</b>';
 
 ### `style`
 
-`style` allows us to apply **inline CSS styles**. These styles get maximum priority, which makes them extremely useful when hiding/displaying items, for instance.
+`style` allows us to apply **inline CSS styles**. These styles get maximum priority, which makes them extremely useful when hiding/displaying elements, for instance.
 
 ```javascript
 var previousDisplay = button.style.display;
-button.style="display:none"; // hides any item
+button.style="display:none"; // hides any element
 button.style="display:inline-block;" // displays the button
 ```
-<small>Note: `display:none` is universal, but in order to display an item we have to choose one from among several values; the most frequent of these are `inline`, `inline-block` & `block`, but there are others.</small>
+<small>Note: `display:none` is universal, but in order to display an element we have to choose one from among several values; the most frequent of these are `inline`, `inline-block` & `block`, but there are others.</small>
 
 ### `classList`
 
-`classList` allows us to access an item's **CSS classes**, enabling the addition, removal or switching (_toggling_) of classes. This is very useful when we want to change the way the UI looks according to the user's interactions.
+`classList` allows us to access an element's **CSS classes**, enabling the addition, removal or switching (_toggling_) of classes. This is very useful when we want to change the way the UI looks according to the user's interactions.
 
 ```javascript
 button.classList.add('loading');
