@@ -320,13 +320,13 @@ button.classList.toggle('loading'); // doesn't work on IE
 
 Example: Online [code snippet](https://developer.mozilla.org/en/docs/Web/API/Element/classList).
 
-## Manipular el DOM
+## Altering the DOM
 
-Manipular el DOM (esto es, insertar y eleminar elementos) nos permite alterar dinámicamente el contenido de una página web.
+Altering the DOM (i.e., inserting and removing elements) allows us to dynamically alter the contents of a webpage.
 
-### Insertar elementos
+### Inserting elements
 
-Ya hemos visto que se pueden insertar elementos HTML nuevos a través de la propiedad `innerHTML`, pero también los podemos crear desde cero, con `createElement`:
+We have already seen how we can insert new HTML elements through the `innerHTML` property, but we can also create them from scratch with `createElement`:
 
 ```javascript
 var button = document.createElement('button');
@@ -336,85 +336,85 @@ button.setAttribute('type', 'button');
 // <button type="button">Start</button>
 ```
 
-Es importante tener en cuenta que cuando creamos un elemento con `createElement` este se encuentra **huérfano** y no lo veremos renderizado en la página. Para que aparezca, hay que añadirlo al DOM como "familiar" de algún otro elemento –usando para ello [`appendChild`](https://developer.mozilla.org/en/docs/Web/API/Node/appendChild), [`insertBefore`](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore), etc.
+It is important to keep in mind that whenever we create an element with `createElement`, it is **orphaned** and will not render on the page. For it to appear, we have to add it to the DOM as a "relative" of some other element by using [`appendChild`](https://developer.mozilla.org/en/docs/Web/API/Node/appendChild), [`insertBefore`](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore), etc.
 
 ```javascript
 document.body.appendChild(button);
 ```
 
-Ejemplo: [_snippet_ de código](https://jsfiddle.net/mpsjmz11/1/) online.
+Example: Online [code snippet](https://jsfiddle.net/mpsjmz11/1/).
 
-### Eliminar elementos
+### Removing elements
 
-Para eliminar un elemento del DOM, bien podemos reemplazarlo por otro –usando `replaceChild`, o bien podemos eliminarlo del todo.
+In order to remove an element from the DOM, we can either replace it with another (by using `replaceChild`) or delete it altogether.
 
-Del mismo modo que se pueden crear elementos insertando una string con código HTML en la propiedad `innerHTML`, también se pueden eliminar todos los hijos –y contenido– de un elemento asignando una cadena vacía a `innerHTML`:
+The same way we can create elements by inserting a string with HTML code within the `innerHTML` property, we can also remove all of the children –and content– of an element by assigning a void string to `innerHTML`:
 
 ```javascript
-document.body.innerHTML = ''; // remove all the body content
+document.body.innerHTML = ''; // remove all of the body content
 ```
 
-También podemos eliminar un elemento del DOM con `remove`, y un hijo suyo con `removeChild`:
+We can also remove an element from the DOM with `remove`, or one of its children with `removeChild`:
 
 ```javascript
 var button = document.querySelector('button');
 button.remove();
 ```
 
-## Eventos
+## Events
 
-Los eventos del DOM son una parte crucial de la programación web, ya que es la manera que tenemos de programar el comportamiento de una página web sin bloquear la UI.
+DOM events are a keystone of Web programming, since they are the way for us to program a webpage's behavior without locking up the UI.
 
-Los elementos del DOM disparan eventos a los que podemos subscribirnos, y ejecutar entonces el comprtamiento que queremos asociado a dicha acción. Por ejemplo, un click en un botón, un cambio del texto de un `<input>`, cuando se selecciona una checkbox, etc.
+DOM elements fire events we can subscribe to; then we can execute the behavior we want to associate to that action: clicking on a button, a a change in the text of an `<input>`, selecting a checkbox, etc.
 
-No sólo los elementos HTML disparan eventos, sino que otros objetos globales, como `window`, también lo hacen Por ejemplo: `load`, `resize`, etc.
+Events can be fired not only be HTML elements, but also other global objects such as `window`, `load`, `resize`, etc.
 
-Hay dos maneras de escuchar (o subscribirse a) eventos del DOM:
+There are two ways to listen for (or subscribe to) DOM events:
 
-- Usando el método `Event.addEventListener`
-- Usando los _on-event handlers_ (p. ej: `onclick`, `onfocus`, etc.)
+- By using the `Event.addEventListener` method
+- By using the **on-event handlers** (e.g.: `onclick`, `onfocus`, etc.)
 
-### _On-event handlers_
+### On-event handlers
 
-Los _on-event handlers_ eran originalmente la única manera de subscribirse a eventos, aunque hoy en día disponemos de la alternativa de `addEventListener`. El inconveniente de usar un _on-event handler_ es que sólo podemos tener **un único _handler_** (es decir, el código que se ejecutará cuando el evento se dispara) por evento.
+**On-event handlers** were originally the only way to subscribe to events, though nowadays we have an alternative in `addEventListener`. The drawback to using an on-event handler is that we can only have **a single handler** (that is to say, the code that will be run when the event is fired) per event.
 
-La manera de subscribirse y cancelar la subscribpción con _handlers_ es mediante una **asignación**:
+We subscribe and unsubscribe with handlers through **assignment**:
 
 ```javascript
-// subscripción
+// subscription
 button.onclick = function (evt) { /* ... */ };
-// cancelar la subscripción
+// cancelling the subscription
 button.onclick = null;
 ```
 
-Documentación [en la MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers).
+Documentation [on the MDN](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers).
 
-### _Event listeners_
+### Event listeners
 
-Usando _event listeners_ podemos **subscribirnos varias veces** al mismo evento, pudiendo tener varios comportamientos asociados a una misma acción.
+We can use **event listeners** to subscribe more than once to the same event, thereby associating several behaviors to a single action.
 
-Esta es la manera **recomendada y más segura**, especialmente si se usa código de terceros, ya que no podríamos eliminar de manera accidental un _handler_ existente.
+This is the **safest and most recommended** way, especially if using third-party code, since it would prevent us from accidentally removing an existing handler.
 
-Para subscribirnos a un evento usamos el método `addEventListener`, y para cancelar la subscripción usamos `removeEventListener` (al que hay que pasarle la función de callback para que sepa qué subscripción en particular cancelar).
+In order to subscribe to an event we use the `addEventListener` method, and in order to cancel the subscription we use `removeEventListener` (to which we pass the callback function so that it can know which specific subscription it has to cancel).
 
 ```javascript
 var sayHi = function () { /* */ };
-// subscripción
+// subscription
 button.addEventListener('click', sayHi);
-// cancelar la subscripción
+// cancelling subscription
 button.removeEventListener('click', sayHi);
 ```
 
-Documentación [en la MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
+Documentation [on the MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
 
 
 ### _Bubbling_
 
-El **_bubbling_** es la metáfora con la que explicamos cómo se comportan los eventos del DOM.
+**Bubbling** is the metaphor we employ in order to explain how DOM events behave.
 
-Cuando un elemento dispara un evento, **se propaga** hacia arriba en el árbol del DOM, como si fuera una burbuja. Es decir, que un evento disparado por un elemento en concreto, podrá ser visto también por su nodo padre y el resto de sus ancestros.
+Whenever an element fires an event, **it propagates** upwards through the DOM tree, as if it were a bubble. That is to say; if a given element fires an event, it can be seen by said element's parent node as well as all other ancestors.
 
-Por ejemplo, en el siguiente código, si el usuario hace click en el botón se dispararía el evento `click`, al que podríamos subscribirnos tanto desde el `<button>` como desde la `<section>` –como ocurre en este caso.
+Consider the following code: if the user clicks the button, the `click` event would be fired and we could subscribe to it both from the `<button>` and `<section>` elements – as is the case here.
 
 ```html
 <section>
@@ -429,13 +429,13 @@ section.addEventListener('click', function () {
 });
 ```
 
-Puedes probar un [_snippet_ de código](https://jsfiddle.net/mcx0hkou/1/) online.
+You can try this [code snippet](https://jsfiddle.net/mcx0hkou/1/) online.
 
-### Interrumpir el _bubbling_
+### Interrupting bubbling
 
-Hay veces que no nos interesa que se produzca esta propagación, o sólo queremos que se produzca de forma parcial.
+Sometimes we do not want an event to propagate, or to make it so that it only does so partially.
 
-Los _callbacks_ de los eventos pueden recibir **un argumento**, que será un objeto de tipo `Event` y contiene información sobre el evento (como el elemento originario de que se disparase), así como métodos. Uno de estos métodos, `stopPropagation`, interrumpe el _bubbling_.
+Event **callbacks** can receive **an argument**, which will be an `Event`-type object and contains information about the event (such as the element that fired it in the first place), as well as methods. One of these methods, `stopPropagation`, interrupts bubbling.
 
 ```javascript
 button.addEventListener('click', function (evt) {
@@ -443,13 +443,13 @@ button.addEventListener('click', function (evt) {
 });
 ```
 
-### Cancelar el evento
+### Cancelling an event
 
-También puede ocurrir que necesitemos **cancelar el evento** para evitar las acciones por defecto asociadas a él (por ejemplo, el envío de un formulario, o el cambio de página al hacer click en un enlace).
+We may also need to **cancel the event** in order to prevent its default associated actions from happening (for instance: sending a form, or changing the page when clicking on a link).
 
-Nótese que esto _no_ es interrumpir el _bubbling_. Una vez disparado, el evento ya se ha producido y ya ha comenzado su propagación. Para interrumpir el _bubbling_ debemos usar `Event.stopPropagation`, como ya hemos visto.
+Do notice that this is not an interruption of bubbling. Once fired, the event has already happened and its propagation has begun. In order to prevent bubbling we need to use `Event.stopPropagation`, as seen above.
 
-Los eventos se cancelan usando `Event.preventDefault`:
+We cancel events by using `Event.preventDefault`:
 
 ```html
 <a href="file.zip" download>Download zip</a>
@@ -458,19 +458,19 @@ Los eventos se cancelan usando `Event.preventDefault`:
 ```javascript
 var link = document.querySelector('a');
 link.addEventListener('click', function (evt) {
-    // the browser won't detect the link has been clicked
+    // the browser will not notice that the link has been clicked
     evt.preventDefault();
 });
 ```
 
-**Aviso**: hay que tener mucho cuidado al hacer `preventDefault`, puesto que podemos empeorar la experiencia de usuario. Cancelar los links suele ser una mala idea, anular los clicks con el botón derecho para que el usuario no pueda guardar una imagen es una idea aún peor.
+**Warning**: great care has to be exercised when using `preventDefault`, since we can worsen the user experience. Cancelling links is usually a bad idea; disabling right-button clicks so that the user will be unable to save an image is even worse.
 
-Usos legítimos de `preventDefault` podrían ser: validar un formulario en el cliente antes de enviarlo, anular ciertas acciones del teclado –por ejemplo, scroll hacia abajo con la barra espaciadora– en un videojuego que use esa tecla, etc.
+Legitimate uses of `preventDefault` could be: validating a form in the client before submitting it, disabling certain keyboard actions –for instance, scrolling down with the spacebar– for a video game that uses those keys, etc.
 
-## Documentación en la MDN
+## Documentation on the MDN
 
-La documentación de todo lo que se ha visto está en la Mozilla Developer Network (MDN): [http://developer.mozilla.org](http://developer.mozilla.org)
+Documentation for everything we have seen can be found in the Mozilla Developer Network (MDN): [http://developer.mozilla.org](http://developer.mozilla.org)
 
-Un truco para acceder más rápidamente a la MDN desde un buscador, es añadir `mdn` a cualquier búsqueda:
+A useful trick for quicker access to the MDN from a search engine is to add `mdn` to any search:
 
-![Buscador](images/search.png)
+![Search engine](images/search.png)
