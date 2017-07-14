@@ -1,19 +1,19 @@
-# Ejercicios
+# Exercises
 
-Realiza estos ejercicios en orden y trata de responder a las preguntas que se plantean.
+Complete these exercises in order and try to answer the proposed questions.
 
-Recuerda que puedes consultar la documentación (por ejemplo, [la MDN](http://developer.mozilla.org)), realizar búsquedas en Internet, etc.
+Remember you can always look up the documentation (for instance), [the MDN](http://developer.mozilla.org)), search the Internet, etc.
 
-**Importante**: en cada ejercicio se pedirá que crees un archivo HTML, otro de JavaScript y quizás uno de CSS. **Debes crear archivos nuevos**, y no reutilizar los de ejercicios anteriores. Si quieres conservar los archivos de los ejercicios, puedes crear un directorio diferente para cada uno.
+**Important**: each exercise will as you to create an HTML file, a JavaScript and possibly a CSS one. **You must create new files**, not reuse the ones for previous exercises. If you want to keep the exercise files, you can create a different directory for each.
 
-## Ejercicio 1. Ejecutar JavaScript en el navegador
+## Exercise 1. Execute JavaScript on the browser
 
-Crea un fichero `index.html` con el siguiente contenido:
+Create an `index.html` file with the following content:
 
 ```html
 <html>
 <head>
-    <title>Ejercicios</title>
+    <title>Exercises</title>
     <meta charset="utf-8">
     <script src="main.js"></script>
 </head>
@@ -22,54 +22,54 @@ Crea un fichero `index.html` con el siguiente contenido:
 </html>
 ```
 
-Crea también `main.js` (si te fijas, lo incluimos desde el fichero HTML con la etiqueta `<script>`) con lo siguiente:
+Create `main.js` too (you may notice we include it from the HTML file, with the `<script>` tag) with the following:
 
 ```javascript
-console.log("Hola, mundo!");
+console.log("Hello, world!");
 ```
 
-Abre el archivo en el navegador, y verás que aparece en blanco –porque el HTML está vacío. Pero si abrimos **la consola del navegador**, podremos ver el mensaje que hemos escrito desde el archivo JavaScript.
+Open the file in the browser, and you will see it shows up blank, since the HTML is empty. But if we open the **browser console**, we can see the message we have written from the JavaScript file.
 
-En Firefox Developer Edition, puedes abrir las herramientas de desarrollo con `Ctrl + Shift + I` (o `⌘ + ⌥ + I` ), o bien desde el menú `Tools / Web Developer / Toggle Tools`. Aparecerán varios paneles con distintas herramientas, entre ellas, la **consola**, que puedes activar haciendo clic en su pestaña.
+In Firefox Developer Edition, you can open up the development tools with `Ctrl + Shift + I` (or `⌘ + ⌥ + I` ), or from the menu `Tools / Web Developer / Toggle Tools`. Several panels will show up with different tools, among them the **console**, which you can enable by clicking on its tab.
 
-![Consola](images/console.png)
+![Console](images/console.png)
 
-Vamos ahora a modificar el HTML dinámicamente para que aparezca texto escrito en la pantalla.
+Now we shall modify the HTML dynamically so that written text will show on screen.
 
-Añade lo siguiente al archivo de JavaScript `main.js`:
+Add the following to the JavaScript file, `main.js`:
 
 ```javascript
-document.body.innerHTML = '<h1>Hola, mundo!</h1>';
+document.body.innerHTML = '<h1>Hello, world!</h1>';
 ```
 
-Prueba a recargar… ¡y sigue la página en blanco! Sin embargo, si cambiamos la línea anterior por el siguiente bloque, el problema se resuelve:
+Then try reloading… and the page still shows up blank! However, if we replace the previous line with the following block, the problem is fixed:
 
 ```javascript
 window.onload = function () {
-    document.body.innerHTML = '<h1>Hola, mundo!</h1>';
+    document.body.innerHTML = '<h1>Hello, world!</h1>';
 };
 ```
 
-![Ejercicio 1 - screenshot](images/exercise01.png)
+![Exercise 1 - screenshot](images/exercise01.png)
 
 ---
 
-**Pregunta**: ¿Por qué sucede esto?
+**Question**: Why does this happen?
 
-Recursos:
+Resources:
 
 - [`window.onload`](https://developer.mozilla.org/en/docs/Web/API/GlobalEventHandlers/onload) (MDN)
 
-## Ejercicio 2. Invocar a una horda de gatos
+## Exercise 2. Summoning a horde of cats
 
-Este ejercicio consiste en crear una imagen al vuelo cuando se pulsa un botón, y añadirla a la página.
+This exercise consists of creating an image on the fly on the press of a button, and adding it to the page.
 
-Crea un `index.html`:
+Create an `index.html`:
 
 ```html
 <html>
 <head>
-    <title>Ejercicios</title>
+    <title>Exercises</title>
     <meta charset="utf-8">
     <script src="main.js"></script>
 </head>
@@ -81,7 +81,7 @@ Crea un `index.html`:
 </html>
 ```
 
-Ahora `main.js`. Primero vamos a detectar clicks en el botón:
+Now for `main.js`. First, we shall check for clicks on the button:
 
 ```javascript
 window.onload = function () {
@@ -92,9 +92,9 @@ window.onload = function () {
 };
 ```
 
-Ejecuta el código en el navegador, y comprueba que el mensaje de `Summon!` aparece en la consola.
+Execute the code on the browser, and check whether the `Summon!` message shows up on the console.
 
-Una vez que tenemos el evento detectado, vamos a crear una imagen dinámicamente y añadirla al DOM para que se vea por pantalla. Reemplaza el contenido de la función de _callback_ (la línea que imprimía en la consola) por lo siguiente:
+Once we have detected the event, we shall dynamically create an image and then add it to the DOM so that it displays on screen. Replace the content of the callback function (the line that was printed out on the console) with the following:
 
 ```javascript
 var img = new Image();
@@ -102,24 +102,24 @@ img.src = 'https://placekitten.com/g/200/200/';
 document.getElementById('kittens').appendChild(img);
 ```
 
-Comprueba que se inserta una imagen nueva con cada click en el botón:
+Check out whether a new image is inserted with each click on the button:
 
-![Invocando gatos](images/exercise02.png)
+![Summoning cats](images/exercise02.png)
 
 ---
 
-**Ejercicio**: en vez de crear un objeto `Image`, modifica el código para insertar HTML directamente como contenido del párrafo con `id` `kittens`.
+**Exercises**: instead of creating an `Image` object, modify the code so that it directly inserts HTML as paragraph content with `id` `kittens`.
 
-Recursos:
+Resources:
 
 - [`Element.innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) (MDN)
 - [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) (MDN)
 
-Consideraciones:
+Considerations:
 
-- Recuerda que `innerHTML` es una propiedad tanto de lectura como de escritura.
-- Puedes concatenar _strings_ usando el operador `+`. Ej: `'hola, ' + 'mundo'`.
-- En este caso, usar `Image` respecto a crear el elemento vía HTML no nos da ninguna ventaja. Se suele utilizar `Image` cuando necesitamos subscribinos a algún elemento de esta (p. ej: `load`), o necesitamos acceder a sus propiedades vía JavaScript.
+- Keep in mind `innerHTML` is both a read property and a write property.
+- You can concatenate strings by using the `+` operator. E.g.: `'hello, ' + 'world'`.
+- In this case, using `Image` yields no advantage over creating the object via HTML. `Image` is usually employed when we need to subscribe to an event of the image (e.g., `load`), or we need to access its properties via JavaScript.
 
 ## Ejercicio 3. Estilos, formularios y atributos personalizados
 
