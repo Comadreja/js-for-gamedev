@@ -329,25 +329,25 @@ Notes:
 
 - We can use `querySelector` on any element of the DOM, not only `document`. In this case, we shall restrict the search to its children.
 
-## Ejercicio 4. Estado de la _party_
+## Exercise 4. Party status
 
-Vamos a pintar ahora el estado de la _party_ de la práctica anterior en un `<canvas>`.
+Now we shall proceed to draw the status of the party of characters from the previous practice on a `<canvas>`.
 
-### Paso 1. Adapta el ejercicio anterior
+### Step 1. Adapt the previous exercise
 
-Modifica tu fichero HTML para cambiar el título, el texto del botón e incluir un elemento `<canvas>` como se muestra a continuación:
+Modify your HTML file to change the title, the button text and include a `<canvas>` element as we show below:
 
 ```html
 <!doctype html>
 <html>
 <head>
-    <title>Ejercicios</title>
+    <title>Exercises</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="styles.css" type="text/css">
     <script src="main.js"></script>
 </head>
 <body>
-    <!-- ¡Cambia el título! Vamos a matar a los monstruos, pero despacito. -->
+    <!-- Change the title! We are going to kill the monsters, but we will take our time. -->
     <h1>Attack the monsters!</h1>
     <canvas width="800" height="600"></canvas>
     <ul id="party-monsters">
@@ -355,7 +355,7 @@ Modifica tu fichero HTML para cambiar el título, el texto del botón e incluir 
     <form name="killing-machine">
         <p>
             <select name="chara"></select>
-            <!-- También hemos cambiado el texto del botón. -->
+            <!-- We have also changed the button text. -->
             <button type="submit">Hit!</button>
         </p>
     </form>
@@ -366,7 +366,7 @@ Modifica tu fichero HTML para cambiar el título, el texto del botón e incluir 
 </html>
 ```
 
-Modifica el fichero CSS también para añadir la siguiente regla y ocultar las imágenes:
+Modify the CSS file too, so as to add the following rule and hide the images:
 
 ```css
 .resources {
@@ -374,7 +374,7 @@ Modifica el fichero CSS también para añadir la siguiente regla y ocultar las i
 }
 ```
 
-Y finalmente, abre el fichero `main.js` y modifica la _party_ para incluir los puntos de vida:
+To wrap things up, open the `main.js` file and modify the party to include their hit points:
 
 ```javascript
 var party = [
@@ -384,7 +384,7 @@ var party = [
 ];
 ```
 
-Modifica el _callback_ de `submit` de la siguiente forma para que en vez de matar directamente, dirija un ataque contra el enemigo de 5 puntos de vida:
+Modify the callback in `submit` as follows, so that instead of outright killing them it deals a 5 hit point attack against them:
 
 ```javascript
 event.preventDefault();
@@ -393,13 +393,13 @@ var character = findCharById(charaID);
 character.hp -= 5;
 
 if (character.hp <= 0) {
-    character.hp = 0; // corrige el valor en caso de que sea negativo.
+    character.hp = 0; // adjust the value in case it is negative.
     var li = list.querySelector('[data-charaid=' + charaID + ']');
     li.classList.add('dead');
 }
 ```
 
-La función `findCharById` queda así:
+The `findCharById` function will look like this:
 
 ```javascript
 function findCharById(charaID) {
@@ -407,11 +407,11 @@ function findCharById(charaID) {
 }
 ```
 
-Ahora necesitarás más de un click para acabar con un enemigo. Puedes usar el depurador para ver cómo los enemigos pierden vida a cada click.
+Now you will need to click more than once to destroy an enemy. You can use the debugger to see how the enemies lose their hit points with each click.
 
-### Paso 2. El bucle de renderizado
+### Step 2. The rendering loop
 
-Lo que vamos a hacer ahora es implementar un bucle de renderizado muy sencillo. Como ya hemos visto en los artículos de teoría, no podemos hacer algo como:
+What we shall do now is implement a very simple rendering loop. As we have already seen in the theory, we cannot do anything like:
 
 ```javascript
 while (true) {
@@ -419,7 +419,7 @@ while (true) {
 }
 ```
 
-La razón es que bloquearíamos el hilo principal y dejaríamos la página inutilizada. Lo que tenemos que hacer es programar un renderizado a cada _frame_ utilizando `requestAnimationFrame`. Dentro de la función `onload` añade lo siguiente:
+The reason being that we would lock the main thread up, leaving the page disabled. What we need to do is program a frame-by-frame render by using `requestAnimationFrame`. Add the following within the `onload` function:
 
 ```js
 var lastRender = 0;
@@ -428,9 +428,9 @@ var context = canvas.getContext('2d');
 
 function render() {
     requestAnimationFrame(function (t) {
-        // Borra todo...
+        // Delete it all...
         context.clearRect(0, 0, 800, 600);
-        // ...y repinta.
+        // ...and redraw.
         renderParty();
         console.log('Delta time:', t - lastRender);
         lastRender = t;
@@ -439,50 +439,50 @@ function render() {
 }
 
 function renderParty(t) {
-    console.log('Pintando la party en tiempo', t);
+    console.log('Time to draw the party: ', t);
 }
 
 render();
 ```
 
-Observa la salida por consola. **¿Qué representa la cantidad impresa?**
+Check out the console output. **What does the number it prints out stand for?**
 
-### Paso 3. Pintar el fondo
+### Step 3. Drawing the background
 
-Vamos a esbozar en qué consiste pintar la party. Eso es fácil. Cambia el código de `renderParty` para que sea:
+Now we shall sketch out what it means to draw the party. That is easy enough. Change the code of `renderParty` so that it looks like this:
 
 ```javascript
 function renderParty(t) {
     renderBackground();
-    renderCharacters(t); // pásale t a la función que pinta los enemigos.
+    renderCharacters(t); // pass t to the function that draws enemies.
     renderUI();
 }
 
 var bgImage = document.getElementById('background');
 function renderBackground() {
-    console.log('Pintando el fondo.');
+    console.log('Drawing the background.');
 }
 
 function renderCharacters(t) {
-    console.log('Pintando a los personajes.');
+    console.log('Drawing the characters.');
 }
 
 function renderUI() {
-    console.log('Pintando la interfaz.');
+    console.log('Drawing the interface.');
 }
 ```
 
-**Nota**: mucho ojo con utilizar `console.log` dentro de las funciones de render. Hacer esto 60 veces por segundo puede degradar el rendimiento de la aplicación si tienes las herramientas de desarrollador abiertas.
+**Note**: be extremely careful about using `console.log` within rendering functions. Doing this 60 times per second can degrade the application's performance if you have the developer tools open.
 
-Ahora vamos a pintar el fondo. Cambia la función `renderBackground` para que sólo incluya el siguiente código:
+Now let us draw the background. Change the `renderBackground` function so that it only includes the following code:
 
 ```js
 context.drawImage(bgImage, 0, 0)
 ```
 
-### Paso 4. Pintar los enemigos
+### Step 4. Drawing the enemies
 
-Pintaremos los enemigos con primitivas gráficas. El _slime_ será un círculo verde y el murciélago un círculo azul. Si alguno de los personajes está muerto, lo pintaremos en gris. Borra el log y modifica la función `renderCharacters` para que incluya:
+We will use graphical primitives to draw the enemies. The "slime" will be a green circle, while the bat will be a blue circle. If any of the characters is dead, we will draw them in grey. Delete the log and modify the `renderCharacters` function so that it includes:
 
 ```javascript
 var charaSpace = 800 / party.length;
@@ -492,13 +492,13 @@ party.forEach(function (char, index) {
     var y;
     if (char.hp === 0) {
         context.fillStyle = 'grey';
-        y = 500; // en el suelo porque está muerto.
+        y = 500; // on the ground because character is dead.
     } else if (char.name === 'Bat') {
         context.fillStyle = 'blue';
-        y = 50 * Math.sin(t/100) + 300; // flotando en el aire.
+        y = 50 * Math.sin(t/100) + 300; // floating in the air.
     } else if (char.name === 'Slime') {
         context.fillStyle = 'green';
-        y = 400; // en el suelo pero no en la tumba.
+        y = 400; // on the ground, but not in the grave.
     }
     context.beginPath();
     context.arc(x, y, 50, 0, 2 * Math.PI);
@@ -506,9 +506,9 @@ party.forEach(function (char, index) {
 });
 ```
 
-### Paso 5. Pintar la UI
+### Step 5. Drawing the UI
 
-Falta pintar unas barras de vida justo debajo de cada enemigo. Para ello, reemplaza el contenido de la función `renderUI` por el siguiente:
+We still need to draw some life bars right beneath each enemy. To do this, replace the contents of the `renderUI` function with the following:
 
 ```javascript
 var width = 100;
@@ -534,9 +534,9 @@ party.forEach(function (char, index) {
 
 ---
 
-**Ejercicio**: modifica los `hp` de la lista `party` para que estén al máximo y haz que cuando reciban un golpe la barra se anime hasta el nuevo valor.
+**Exercise**: modify the `hp` in the `party` list so that they are maxed out, and make it so that whenever they are hit, the bar will animate from its prior value to the new one.
 
-Recursos:
+Resources:
 
 - [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
 - [`CanvasRenderingContext2D.clearRect`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect)
