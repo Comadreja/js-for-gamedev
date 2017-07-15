@@ -265,25 +265,25 @@ In the console, notice how the ID is different depending on the option that is s
 ![Exercise 3 - value of select](images/exercise03_selected_value.png)
 
 
-### Paso 4. Atributos data para mapear elementos
+### Step 4. Data attributes for element mapping
 
-En este paso, añadiremos una clase CSS al elemento de la lista que corresponda cuando matemos a un personaje. Así, lo marcaremos como muerto.
+In this step, we shall add a CSS class to the appropriate element of the list when we kill its corresponding character, thereby marking it dead.
 
-¿Cómo podemos hacer para relacionar el valor seleccionado con otro nodo HTML?
+What can we do so as to relate the selected value to another HTML node?
 
-Podríamos añadir un atributo ID a los elementos de la lista y luego utilizar `getElementById` para seleccionar ese elemento y manipularlo. El problema es que **las ID's tienen que ser únicas**. Para este ejemplo nos valdría, ¿pero qué pasa si necesitamos renderizar esa misma party en otra parte de la página?
+One thing we could do is add an ID attribute to the elements of the list, and then use `getElementById` in order to select that element and manipulate it. The problem is, **IDs must be unique**. It would serve us for this particular example, but what if we need to render the same party on another part of the page?
 
-La solución es _inventarnos_ un **atributo HTML a nuestra elección** y guardar ahí la ID del personaje (¡o cualquier otro valor que queramos!). Podemos añadir uno o más atributos personalizados a cualquier etiqueta HTML, el único requisito es que tengan el **prefijo `data-`**. Tendríamos así elementos renderizados de esta manera:
+The solution is to _make up_ an **HTML attribute of our own invention** and store the character's ID there (or any other value we like). We can add one or more custom attributes to any HTML tag; the only requirement would be for them to have **the prefix, `data-`**. Thus, we would have elements rendered as follows:
 
 ```html
 <li data-charaid="bat1">...</li>
 ```
 
-Así, podríamos acceder a este elemento utilizando `querySelector('[data-chara-id=bat1]')`, por ejemplo.
+We could thus access this element by using `querySelector('[data-chara-id=bat1]')`, for instance.
 
-Estos atributos se llaman _data attributes_. Podemos acceder a ellos desde JavaScript con la propiedad `dataset`, que contiene un mapa en la que los nombre de los atributos (_sin_ el prefijo `data-`) son las _keys_. En este ejemplo, `li.dataset.charaid` nos devolvería `bat1` (asumiendo que `li` es el elemento `<li>` que queremos).
+These attributes are called _data attributes_. We can access them from JavaScript with the `dataset` property, which contains a map on which the names of the attributes (_without_ the prefix `data-`) would be the _keys_. In this example, `li.dataset.charaid` would return `bat1` (assuming that `li` were the `<li>` element we wanted).
 
-Primero debemos añadir este atributo data cuando rellenamos la lista:
+We must first add this data attribute when filling in the list:
 
 ```javascript
 var li = document.createElement('li');
@@ -292,11 +292,11 @@ li.dataset.charaid = character.id;
 list.appendChild(li);
 ```
 
-Puedes comprobar que el atributo está puesto correctamente usando el inspector:
+You can check whether the attribute is correctly set by using the inspector:
 
-![Inspeccionando el atributo data](images/exercise03_inspector_data_attr.png)
+![Inspecting the data attribute](images/exercise03_inspector_data_attr.png)
 
-Ahora modifica el callback de `submit` del siguiente modo:
+Now, modify the callback in `submit` as follows:
 
 ```javascript
 event.preventDefault();
@@ -305,29 +305,29 @@ var li = list.querySelector('[data-charaid=' + charaID + ']');
 li.classList.add('dead');
 ```
 
-Con esto, cada vez que se pulse el botón se añade la clase CSS `dead` al elemnto `<li>` que contenga el personaje seleccionado. En el archivo CSS `styles.css` hemos creado antes una regla que muestra a los elementos con clase `dead` con el texto tachado:
+This way, every time we push the button the CSS class `dead` is added to the `<li>` element which contains the selected character. On the CSS file `styles.css` we have already created a rule that displays elements of the `dead` class with   Con esto, cada vez que se pulse el botón se añade la clase CSS `dead` al elemnto `<li>` que contenga el personaje seleccionado. En el archivo CSS `styles.css` hemos creado antes una regla que muestra a los elementos con clase `dead` in strikethrough:
 
-![Ejercicio 3 - clase CSS](images/exercise03_strikethrough.png)
+![Exercise 3 - CSS class](images/exercise03_strikethrough.png)
 
 ---
 
-**Ejercicio**: prueba a desactivar el botón de kill si la opción seleccionada del `<select>` es un personaje que ya está muerto.
+**Exercise**: try disabling the kill button if the selected option on `<select>` is a character that is already dead.
 
-- Desactiva el botón nada más matar al personaje, poniendo la propiedad `disabled` de `<button>` a `true`.
-- Subscríbete al evento `change` de `<select>`, que se dispara cuando el valor seleccionado cambia.
-    1. Averigua si el `<li>` del personaje correspondiente tiene la clase `dead`. Para ello, utiliza el método adecuado de la [propiedad `classList`](https://developer.mozilla.org/en/docs/Web/API/Element/classList).
-    2. Cambia la propiedad `disabled` de `<button>` en función de si el personaje está vivo todavía o muerto.
+- Disable the button as soon as the character is dead, setting the `disabled` option of `<button>` to `true`.
+- Subscribe to the `change` event of `<select>`, which fires whenever the selected value changes.
+    1. Find out whether the corresponding character's `<li>` has the `dead` class. To do this, use the appropriate method from the [`classList` property](https://developer.mozilla.org/en/docs/Web/API/Element/classList).
+    2. Change the `disabled` property of `<button>` according to whether the character is living or dead.
 
-Recursos:
+Resources:
 
 - [`Event.preventDefault`](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) (MDN)
 - [Using data attributes](https://developer.mozilla.org/en/docs/Web/Guide/HTML/Using_data_attributes) (MDN)
 - [`Element.classList`](https://developer.mozilla.org/en/docs/Web/API/Element/classList) (MDN)
 
 
-Notas:
+Notes:
 
-- Podemos usar `querySelector` sobre cualquier elemento del DOM, no sólo sobre `document`. En este caso, limitaremos la búsqueda sólo a sus hijos.
+- We can use `querySelector` on any element of the DOM, not only `document`. In this case, we shall restrict the search to its children.
 
 ## Ejercicio 4. Estado de la _party_
 
