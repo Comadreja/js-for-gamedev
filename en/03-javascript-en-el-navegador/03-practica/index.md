@@ -1,67 +1,67 @@
-# Cliente web para batallas RPG
+# Web client for RPG battles
 
-A continuación se expone la práctica propuesta para esta unidad. Tras leer este enunciado, se recomienda _encarecidamente_ consultar la **[guía de la práctica](guia.md)** para su realización.
+Below is a breakdown of the proposed practice for this unit. After reading this formulation, we _strongly_ recommend looking up the **[practice guide](guia.md)** in order to accomplish it.
 
-## Enunciado
+## Formulation
 
-La práctica consiste en implementar un cliente visual (en este caso, **una página web**) para el juego de batallas de la práctica de la unidad anterior.
+The practice consists of the implementation of a visual client (in this case, **a webpage**) for the battle game from the previous unit's practice.
 
-![Captura de pantalla del cliente](images/screenshot.png)
+![Client screenshot](images/screenshot.png)
 
-Como punto de partida, se ha provisto de un  href="start-here.zip" target="_blank">esqueleto de proyecto</a> con los siguientes archivos:
+As a starting point, we provide a <a href="start-here.zip" target="_blank">project framework</a> with the following files:
 
-- `index.html`: código HTML de partida
-- `styles.css`: hoja de estilo
-- `js/main.js`: el archivo de partida JavaScript
-- `js/rpg.js`: un archivo con el código de la librería de batallas de la práctica. También puedes usar tu propio código (consulta la sección de _Adaptación del código de la práctica anterior_).
+- `index.html`: starter HTML code
+- `styles.css`: stylesheet
+- `js/main.js`: starter JavaScript file
+- `js/rpg.js`: a file with the code for the practice's battle library. You can also use your own code (check out the section _Adapting code from the previous practice_).
 
-En este código inicial se incluye ya implementado lo siguiente:
+This starter code already implements the following:
 
-- Carga desde el archivo HTML de los recursos JavaScript y CSS.
+- JavaScript and CSS resource loading from HTML file.
 
-- Esqueleto HTML con una interfaz ya hecha. Puedes modificar este HTML para añadir más cosas, o cambiar elementos de la UI que no te convenzan, pero no es obligatorio.
+- HTML framework with a ready-made interface. You can modify this HTML to add extra bits, or change UI elements you do not like, but it is not necessary to do so.
 
-- Creación de una instancia de `Battle`, así como el setup de las _parties_ y la subscripción a los eventos más relevantes. La información de dichos eventos se imprime por consola (lo cual puedes eliminar/modificar a tu gusto).
+- Creation of an instance of `Battle`, as well as party setup as well as subscription to the most relevant events. The info on said events is printed out on the console (you can remove or modify this as you like).
 
-Hay que implementar las siguientes _features_:
+The following features need to be implemented:
 
-- Mostrar los personajes de ambas _parties_, con sus ID's, puntos de vida y de maná.
+- Display the characters in both parties, with their IDs, hit points, and mana points.
 
-- Marcar qué personaje está seleccionado, cambiando su estilo o añadiendo un carácter especial (p.ej: `*`).
+- Signal which character is selected, by changing her style or adding a special character (e.g., `*`).
 
-- Marcar qué personajes están muertos, cambiando su estilo o añadiendo un carácter especial (p.ej: `✝`).
+- Signal which characters are dead, by changing their style or adding a special character (e.g., `✝`).
 
-- Implementar el menú de batalla con sus siguientes estados: selección de acción, selección de objetivo y selección de hechizo.
+- Implement the battle menu with its following states: action selection, target selection, and spell selection.
 
-- Mostrar información de qué ha pasado cada turno (p.ej `Bat attacked Wizz, but missed`).
+- Display info feed on what has happened on each turn (e.g., `Bat attacked Wizz, but missed`).
 
-- Mostrar un mensaje al final de la batalla indicando cuál es el bando ganador.
+- Display a message at the end of the battle, indicating which side is the victor.
 
-Para implementar estas _features_ básicas, es recomendable seguir el procedimiento marcado por **la [guía](GUIDE.md) de la práctica**.
+In order to implement these basic features, it is advisable to follow the procedure outlined by the **[practice guide](GUIDE.md)**.
 
-Otras características opcionales que se podrían implementar, serían:
+Some other features that could be optionally implemented would be:
 
-- En el menú de selección de objetivo, mostrar en un color diferente los personajes de cada _party_.
+- On the target selection menu, display characters belonging to different parties in different colors.
 
-- Al terminar la batalla, mostrar un botón o enlace para empezar una nueva (esto se puede hacer simplemente recargando la página).
+- On finishing the battle, display a button or link to start a new one (this can otherwise be done by simply reloading the page).
 
-- Crear la composición de una o ambas _parties_ de manera aleatoria.
+- The ability to randomize the makeup of either or both parties.
 
-## Adaptación del código de la práctica anterior
+## Adapting code from the previous practice
 
-En la versión actual de JavaScript no hay ningún mecanismo para gestionar módulos (por ejemplo, usando la función `require` como en Node). Es por esto que no podemos utilizar ni `require` ni `module.exports`.
+The current version of JavaScript features no module management mechanisms (such as using the `require` function, as in Node). Due to this, we cannot use either `require`, or `module.exports`.
 
-Además, ciertas partes que forman parte de la librería estándar de Node, como el módulo `events` para implementar eventos, no forman parte del estándar JavaScript.
+Additionally, certain parts that belong in the Node standard library, such as the event implementation module `events`, are not a part of the JavaScript standard.
 
-Hay una herramienta, [**Browserify**](http://browserify.org/) que nos permite transformar módulos de Node –con sus dependencias– en código que funciona en el browser. También incluye **polyfills**.
+There is a tool, [**Browserify**](http://browserify.org/), which allows us to transform Node modules –along with their dependencies– into code that can run on the browser. It also includes **polyfills**.
 
-### Instrucciones
+### Instructions
 
-#### Opción A: usar el código propio
+#### Option A: using our own code
 
-Si has acabado la práctica anterior, puedes utilizar ese código en esta. Sigue los pasos que hay a continuación para adaptar ese código de Node a código que puedas ejecutar en el navegador.
+If you have finished the previous practice, you can use that code in this one. Follow the steps below in order to adapt that code from Node into code you can run on the browser.
 
-1. Como vamos a necesitar dos módulos, `Battle` y `entities` (junto a sus dependencias), tenemos que crear un archivo "raíz" con esos dos. Crea en la raíz del directorio de la práctica anterior un archivo `export.js` con el siguiente contenido:
+1. Since we are going to need two modules, `Battle` and `entities` (along with their dependencies), we need to create a "root" file with those two. Create an `export.js` file in the root of the previous practice's directory, with the following content:
 
     ```javascript
     module.exports = {
@@ -70,13 +70,13 @@ Si has acabado la práctica anterior, puedes utilizar ese código en esta. Sigue
     };
     ```
 
-2. De nuevo en la raíz del directorio de la práctica anterior, instala Browserify con npm:
+2. Again, in the root of the previous practice's directory, install Browserify with npm:
 
     ```
     npm install --save-dev browserify
     ```
 
-3. Comprueba que el archivo `package.json` se ha modificado y que ahora aparece Browserify listado dentro de `devDependencies`. Por ejemplo:
+3. Make sure that the `package.json` file has been modified and Browserify now appears listed within `devDependencies`. For instance:
 
     ```json
     "devDependencies": {
@@ -84,7 +84,7 @@ Si has acabado la práctica anterior, puedes utilizar ese código en esta. Sigue
     }
     ```
 
-4. Edita `package.json` para añadir un comando de script más, que ejecutará Browserify:
+4. Edit `package.json` to add one more script command, which will launch Browserify:
 
     ```json
     "scripts": {
@@ -92,33 +92,33 @@ Si has acabado la práctica anterior, puedes utilizar ese código en esta. Sigue
     }
     ```
 
-5. Ejecuta dicho comando, que generará un archivo `rpg.js` en el raíz de ese directorio.
+5. Execute said command, which will generate an `rpg.js` file within the root of that directory.
 
     ```bash
     npm run bundle
     ```
 
-6. Ahora puedes copiar `rpg.js` al directorio `js` de la práctica 2. Cuando se cargue el archivo con una etiqueta `<script>` en el navegador, habrá un objeto global `RPG`, con dos propiedades: `entities` y `Battle`.
+6. Now you can copy `rpg.js` into the `js` directory from practice 2. When the file with the tag `<script>` is loaded into the browser, there will be an `RPG` global object, with two properties: `entities` and `Battle`.
 
 
-#### Opción B: usar una implementación de terceros
+#### Option B: using a third-party implementation
 
-Puedes emplear el archivo `rpg.js` –incluido ya en el código fuente de partida–, que contiene una implementación de la práctica anterior.
+You can use the `rpg.js` file –which is already included in the starter source code–, which contains an implementation of the previous practice.
 
-## Auto-reload del navegador
+## Browser auto-reload
 
-Si quieres que el navegador **automáticamente recargue** la página cuando modifques un archivo, lo puedes conseguir fácilmente con [**Browsersync**](https://www.browsersync.io/). No es obligatorio, pero quizás te resulte más cómodo programar así.
+If you want the browser to **automatically reload** the page whenever you modify a file, you can do it easily enough by using [**Browsersync**](https://www.browsersync.io/). It is not mandatory, but you may be more comfortable programming this way.
 
-Puedes instalar Browsersync de manera global (para así utilizarlo desde cualquier directorio) vía npm con el flag `-g`:
+You can install Browsersync globally (so that you can use it from any directory) via npm with the `-g` flag:
 
 ```bash
 npm install -g browser-sync
 ```
 
-Una vez instalado, puedes lanzarlo en el directorio raíz de la práctica. El siguiente comando ejecuta browsersync, lanza un servidor local y activa la auto-recarga del navegador cuando haya algún cambio en los ficheros HTML, CSS o JavaScript:
+Once installed, you can launch it from the practice's root directory. The following command launches browsersync, starts a local server and enables browser auto-reload whenever there is a change in the HTML, CSS or JavaScript files:
 
 ```bash
 browser-sync start --server --files="*.html,js/*.js,*.css"
 ```
 
-Para más información, consulta la [documentación de Browsersync](https://www.browsersync.io/docs/command-line).
+For further info, check out the [Browsersync documentation](https://www.browsersync.io/docs/command-line).
