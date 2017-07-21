@@ -64,7 +64,7 @@ This list of radio buttons will look like this, though it has to be dynamically 
 </ul>
 ```
 
-We have to generate this list dynamically within the actions to be taken whenever the `turn` event of `Battle` fires. In this case, the list we need to generate is that of **the actions** a character can take, which relates to the form with its attribute `name` En este caso, la lista a generar es de **las acciones** que puede tomar un personaje, lo que se corresponde con el formulario con su atributo `name` a `select-action`.
+We have to generate this list dynamically within the actions to be taken whenever `Battle` fires the `turn` event. In this case, the list to be generated is that of the actions available to a character, which corresponds to the form which `name` atribute has the value `select-action`.
 
 ![Actions menu](images/actions_menu.png)
 
