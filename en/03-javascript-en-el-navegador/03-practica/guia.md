@@ -1,16 +1,16 @@
-# Guía
+# Guide
 
-_Nota: lee primero el [enunciado de la práctica](index.md) antes de leer este documento._
+_Note: read first the [practice formulation](index.md) before reading this document._
 
-Esta es una guía paso a paso con sugerencias para afrontar la práctica. Es recomendable **leer este documento entero** –especialmente el apartado de _Consideraciones_– antes de ponerse a realizar el primer paso.
+This is a step-by-step guide with suggestions toward approaching the practice. It is advisable to read **this whole document**, especially the _Considerations_ section, before getting started on the first step.
 
-También es recomendable tener fresca en la cabeza la API de la práctica anterior de las batallas RPG con Node: repasa el enunciado de la práctica o su código fuente.
+It is also recommendable to have a fresh memory of the API from the previous practice on RPG battles with Node; review the practice formulation or its source code.
 
-Durante el desarrollo de esta práctica, si te atascas sobre qué llamadas a la API hay que hacer, siempre puedes consultar el archivo `index.js` de la práctica anterior –donde hay programado un cliente de dicha API.
+Should you get stuck wondering which API calls to make during the development of this practice, you can always check with the `index.js` file from the previous practice, where there is a programmed client of the aforementioned API.
 
-## 1. Mostrar los personajes
+## 1. Displaying the characters
 
-En el código HTML de base, hay dos listas `<ul class="character-list">` que hay que rellenar con elementos `<li>`, uno por personaje. Debemos indicar el nombre del personaje junto con sus atributos de vida y maná. Más adelante nos será util poder referinos a ese personaje, así que es conveniente almacenar en un atributo data su ID de personaje.
+In the starter HTML code, there are two lists `<ul class="character-list">` which you have to fill with `<li>` elements, one per character. We need to indicate the character's name along with her hit and mana point attributes. Further on, it will be useful to be able to refer to that character, so it is best to store her character ID to an attribute.
 
 
 ```html
@@ -22,39 +22,39 @@ En el código HTML de base, hay dos listas `<ul class="character-list">` que hay
 </ul>
 ```
 
-Aunque las listas `<ul>` están creadas en el archivo HTML, falta rellenar su contenido, lo cual se ha de hacer dinámicamente con JavaScript. Con `Battle.prototype.characters.allFrom` se puede acceder a las vistas (`CharactersView`) de los personajes de una party.
+Although the `<ul>` lists are created in the HTML file, we still need to fill in their content, which is something we have to do dynamically with JavaScript. We can access the character views (`CharactersView`) of the characters in a party with  `Battle.prototype.characters.allFrom`.
 
-Como habrá que refrescar el contenido de estas listas, es recomendable implementar una función que haga esto, para poder llamarla más adelante desde otros sitios.
+Since the contents of these lists will have to be updated, it is convenient to implement a function that will do this; then we will be able to call it from elsewhere.
 
-Por ahora, se puede comenzar con mostrar los personajes al inicio de cada turno. Para ello, hay que subscribirse al evento `turn` de `Battle`.
+For the time being, we can begin by displaying the characters at the start of every turn. To do this, we need to subscribe to the `turn` event from `Battle`.
 
-![Listado de las parties](images/parties.png)
+![Listing of parties](images/parties.png)
 
-### Documentación relacionada
+### Related documentation
 
-- [`Element.innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) en la MDN.
-- [`Document.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) en la MDN
+- [`Element.innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) on the MDN.
+- [`Document.querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) on the MDN
 
-## 2. Mostrar el personaje seleccionado
+## 2. Displaying the selected character
 
-El CSS está preparado para que un elemento con la clase `active` aparezca resaltado, indicando que es el turno de dicho personaje.
+The CSS is set up so that an element with the class `active` is highlighted, indicating it is that character's turn.
 
-En el callback evento `turn` de `Battle` se nos pasa la información de cada turno. Uno de los datos del evento es la ID del personaje activo, con lo que podemos usar un `querySelector` para seleccionar el `<li>` de dicho personaje y añadir la clase `active`.
+In the callback of the `turn` event from `Battle`, we get the info from every turn. One of the data points of the event is the active character's ID, with which we can use a `querySelector` in order to select that character's `<li>` and add the `active` class to her.
 
-![Selección del personaje actual](images/highlight_current_chara.png)
+![Current character selection](images/highlight_current_chara.png)
 
-### Documentación relacionada
+### Related documentation
 
-- [`Element.classList`](https://developer.mozilla.org/en/docs/Web/API/Element/classList) en la MDN
-- [Using data attributes](https://developer.mozilla.org/en/docs/Web/Guide/HTML/Using_data_attributes) (guía en la MDN)
+- [`Element.classList`](https://developer.mozilla.org/en/docs/Web/API/Element/classList) on the MDN
+- [Using data attributes](https://developer.mozilla.org/en/docs/Web/Guide/HTML/Using_data_attributes) (guide on the MDN)
 
-## 3. Mostrar el menú de acciones de batalla
+## 3. Displaying the battle action menu
 
-Dentro de la sección `<section class="battle-menu">` hay tres formularios, que aparecen ocultos gracias a un estilo `display: none` aplicado _inline_. Cada formulario representa una "fase" del menú de batalla, y presentará una lista de opciones al jugador.
+Within the section `<section class="battle-menu">` we can find three forms, which are hidden from display thanks to the inline style `display: none`. Each form represents a "stage" of the battle menu, and presents a list of options to the player.
 
-Se puede obtener una lista de las opciones disponibles en un momento dado con el método `list` de `Battle.prototype.options`. Con dicha lista, se pueden generar una serie de _radio buttons_ para que el jugador pueda elegir la opción deseada.
+A list of the options that are available at any given time can be obtained with the `list` method of `Battle.prototype.options`. With this list, we can generate a series of radio buttons so that the player can choose her desired option.
 
-Esta lista de _radio buttons_ tendrá el siguiente aspecto –pero se ha de generar dinámicamente con JavaScript:
+This list of radio buttons will look like this, though it has to be dynamically generated with JavaScript:
 
 ```html
 <ul class="choices">
@@ -64,150 +64,149 @@ Esta lista de _radio buttons_ tendrá el siguiente aspecto –pero se ha de gene
 </ul>
 ```
 
-Hemos de generar esta lista dinámicamente dentro de las acciones a tomar cuando se dispare el evento `turn` de `Battle`. En este caso, la lista a generar es de **las acciones** que puede tomar un personaje, lo que se corresponde con el formulario con su atributo `name` a `select-action`.
+We have to generate this list dynamically within the actions to be taken whenever the `turn` event of `Battle` fires. In this case, the list we need to generate is that of **the actions** a character can take, which relates to the form with its attribute `name` En este caso, la lista a generar es de **las acciones** que puede tomar un personaje, lo que se corresponde con el formulario con su atributo `name` a `select-action`.
 
-![Menú de acciones](images/actions_menu.png)
+![Actions menu](images/actions_menu.png)
 
-## 4. Seleccionar una acción
+## 4. Selecting an action
 
-Los _radio buttons_ tienen un funcionamiento peculiar, puesto que comparten el atributo `name`. Esta es la manera que tiene el navegador de "agruparlos", de forma que sólo pueda estar activo un único _radio button_ en un momento dado.
+Radio buttons have a peculiar behavior, since they share the `name` attribute. This is the way the browser "groups" them so that only a single radio button can be active at any given time.
 
-Se puede acceder fácilmente al valor (_value_) de un **grupo de _radio buttons_** a través del formulario al que pertenecen. Por ejemplo, para el menú de batalla hemos establecido un `name` para el grupo de `"option"`. Suponiendo que su formulario está almacenado en la variable `form`, podríamos tener:
+The value of a **radio button group** can be easily accessed through the form they belong to. For instance, we have set a `name` for the `"option"` group in the battle menu. Provided that its form is stored in the `form` variable, we could have the following:
 
 ```javascript
 var action = form.elements['option'].value;
 battle.options.select(action);
 ```
 
-Obviamente hay que realizar esto cuando el jugador haya pulsado el botón de _Select action_. Para ello, hay que subscribirse al evento `submit` del formulario. Es imprescindible que además anulemos dicho evento con `preventDefault` para evitar que el navegador recargue la página.
+Obviously, this has to be done when the player has pressed the _Select action_ button. To that end, we need to subscribe to the form's `submit` event. It is also indispensable to disable said event with `preventDefault` in order to prevent the browser from reloading the page.
 
-Debemos además **validar** el formulario, para asegurarnos de que el jugador _ha seleccionado_ una opción. HTML5 nos permite hacer validaciones sencillas con JavaScript en el lado del cliente. Para requerir un campo, debemos añadir el atributo `required` a dicho elemento. En el caso de un grupo de _radio buttons_, basta con añadir `required` a uno cualquiera:
+We must also **validate** the form in order to ensure that the player _has selected_ an option. HTML5 allows us to carry out simple client-side validations with JavaScript. To make a field mandatory, we need to add the `required` attribute to said element. In the case of a radio button group, all we need is to add `required` to any one of them:
 
 ```html
 <input type="radio" name="option" value="attack" required>
 ```
 
-Para comprobar que este paso está hecho correctamente, puedes subscribirte al evento `info` de `Battle` e imprimir los datos de dicho evento. Con lo que hay hecho ahora debería funcionar la acción de _Defend_, puesto que no requiere ningún paso más.
+In order to check that this step has been correctly realized, you can subscribe to the `info` event of `Battle` and print out said event's data. The _Defend_ action should work with what has been done up to now, since it needs no further steps.
 
-![Log de la acción de defender](images/defend_info.png)
+![Defend action log](images/defend_info.png)
 
-### Documentación relacionada
+### Related documentation
 
-- [HTML Forms Guide](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms), una lista de artículos y tutoriales sobre formularios HTML5.
-- [`Event.preventDefault`](https://developer.mozilla.org/en/docs/Web/API/Event/preventDefault)  en la MDN
-- [`HTMLFormControlsCollection`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection) en la MDN (para información sobre `HTMLFormElement.elements`)
+- [HTML Forms Guide](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms), a list of articles and tutorials on HTML5 forms.
+- [`Event.preventDefault`](https://developer.mozilla.org/en/docs/Web/API/Event/preventDefault) on the MDN.
+- [`HTMLFormControlsCollection`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection) on the MDN (for info on `HTMLFormElement.elements`)
 
-## 5. Seleccionar un objetivo
+## 5. Selecting a target
 
-Se hace de forma similar a seleccionar una acción: se ha de generar la lista  de opciones dinámicamente con JavaScript, así como interceptar el evento `submit` de este formulario y llamar a `battle.options.select` con el objetivo seleccionado por el jugador.
+This is done similarly to selecting an action: we need to dynamically generate the options list with JavaScript, as well as intercept this form's `submit` event and call `battle.options.select` with the player's selected target.
 
-Un añadido que tiene este formulario es un enlace que nos permite **cancelar la acción actual**. Para que funcione, hemos de interceptar el evento `click` de dicho enlace, usar `preventDefault` para que el navegador no haga nada, y llamar a `battle.options.cancel`.
+One extra bit in this form is a link that lets us **cancel the current action**. In order for it to work, we need to intercept said link's `click` event, use `preventDefault` to prevent the browser from doing anything, and call `battle.options.cancel`.
 
-Por supuesto, hay que controlar qué menú está visible cada momento. Esto lo podemos hacer cambiando su estilo CSS inline, a través de la propiedad `display`:
+Of course, we need to control which menu is visible at any time. We can do this by changing their inline CSS style, through the `display` property:
 
 ```javascript
-actionForm.style.display = 'none'; // oculta el formulario de acciones
+actionForm.style.display = 'none'; // hides the actions form
 ```
 
 ```javascript
-targetForm.style.display = 'block'; // muestra el formulario de objetivos
+targetForm.style.display = 'block'; // shows the targets form
 ```
 
-Para comprobar que funciona, prueba a elegir atacar un objetivo en los menús y comprueba el mensaje que emite el evento `info` de `Battle` en la consola:
+To ensure that it works, try choosing to attack a target in the menus and checking the messages output by the `info` event of `Battle` on the console:
 
-![Log de atacar](images/attack_info.png)
+![Attack log](images/attack_info.png)
 
-Como re-renderizamos los personajes de las _parties_ en cada turno (cada vez que `Battle` emite `turn`), si el ataque ha tenido éxito, deberíamos ver cómo han disminuido sus puntos de vida.
+Since we are re-rendering all of the parties' characters on each turn (every time `Battle` fires the `turn` event), if the attack has been successful, we should be able to see how the target's hit points have decreased.
 
-### Documentación relacionada
+### Related documentation
 
-- [Propiedad CSS `display`](https://developer.mozilla.org/en-US/docs/Web/CSS/display) en la MDN
+- [`display` CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/display) on the MDN
 
-## 6. Seleccionar un hechizo
+## 6. Selecting a spell
 
-Esto es muy similar a seleccionar una acción o un objetivo. Hay que generar, de nuevo, la lista de opciones (en este caso, hechizos disponibles) dinámicamente, y ocultar / enseñar el menú que corresponda según el flujo.
+This is very similar to selecting an action or a target. Again, we need to dynamically generate the options list (in this case, available spells), and hide or show the appropriate menu as per the flow.
 
-Seleccionar un hechizo ocurre tras haber seleccionado la opción _Cast_ en el menú de acciones, y una vez seleccinado el hechizo debemos mostrar el formulario de seleccionar un objetivo.
+Spell selection happens after having selected the _Cast_ option in the actions menu; once we have selected a spell we need to show the target selection form.
 
-La particularidad de este menú es que **puede ser que no haya ninguna opción disponible**. En este caso, debemos desactivar el botón del formulario si la lista de opciones está vacía (y activarlo en caso contrario). Para ello, hay que usar la propiedad `disabled` del botón.
+A particularity of this menu is that **there may be no available options**. In this case, we need to disable the form's button if the options list is empty (and otherwise enable it). To do this, we need to use the button's `disabled` property.
 
-![Botón desactivado](images/disabled_spells.png)
+![Disabled button](images/disabled_spells.png)
 
-## 7. Panel de información
+## 7. Info panel
 
-Hay que mostrar información al usuario sobre el resultado de una acción concreta: si el ataque tuvo éxito o no, cuanto daño causó, etc.
+We need to show the user information on the result of a given action: whether the attack was successful or not, how much damage it inflicted, etc.
 
-![Panel de información de batalla](images/info_panel.png)
+![Battle info panel](images/info_panel.png)
 
-En el archivo HTML hay un párrafo con ID `battle-info`, cuyo contenido puedes modificar para mostrar estos mensajes de información de batalla.
+There is a paragraph with the ID `battle-info` within the HTML file; you can modify its content in order to display these battle info messages.
 
-Esta información de batalla la podemos obtener subscribiéndonos al evento `info` de `Battle`, que nos proporcionará los datos de qué personaje actuó, contra quién, si tuvo éxito, etc.
+We can obtain this battle info by subscribing to the `info` event of `Battle`, which will provide us with the data for which character took action, against whom, whether she did so successfully, etc.
 
-Para facilitar la tarea, se ha incluido una función llamada `prettifyEffect`, que devuelve una string "bonita" (en lugar de `[Object object]`) con los efectos aplicados en el ataque.
+For easier completion of the task, we have included a function called `prettifyEffect`, which returns a "pretty" string (instead of `[Object object]`) with the effects applied in the attack.
 
 ```javascript
 var effectsTxt = prettifyEffect(effect || {});
 // ej: -> '-5 hp, +5 mp'
 ```
 
-## 8. Marcar personajes como muertos
+## 8. Marking characters as dead
 
-Ahora que los personajes pueden atacar, podemos mostrar cuándo uno ha muerto. La hoja de estilos CSS incluye una clase `dead` que, aplicada a un elemento, lo muestra como "muerto" (en este caso, tachado).
+Now that the characters can attack, we can show when one of them has died. The CSS style sheet includes a `dead` class which, once applied to an element, marks it as "dead" (in this case, by changing its typeface to strikethrough).
 
-![Personaje marcado como muerto](images/death.png)
+![Character marked as dead](images/death.png)
 
-Para ello, se ha de modificar el código que se ha programado en el paso 1 para mostrar los personajes, de forma que cada elemento de la lista (`<li>`) tenga la clase `dead` si el personaje está muerto (los puntos de vida están a cero).
+To this end, we need to modify the code programmed in step 1 to display the characters, so that every element of the list (`<li>`) has the `dead` class if the character is dead (i.e., its hit points are equal to zero).
 
-## 9. Final del juego
+## 9. Endgame
 
-Hay que mostrar un mensaje en el panel de información que indique que el juego ha acabado y quién ha ganado. Además, hay que volver a mostrar los personajes para que se muestre el resultado final de la batalla (con una de las _parties_ con todos los personajes muertos).
+We need to show a message in the info panel to indicate when the game is over, and who has won. Additionally, we need to show the characters again to display the end result of the battle (with all of the characters in one of the parties dead).
 
-El juego se acaba cuando `Battle` emite el evento `end`, por lo que debemos implementar dicho código en un callback de este evento.
+The game is over when `Battle` fires the `end` event, so we need to implement this code in a callback for this event.
 
-![Mensaje de final del juego](images/end_game.png)
+![Endgame message](images/end_game.png)
 
 ---
 
-## Consideraciones
+## Considerations
 
 ### Template strings
 
-Las _template strings_ (o _template literals_) son una característica de ES6, pero que [ya está implementada](http://kangax.github.io/compat-table/es6/) en la mayoría de navegadores modernos.
-Pueden resultarte útiles en esta práctica, ya que soportan **interpolación de expresiones** y declaraciones **multilinea**.
+_Template strings_ (or _template literals_) are a feature of ES6, but one that is [already implemented](http://kangax.github.io/compat-table/es6/) in most modern browsers. They can be useful for this practice, since they support **expression interpolation** y **multiline** declarations.
 
-En su manera más básica, se definen igual que una string normal, pero usando backticks <code>\`<code>:
+In their easiest form, they are defined the same way as a normal string, but using backticks <code>\`<code>:
 
 ```javascript
 `Hello, world!`
 ```
 
-Se pueden tener strings multilíneas sin necesidad de romper la cadena ni usar el operador de concatenación:
+We can have multiline strings without any need for breaking the string up, or using the concatenation operator:
 
 ```javascript
 `Hello,
 world!`
 ```
 
-Para interpolar expresiones, debemos poner la expresión a interpolar entre los caracteres `${}`:
+In order to interpolate expressions, we have to place the expression we want to interpolate between the characters `${}`:
 
 ```javascript
 var name = 'Darth Vader';
 `Hello, ${name}`;
 ```
 
-No sólo podemos utilizar variables, sino otro tipo de expresiones:
+Not only can we use variables, but other types of expressions:
 
 ```javascript
 `Hello, ${name.toUpperCase()}, here's a calculation: ${2 + 2}`
 ```
 
-Recordemos también que el operador ternario es también una expresión, y nos permite interpolar condiciones sencillas:
+Also, remember that the ternary operator is an expression too, and allows us to interpolate simple conditions:
 
 ```javascript
 `Hello, you are ${life > 0 ? 'alive' : 'dead'}`;
 ```
 
-Un ejemplo práctico que muestra la diferencia entre usar template strings y strings normales para generar código HTML a usar dentro de la propiedad `innerHTML`:
+A practical example showing the difference between using template strings and normal strings in order to generate HTML code to be used within the `innerHTML` property:
 
 ```javascript
 var list = document.querySelector('ul.shopping-list');
@@ -224,22 +223,22 @@ list.innerHTML += '<li class="' + (data.amount > 0 ? 'bought' : '') + '">' +
     '</li>';
 ```
 
-**Documentación**: [_Template strings_](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals) en la MDN.
+**Documentation**: [Template strings](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals) on the MDN.
 
 
-### Atributos data
+### Data attributes
 
-Las ID's de los personajes repetidos tienen un espacio en blanco (p.ej: `bat 2`). Para poder usar esto en un `querySelector`, se deben utilizar comillas:
+Repeated character IDs have a blank space (e.g., `bat 2`). If we want to use this in a `querySelector`, we need to use double quotes:
 
 ```javascript
 document.querySelector('[data-chara-id="bat 2"]');
 ```
 
-Para acceder a ese atributo data usando la propiedad `dataset` hay que tener en cuenta que los guiones se transforman en [camel case](https://en.wikipedia.org/wiki/Camel_case#Computer_programming). Así, si se usa como atributo data `data-chara-id`, se accedería a él de la siguiente manera:
+In order to use that data attribute by using the `dataset` property, we need to keep in mind that dashes transform into [camel case](https://en.wikipedia.org/wiki/Camel_case#Computer_programming). Thus, if used as the `data-chara-id` data attribute, we would access it as follows:
 
 ```javascript
 var el = document.querySelector([data-chara-id="bat 2"]);
 console.log(el.dataset.charaId); // imprimiría bat 2
 ```
 
-**Documentación**: [Using data attributes](https://developer.mozilla.org/en/docs/Web/Guide/HTML/Using_data_attributes) en la MDN.
+**Documentation**: [Using data attributes](https://developer.mozilla.org/en/docs/Web/Guide/HTML/Using_data_attributes) on the MDN.
